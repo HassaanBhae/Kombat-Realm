@@ -156,13 +156,14 @@ for (let i = 1; i <= 57; i++) {
     
     slideshow.append(img);
     if(i == 57){
-        heading.style.display = "block";
-        bg.style.backdropFilter = "none";
-        bg.style.filter = "none";
         startmenu();
     }
 }
-
+function startmenu(){
+    heading.style.display = "block";
+    bg.style.backdropFilter = "none";
+    bg.style.filter = "none";
+};
 let currentIndex = 0; 
 
 //Grab The loaded Images
