@@ -147,6 +147,7 @@ function startMenu(){
     heading.style.opacity = "1";
     bg.style.backdropFilter = "none";
     bg.style.filter = "none";
+    weaponHolder.style.opacity = "1";
 };
 let currentIndex = 0; 
 
