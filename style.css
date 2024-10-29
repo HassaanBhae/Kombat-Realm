@@ -1,5 +1,6 @@
 body {
     background-image: url(./images/background2.png);
+    background-image: url(./images/background2-compresed.jpg);
     background-size: cover; /* or contain, depending on your preference */
     background-position: center; /* centers the image */
     background-repeat: no-repeat; /* prevents the image from repeating */
