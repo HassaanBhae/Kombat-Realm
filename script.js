@@ -89,6 +89,8 @@ const menu = document.getElementById("menu");
 const leaves = document.querySelectorAll(".leaf");
 const slideshow = document.getElementById("slideshow");
 const weaponHolder = document.getElementById("weapon-holder");
+const bg = document.querySelector("body");
+const heading = document.getElementById("heading");
 
 //Load The Images Before Hand
 for (let i = 1; i <= 57; i++) {
@@ -153,6 +155,12 @@ for (let i = 1; i <= 57; i++) {
     }
     
     slideshow.append(img);
+    if(i == 57){
+        heading.style.display = "block";
+        bg.style.backdropFilter = "none";
+        bg.style.filter = "none";
+        startmenu();
+    }
 }
 
 let currentIndex = 0; 
