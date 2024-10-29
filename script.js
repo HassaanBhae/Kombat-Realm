@@ -87,6 +87,7 @@ const rings = document.querySelectorAll(".ring");
 const choice = document.getElementById("choice");
 const menu = document.getElementById("menu");
 const leaves = document.querySelectorAll(".leaf");
+const leavesAll = document.getElementById("leaves");
 const slideshow = document.getElementById("slideshow");
 const weaponHolder = document.getElementById("weapon-holder");
 const bg = document.querySelector("body");
@@ -144,6 +145,7 @@ for (let i = 1; i <= 57; i++) {
 }
 
 function startMenu(){
+    leavesAll.style.display = "block";  
     heading.style.opacity = "1";
     bg.style.backdropFilter = "none";
     bg.style.filter = "none";

@@ -6,6 +6,7 @@
     width:40%;
     text-align: right;
     left: 40%;
+    display: none;
 }
 
 #leaves i {
