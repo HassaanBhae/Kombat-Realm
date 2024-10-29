@@ -144,7 +144,7 @@ for (let i = 1; i <= 57; i++) {
 }
 
 function startMenu(){
-    heading.style.display = "block";
+    heading.style.opacity = "1";
     bg.style.backdropFilter = "none";
     bg.style.filter = "none";
 };
