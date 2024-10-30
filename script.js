@@ -92,6 +92,7 @@ const slideshow = document.getElementById("slideshow");
 const loader = document.getElementById("loader");
 const loadingBar = document.getElementById("loadingBar");
 const innerBar = document.getElementById("innerBar");
+const playButton = document.getElementById("playButton");
 const weaponHolder = document.getElementById("weapon-holder");
 const bg = document.querySelector("body");
 const heading = document.getElementById("heading");
@@ -147,11 +148,22 @@ for (let i = 1; i <= 57; i++) {
         imagesLoaded++;
         finnerBar();
         if (imagesLoaded === 57) {
-            playAudio();
-            startMenu();
+            // playAudio();
+            loadingBar.style.opacity = "0";
+            loadingBar.style.display = "none";
+            playButton.style.display = "flex";
+            // functionPlayButton();
             console.log("Called StartMenu");
         }
     };
+}
+playButton.addEventListener("click", () => {
+    functionPlayButton();
+});
+function functionPlayButton(){
+    playButton.style.display = "none";
+    playAudio();
+    startMenu();
 }
 function playAudio() {
     console.log("Playing BGAudio!");
@@ -173,7 +185,6 @@ function finnerBar(){
     innerBar.style.width = newWidth + '%'; // set the new width
 }
 function startMenu(){
-    loader.style.display = "none";
     leavesAll.style.display = "block";  
     heading.style.opacity = "1";
     bg.style.backdropFilter = "none";

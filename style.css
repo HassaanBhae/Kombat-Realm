@@ -255,11 +255,38 @@ body {
     /* -webkit-animation: spin 1.5s ease-in-out infinite; Safari */
     /* animation: spin 1.5s ease-in-out infinite  ; */
     transition: opacity 1s;
+    /* display: none; */
 }
 #innerBar{
     height: 100%;
     width: 1%;
     background-color: white;
+}
+
+#playButton{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    margin-bottom: 20px;
+    margin-left: 0;
+    width: 80px;
+    height: 22px;
+    background-color: white;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family:  Helvetica, sans-serif;
+    font-weight:700;
+    font-size: 18px;
+    outline: white 3px solid;
+    border:  black 2px solid;
+    animation: pulse 3s infinite;
+    display: none;
+}
+#playButton:hover{
+    cursor: pointer;
 }
 /* ////Animtations */
 @-webkit-keyframes pulse {
