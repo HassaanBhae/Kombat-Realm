@@ -95,6 +95,8 @@ const innerBar = document.getElementById("innerBar");
 const weaponHolder = document.getElementById("weapon-holder");
 const bg = document.querySelector("body");
 const heading = document.getElementById("heading");
+const audioBg = document.getElementById('background-audio');
+const slideDoorAudio = document.getElementById('slideDoor-audio');
 
 //Load The Images Before Hand
 let imagesLoaded = 0;
@@ -145,10 +147,23 @@ for (let i = 1; i <= 57; i++) {
         imagesLoaded++;
         finnerBar();
         if (imagesLoaded === 57) {
+            playAudio();
             startMenu();
             console.log("Called StartMenu");
         }
     };
+}
+function playAudio() {
+    console.log("Playing BGAudio!");
+    audioBg.muted = false;
+    audioBg.play();
+}
+function playSlideDoorAudio() {
+    console.log("Playing SlideDoorAudio!");
+    audioBg.muted = true;
+    audioBg.pause();
+    slideDoorAudio.muted = false;
+    slideDoorAudio.play();
 }
 function finnerBar(){
     console.log("innerBar called!");
@@ -190,6 +205,7 @@ function splashScreen(){
     leaves.forEach(leaf => {
         leaf.style.zIndex = "1";
     });
+    playSlideDoorAudio();
     const intervalId = setInterval(() => showNextImage(intervalId), 30); 
 }
 
@@ -215,6 +231,7 @@ weapons.forEach(weapon => {
             choice.style.transform = "scale(15)"; // Grows
             choice.style.opacity = "0.8"; // Optional for fade effect
             choice.style.transition = "transform 0.5s ease-in-out";
+            audioBg.pause();
         }, 500); // Match this duration with the CSS transition time
         setTimeout(() => {
             console.log("Calling Splash Screen!");

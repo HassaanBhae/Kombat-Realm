@@ -245,7 +245,8 @@ body {
     left: 50%;
     transform: translateX(-50%);
     bottom: 0;
-    margin: 20px;
+    margin-bottom: 20px;
+    margin-left: 0;
     border: 1px solid white;
     /* border-radius: 50%; */
     /* border-top: 5px solid white; */
