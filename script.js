@@ -90,12 +90,18 @@ const leaves = document.querySelectorAll(".leaf");
 const leavesAll = document.getElementById("leaves");
 const slideshow = document.getElementById("slideshow");
 const loader = document.getElementById("loader");
+const loadingBar = document.getElementById("loadingBar");
+const innerBar = document.getElementById("innerBar");
 const weaponHolder = document.getElementById("weapon-holder");
 const bg = document.querySelector("body");
 const heading = document.getElementById("heading");
 
 //Load The Images Before Hand
 let imagesLoaded = 0;
+let counter = 0;
+// let barWidth = "1.756%";
+// innerBar.style.width += barWidth;
+
 
 for (let i = 1; i <= 57; i++) {
     const img = document.createElement('img');
@@ -135,16 +141,22 @@ for (let i = 1; i <= 57; i++) {
         img.style.transform = "scale(1.3)";
     }
     slideshow.append(img);
-
     img.onload = () => {
         imagesLoaded++;
+        finnerBar();
         if (imagesLoaded === 57) {
             startMenu();
             console.log("Called StartMenu");
         }
     };
 }
-
+function finnerBar(){
+    console.log("innerBar called!");
+    let barWidth = 1.756; // percentage value as a number
+    let currentWidth = parseFloat(innerBar.style.width) || 0; // get current width, default to 0 if not set
+    let newWidth = currentWidth + barWidth; // add the new width
+    innerBar.style.width = newWidth + '%'; // set the new width
+}
 function startMenu(){
     loader.style.display = "none";
     leavesAll.style.display = "block";  
@@ -152,6 +164,8 @@ function startMenu(){
     bg.style.backdropFilter = "none";
     bg.style.filter = "none";
     weaponHolder.style.opacity = "1";
+    loadingBar.style.opacity = "0";
+    loadingBar.style.display = "none";
 };
 let currentIndex = 0; 
 
@@ -209,4 +223,3 @@ weapons.forEach(weapon => {
         }, 1500); // Function will execute after 1500 ms
     });
 });
-

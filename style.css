@@ -237,8 +237,29 @@ body {
     -webkit-animation: spin 1.5s ease-in-out infinite; /* Safari */
     animation: spin 1.5s ease-in-out infinite  ;
     /* transition: opacity 2s; */
+    display: none;
 }
-  
+
+#loadingBar  {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    margin: 20px;
+    border: 1px solid white;
+    /* border-radius: 50%; */
+    /* border-top: 5px solid white; */
+    width: 90vw;
+    height: 10px;
+    /* -webkit-animation: spin 1.5s ease-in-out infinite; Safari */
+    /* animation: spin 1.5s ease-in-out infinite  ; */
+    transition: opacity 1s;
+}
+#innerBar{
+    height: 100%;
+    width: 1%;
+    background-color: white;
+}
 /* ////Animtations */
 @-webkit-keyframes pulse {
     0% { 
