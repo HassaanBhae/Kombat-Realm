@@ -89,6 +89,7 @@ const menu = document.getElementById("menu");
 const leaves = document.querySelectorAll(".leaf");
 const leavesAll = document.getElementById("leaves");
 const slideshow = document.getElementById("slideshow");
+const loader = document.getElementById("loader");
 const weaponHolder = document.getElementById("weapon-holder");
 const bg = document.querySelector("body");
 const heading = document.getElementById("heading");
@@ -145,6 +146,7 @@ for (let i = 1; i <= 57; i++) {
 }
 
 function startMenu(){
+    loader.style.display = "none";
     leavesAll.style.display = "block";  
     heading.style.opacity = "1";
     bg.style.backdropFilter = "none";
