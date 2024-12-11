@@ -7,7 +7,6 @@ body {
     height: 100vh; /* makes sure the body takes the full height */
     margin: 0; /* removes default margin */
     width: 100vw;
-    /* align-items: center; */
     overflow: hidden;
     filter: grayscale();
     backdrop-filter:grayscale();
