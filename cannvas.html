@@ -12,42 +12,125 @@ body{
 #indicator{
     position: absolute;
     scale: 3;
-    margin-left: 400px;
+    margin-left: 260px;
     margin-top: 600px;
     color: blueviolet;
 }
 #player,
-#Attack1,
-#Attack2,
-#Attack3,
-#Attack4,
+#enemy,
+.attack,
+.Eattack,
+.Death,
+.DeathE,
+.TakeHit,
+.TakeHitE,
 #fall,
-.run{
+#fallE,
+.run,
+.runE{
     position: absolute;
     display:none;
     scale: 3;
 }
-
+.healthBar1{
+    width: 250px;
+    height: 30px;
+    outline: black solid 3px;
+    position: absolute;
+    /* background-color: red; */
+    margin: 40px;
+}
+.healthBar2{
+    width: 250px;
+    height: 30px;
+    outline: black solid 3px;
+    position: absolute;
+    /* background-color: red; */
+    margin: 40px;
+    right: 0;
+}
+#healthBarPlayer{
+    position: absolute;
+    height: inherit;
+    width: 100%;
+    background-color: red;
+    left: 0;
+}
+#healthBarEnemy{
+    position: absolute;
+    height: inherit;
+    width: 100%;
+    background-color: red;
+    right: 0;
+}
 </style>
 </head>
 <body>
 
 <p id="p" style="position: absolute;margin-left: 10px;border: 2px black solid;">A canvas element is displayed like this:</p>
 <p id="p2" style="position: absolute;margin-right:10px;right: 0;border: 2px black solid;">A canvas element is displayed like this:</p>
-<img id="player" src="./Idle.png">
-<img id="Attack1" src="./attack/Attack1.png">
-<img id="Attack2" src="./attack/Attack2.png">
-<img id="Attack3" src="./attack/Attack3.png">
-<img id="Attack4" src="./attack/Attack4.png">
-<img id="Run0" class="run" src="./run/Run_0.png">
-<img id="Run1" class="run" src="./run/Run_1.png">
-<img id="Run2" class="run" src="./run/Run_2.png">
-<img id="Run3" class="run" src="./run/Run_3.png">
-<img id="Run4" class="run" src="./run/Run_4.png">
-<img id="Run5" class="run" src="./run/Run_5.png">
-<img id="Run6" class="run" src="./run/Run_6.png">
-<img id="Run7" class="run" src="./run/Run_7.png">
-<img id="fall" src="./fall/Fall.png">
+
+<div class="healthBar1"><div id="healthBarPlayer"></div></div>
+<div class="healthBar2"><div id="healthBarEnemy"></div></div>
+
+<!-- //Player -->
+<img id="player" src="./samurai/Idle.png">
+<img id="Attack1" class="attack"src="./samurai/attack/Attack_1.png">
+<img id="Attack2" class="attack"src="./samurai/attack/Attack_2.png">
+<img id="Attack3" class="attack"src="./samurai/attack/Attack_3.png">
+<img id="Attack4" class="attack"src="./samurai/attack/Attack_4.png">
+
+<img id="Run0" class="run" src="./samurai/run/Run_0.png">
+<img id="Run1" class="run" src="./samurai/run/Run_1.png">
+<img id="Run2" class="run" src="./samurai/run/Run_2.png">
+<img id="Run3" class="run" src="./samurai/run/Run_3.png">
+<img id="Run4" class="run" src="./samurai/run/Run_4.png">
+<img id="Run5" class="run" src="./samurai/run/Run_5.png">
+<img id="Run6" class="run" src="./samurai/run/Run_6.png">
+<img id="Run7" class="run" src="./samurai/run/Run_7.png">
+
+<img id="fall" src="./samurai/fall/Fall.png">
+
+<img id="TakeHit0" class="TakeHit" src="./samurai/TakeHit/TakeHit_0.png">
+<img id="TakeHit1" class="TakeHit" src="./samurai/TakeHit/TakeHit_1.png">
+<img id="TakeHit2" class="TakeHit" src="./samurai/TakeHit/TakeHit_2.png">
+
+<img id="Death0" class="Death" src="./samurai/Death/Death_0.png">
+<img id="Death1" class="Death" src="./samurai/Death/Death_1.png">
+<img id="Death2" class="Death" src="./samurai/Death/Death_2.png">
+<img id="Death3" class="Death" src="./samurai/Death/Death_3.png">
+<img id="Death4" class="Death" src="./samurai/Death/Death_4.png">
+<img id="Death5" class="Death" src="./samurai/Death/Death_5.png">
+
+<!-- //Enemy -->
+<img id="enemy" src="./kenji/idle.png">
+<img id="AttackE1" class="Eattack"src="./kenji/attack/Attack1.png">
+<img id="AttackE2" class="Eattack"src="./kenji/attack/Attack2.png">
+<img id="AttackE3" class="Eattack"src="./kenji/attack/Attack3.png">
+<img id="AttackE4" class="Eattack"src="./kenji/attack/Attack4.png">
+
+<img id="RunE0" class="runE" src="./kenji/run/Run_0.png">
+<img id="RunE1" class="runE" src="./kenji/run/Run_1.png">
+<img id="RunE2" class="runE" src="./kenji/run/Run_2.png">
+<img id="RunE3" class="runE" src="./kenji/run/Run_3.png">
+<img id="RunE4" class="runE" src="./kenji/run/Run_4.png">
+<img id="RunE5" class="runE" src="./kenji/run/Run_5.png">
+<img id="RunE6" class="runE" src="./kenji/run/Run_6.png">
+<img id="RunE7" class="runE" src="./kenji/run/Run_7.png">
+
+<img id="fallE" src="./kenji/fall/Fall.png">
+
+<img id="TakeHitE0" class="TakeHitE" src="./kenji/TakeHit/TakeHit_0.png">
+<img id="TakeHitE1" class="TakeHitE" src="./kenji/TakeHit/TakeHit_1.png">
+<img id="TakeHitE2" class="TakeHitE" src="./kenji/TakeHit/TakeHit_2.png">
+
+<img id="DeathE0" class="DeathE" src="./kenji/Death/Death_0.png">
+<img id="DeathE1" class="DeathE" src="./kenji/Death/Death_1.png">
+<img id="DeathE2" class="DeathE" src="./kenji/Death/Death_2.png">
+<img id="DeathE3" class="DeathE" src="./kenji/Death/Death_3.png">
+<img id="DeathE4" class="DeathE" src="./kenji/Death/Death_4.png">
+<img id="DeathE5" class="DeathE" src="./kenji/Death/Death_5.png">
+
 
 <h2 id="indicator"></h2>
 <canvas id="canvas" style="width: 100vw; height: 100vh;">Your browser does not support the HTML5 canvas tag.</canvas>
@@ -58,40 +141,70 @@ body{
     let x,y;
     const keysPressed = new Set(); // Track keys pressed
     const scale = 3; // Set your scale factor here
-    const pwidth = 50 * scale; // Scaled width
-    const pheight = 61 * scale; // Scaled height
-    const pawidth = 100 * scale; // Scaled width
-    const paheight = 70 * scale; // Scaled height
-    let moveFrameCounter = 0;  // Keeps track of the current frame
+    const width = 210 * scale; // Scaled width
+    const height = 210 * scale; // Scaled height
+
+    let playerMoveFrameCounter = 0;  // Keeps track of the current frame
+    let enemyMoveEFrameCounter = 0;  // Keeps track of the current frame
+
+    let playerAttackFrameCounter = 0;  // Keeps track of the current frame
+    let enemyAttackFrameCounter = 0;  // Keeps track of the current frame
+
+    let playerDeathFrameCounter = 0;
+    let enemyDeathFrameCounter = 0;
+    
+    let playerTakeHitFrameCounter = 0;
+    let enemyTakeHitFrameCounter = 0;
 
     function User(name,x,y) {
         this.name = name;
         this.health = 100;
         this.x = x;
         this.y = y;
-        this.attacking = false;
-        let isAtAttackF1 = false; // Flag to track jumping state
-        let isAtAttackF2 = false; // Flag to track jumping state
-        let isAtAttackF3 = false; // Flag to track jumping state
-        let isAtAttackF4 = false; // Flag to track jumping state
-
+        this.isAttacking = false;
+        let isTakingHit = false;
+        let cooldown = false;
+        let dashCooldown = false;
         let isMoving = false;
         let isJumping = false; // Flag to track jumping state
         let isFalling = false; // Flag to track jumping state
         let isDashing = false; // Flag to track jumping state
+        let playingAnimation = false;
         this.takeDamage = function(damage) {
             this.health -= damage;
         };
         this.attack = function(){
-            this.isAttacking = true;
-            attackAnimation(this.x,this,y);
-            // checkHealth();
+            if(!this.cooldown){
+                this.isAttacking = true;
+                this.cooldown = true;
+            }
             setTimeout(() => {
-                this.isAttacking = false;
-            }, 800); 
+                    this.isAttacking = false;
+                    if (this === player) {     
+                        enemy.takeHit();       
+                        enemy.takeDamage(50);
+                        healthBarEnemy.style.width = (enemy.health) + '%';
+                    } 
+                    else if (this === enemy) {
+                        player.takeHit();       
+                        player.takeDamage(50);
+                        healthBarPlayer.style.width = (player.health) + '%';
+                    }
+            }, 200); 
+            setTimeout(() => {
+                this.cooldown = false;
+            }, 500); 
+        }
+        this.takeHit = function(){
+            this.isTakingHit = true;
+            setTimeout(() => {
+                this.isTakingHit = false;
+                playerTakeHitFrameCounter = 0;
+                enemyTakeHitFrameCounter = 0;
+            }, 400); 
         }
         this.move = function(){
-            moveAnimation(this.x,this.y);
+            moveAnimation(this.name,this.x,this.y);
         };
         this.jump = function(){
             this.isJumping = true; // Set jumping state
@@ -102,6 +215,7 @@ body{
                     counter++;
                 } else {
                     clearInterval(intervalId); // Stop the upward movement
+                    console.log("CAlling Fall()");
                     this.fall(); // Start falling back down
                 }
             }, 1);
@@ -109,7 +223,6 @@ body{
         this.fall = function(){
             console.log('Falling!');
             this.isFalling = true;
-            fallAnimation(this.x,this.y);
             // console.log("Fall ANimation Ended");
             let fallCounter = 0;
             const fallIntervalId = setInterval(() => {
@@ -125,24 +238,38 @@ body{
         }
         this.dash = function(){
             // If dash is on cooldown, return early
-            if (this.isDashing === true) {
+            if (this.isDashing === true || this.dashCooldown === true) {
                 return;
             }
             this.isDashing = true; // Set dashing state
-            playingAnimation=true;
-            this.x += 300; // Move player position to the right
+            this.dashCooldown = true;
+            this.playingAnimation=true;
+            if (this === player) {            
+                this.x += 300; // Move player position to the right
+            } 
+            else if (this === enemy) {
+                this.x -= 300; // Move player position to the left
+            }
             this.attack();
             setTimeout(() => {
-                this.x -= 300; // Reset the player position after the dash
-                playingAnimation = false; // Animation ends
+                if (this === player) {            
+                    this.x -= 300; // Move player position to the right
+                } 
+                else if (this === enemy) {
+                    this.x += 300; // Move player position to the left
+                }
+                this.playingAnimation = false; // Animation ends
             }, 250);
             setTimeout(() => {
                 this.isDashing = false; // Reset cooldown after 3 seconds
-            }, 300); // Increased cooldown to ensure the dash cooldown is longer than the dash duration
+            }, 400);
+            setTimeout(() => {
+                this.dashCooldown = false; // Reset cooldown after 3 seconds
+            }, 10000);
         }
     }
-    const player = new User('player',130,275);
-    const enemy = new User('enemy',500,275);
+    const player = new User('player',-120,53);
+    const enemy = new User('enemy',300,35);
 
     window.onload = init;
 
@@ -152,15 +279,36 @@ body{
         p = document.getElementById('p');
         p2 = document.getElementById('p2');
         context = canvas.getContext('2d');
-        playerimg = document.getElementById("player");
+
         indicator = document.getElementById("indicator");
-        playerAttackF1 = document.getElementById("Attack1");
-        playerAttackF2 = document.getElementById("Attack2");
-        playerAttackF3 = document.getElementById("Attack3");
-        playerAttackF4 = document.getElementById("Attack4");
-        fallF = document.getElementById("fall");
-        moveF = document.querySelectorAll(".run");
-        console.log('moveFrames: ', moveF);
+        healthBarPlayer =  document.getElementById("healthBarPlayer");
+        healthBarEnemy = document.getElementById("healthBarEnemy");
+        
+        playerimg = document.getElementById("player");
+        enemyimg = document.getElementById("enemy");
+
+        //Attack Frames
+        playerAttackF =  document.querySelectorAll(".attack");
+        enemyAttackF = document.querySelectorAll(".Eattack");
+
+        //Fall Frame
+        playerFallF = document.getElementById("fall");
+        enemyFallF = document.getElementById("fallE");
+
+        //Move Frames
+        playerMoveF = document.querySelectorAll(".run");
+        enemyMoveF = document.querySelectorAll(".runE");
+
+        //Take Hit Frames
+        playerTakeHitF = document.querySelectorAll(".TakeHit");
+        console.log('playerTakeHitF: ', playerTakeHitF);
+        console.log('playerTakeHitF length: ', playerTakeHitF.length);
+        enemyTakeHitF = document.querySelectorAll(".TakeHitE");
+
+        //Death Frames
+        playerDeathF = document.querySelectorAll(".Death");
+        enemyDeathF = document.querySelectorAll(".DeathE");
+
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
@@ -182,152 +330,179 @@ body{
 
         setInterval(() => {
             if(player.isMoving){
-                moveFrameCounter = (moveFrameCounter + 1) % 8;  // Cycle through 8 frames
-                console.log(moveFrameCounter);
+                playerMoveFrameCounter = (playerMoveFrameCounter + 1) % (playerMoveF.length);  
+            }
+            if(enemy.isMoving){
+                enemyMoveEFrameCounter = (enemyMoveEFrameCounter + 1) % (enemyMoveF.length);  
+            }
+            if(enemy.isAttacking){
+                enemyAttackFrameCounter = (enemyAttackFrameCounter+1) % (enemyAttackF.length);
+            }
+            if(player.isAttacking){
+                playerAttackFrameCounter = (playerAttackFrameCounter+1) % (playerAttackF.length);
             }
             
         }, 50);
+        setInterval(() => {
+            if(player.isTakingHit){
+                playerTakeHitFrameCounter = (playerTakeHitFrameCounter+1) % (playerTakeHitF.length);
+            }
+            if(enemy.isTakingHit){
+                enemyTakeHitFrameCounter = (enemyTakeHitFrameCounter+1) % (enemyTakeHitF.length);
+            }
+        }, 200);
+            
+
     }
 
     function gameLoop(timeStamp) {
         // Clear the canvas for each frame
         context.clearRect(0, 0, canvas.width, canvas.height);
-        updatePosition(); // Update position based on keys pressed
+
+        characterMovement(player, {left: 'ArrowLeft',right: 'ArrowRight',attack: 'ArrowDown',jump: 'ArrowUp',dash: ' ',});
+        characterMovement(enemy, {left: 'a',right: 'd',attack: 's',jump: 'w',dash: 'Enter',});
+        playerDraw();
+        enemyDraw();
         checkHealth();
-        if (player.isAtAttackF1){
-            drawAttack1(player.x,player.y);
-            draw(enemy.x, enemy.y); // Draw the player image during normal movement
 
-        }
-        else if (player.isAtAttackF2) {
-            drawAttack2(player.x,player.y); // Draw the attack image only during dash
-            draw(enemy.x, enemy.y); // Draw the player image during normal movement
-
-        }
-        else if (player.isAtAttackF3) {
-            drawAttack3(player.x,player.y); // Draw the attack image only during dash
-            draw(enemy.x, enemy.y); // Draw the player image during normal movement
-
-        }
-        else if (player.isAtAttackF4) {
-            drawAttack4(player.x,player.y);
-            draw(enemy.x, enemy.y); // Draw the player image during normal movement
-
-        }
-        else if (player.isMoving && !player.isAttacking) {
-            player.move();
-            draw(enemy.x, enemy.y); // Draw the player image during normal movement
-            
-        } 
-        else if (player.isFalling) {
-            drawFall(player.x, player.y); // Draw the player image during normal movement
-            draw(enemy.x, enemy.y); // Draw the player image during normal movement
-        } 
-        else {
-            draw(player.x, player.y); // Draw the player image during normal movement
-            draw(enemy.x, enemy.y); // Draw the player image during normal movement
-        }
         window.requestAnimationFrame(gameLoop); // Keep requesting new frames
     }
-    function updatePosition() {
-        if (keysPressed.has('ArrowRight') && player.x<(canvas.width-pwidth) && !playingAnimation){
-            player.x += 10;
+    function playerDraw(){
+        if (player.isAttacking){
+            drawAttack(playerAttackF[playerAttackFrameCounter],player.x,player.y); 
         }
-        if (keysPressed.has('ArrowLeft') && player.x>0 && !playingAnimation) {
-            player.x -= 10;         
+        if (player.isTakingHit){
+            drawTakeHit(playerTakeHitF[playerTakeHitFrameCounter],player.x,player.y); 
         }
-        if (keysPressed.has('ArrowLeft') || keysPressed.has('ArrowRight')) {
-            player.isMoving = true;
-        }
-        else{
-            player.isMoving = false;
+        else if (player.isMoving && !player.isAttacking) {
+            player.move();            
         } 
-        if (keysPressed.has('ArrowLeft') && keysPressed.has('ArrowRight')) {
-            player.isMoving = false;
+        else if (player.isFalling) {
+            drawFall(player.x,player.y);
+        } 
+        else if(!player.isAttacking && !player.isFalling && !player.isMoving && !player.isDashing) { 
+            draw(playerimg,player.x,player.y); 
         }
-        if (keysPressed.has('ArrowDown') && !playingAnimation && !player.isAttacking) player.attack();
-        if (keysPressed.has('ArrowUp') && !player.isJumping) player.jump();
-        if (keysPressed.has(' ') && !player.isDashing && !player.isAttacking) player.dash();
-        if (keysPressed.has('Enter') && !player.isJumping) player.jump(); // Only jump if not already jumping
+    }
+    function enemyDraw(){
+        if (enemy.isAttacking){   
+            drawEnemyAttack(enemyAttackF[enemyAttackFrameCounter],enemy.x,enemy.y); 
+        }
+        if (enemy.isTakingHit){
+            drawTakeHit(enemyTakeHitF[enemyTakeHitFrameCounter],enemy.x,enemy.y); 
+        }
+        else if (enemy.isMoving && !enemy.isAttacking) {
+            enemy.move();
+        } 
+        else if (enemy.isFalling) {
+            drawEFall(enemy.x,enemy.y);
+        } 
+        else if(!enemy.isAttacking && !enemy.isFalling && !enemy.isMoving && !enemy.isDashing) { 
+            drawE(enemyimg,enemy.x, enemy.y); 
+        }
+    }
+    // image size + (charcter pixel size *3)
+    function characterMovement(character, controls) {
+        const { left, right, attack, jump, dash } = controls;
+
+        if (keysPressed.has(right) && character.x < canvas.width - 380 && !character.playingAnimation) {
+            character.x += 10;
+        }
+        if (keysPressed.has(left) && character.x > -220 && !character.playingAnimation) {
+            character.x -= 10;
+        }
+        if (keysPressed.has(left) || keysPressed.has(right)) {
+            character.isMoving = true;
+        } else {
+            character.isMoving = false;
+        }
+        if (keysPressed.has(left) && keysPressed.has(right)) {
+            character.isMoving = false;
+        }
+        if (keysPressed.has(attack) && !character.playingAnimation && !character.isAttacking && !character.cooldown) {
+            character.attack();
+        }
+        if (keysPressed.has(jump) && !character.isJumping) character.jump();
+        if (keysPressed.has(dash) && !character.isDashing &&!character.dashCooldown && !character.isAttacking) character.dash();
     }
 
-    let playingAnimation = false; //
-
-
-
     function checkHealth(){
-        indicator.innerText = enemy.health;
+        indicator.innerText = "Enemy:"+enemy.health+" Player:"+player.health;
         if(enemy.health <= 0){
             console.log("Enemy Dead");
             indicator.innerText = "Enemy Dead";
         }
+        if(player.health <= 0){
+            console.log("Player Dead");
+            indicator.innerText = "Player Dead";
+        }
     }
 
-    function attackAnimation(x,y) {
-        player.isAtAttackF1 = true;
-        enemy.takeDamage(50);
 
-        setTimeout(() => {
-            player.isAtAttackF1 = false;
-            player.isAtAttackF2 = true; 
-        }, 140); 
-        // Transition to point 3
-        setTimeout(() => {
-            player.isAtAttackF2 = false;
-            player.isAtAttackF3 = true;
-        }, 190);
-        setTimeout(() => {
-            player.isAtAttackF3 = false;
-            player.isAtAttackF4 = true;
-        }, 240);
-        // Attack Timeout
-        setTimeout(() => {
-            player.isAtAttackF4 = false;
-        }, 300);
-    }
-    function moveAnimation(x,y) {
-        drawMove(moveF[moveFrameCounter],x,y);
-    }
-    function fallAnimation(x,y) {
-        drawFall(x,y);
+    function moveAnimation(name,x,y) {
+        // moveAnimation    
+            if (name === "player") {
+                // movePAnimation(x,y);
+                drawMove(playerMoveF[playerMoveFrameCounter],x,y);
+
+            } 
+            else if (name === "enemy") {
+                // moveEAnimation(x,y);
+                drawEMove(enemyMoveF[enemyMoveEFrameCounter],x,y);
+
+            }
     }
 
 
 
 
-    function draw(x, y) {
-        // console.log('draw: ', draw);
+    function draw(img,x, y) {
         p.innerText = " x: "+player.x+" | y: "+player.y; // Display current x and y positions
         p2.innerText = " x: "+enemy.x+" | y: "+enemy.y; // Display current x and y positions
-        context.drawImage(playerimg, x, y,pwidth,pheight); // Draw the scaled image
+        context.drawImage(playerimg, x, y,width,height); // Draw the scaled image
     }
-    function drawAttack1(x, y) {
+    function drawE(img,x, y) {
+        p.innerText = " x: "+player.x+" | y: "+player.y; // Display current x and y positions
+        p2.innerText = " x: "+enemy.x+" | y: "+enemy.y; // Display current x and y positions
+        context.drawImage(enemyimg, x, y,width,height); // Draw the scaled image
+    }
+
+
+    function drawAttack(playerAttack,x, y) {
         p.innerText = " x: "+x+" | y: "+y; // Display current x and y positions
-        y=y-(4  *scale);
-        context.drawImage(playerAttackF1, x, y,pwidth,pheight); // Draw the scaled image
+        context.drawImage(playerAttack, x, y,width,height); // Draw the scaled image
     }
-    function drawAttack2(x, y) {
+    function drawEnemyAttack(enemyAttack,x, y) {
         p.innerText = " x: "+x+" | y: "+y; // Display current x and y positions
-        y=y+(6  *scale);
-        context.drawImage(playerAttackF2, x, y,pwidth,pwidth); // Draw the scaled image
+        context.drawImage(enemyAttack, x, y,width,height); // Draw the scaled image
     }
-    function drawAttack3(x, y) {
+    
+    function drawTakeHit(playerTakeHit,x, y) {
         p.innerText = " x: "+x+" | y: "+y; // Display current x and y positions
-        y=y-(15*scale);
-        context.drawImage(playerAttackF3, x, y,pawidth,paheight); // Draw the scaled image
+        context.drawImage(playerTakeHit, x, y,width,height); // Draw the scaled image
     }
-    function drawAttack4(x, y) {
+    function drawEnemyTakeHit(enemyTakeHit,x, y) {
         p.innerText = " x: "+x+" | y: "+y; // Display current x and y positions
-        y=y-(15*scale);
-        context.drawImage(playerAttackF4, x, y,pawidth,paheight); // Draw the scaled image
+        context.drawImage(enemyTakeHit, x, y,width,height); // Draw the scaled image
     }
+
     function drawMove(img,x,y){
         p.innerText = " x: "+x+" | y: "+y;
-        context.drawImage(img, x, y,pwidth,pheight); // Draw the scaled image
+        context.drawImage(img, x, y,width,height); // Draw the scaled image
     }
+    function drawEMove(img,x,y){
+        p.innerText = " x: "+x+" | y: "+y;
+        context.drawImage(img, x, y,width,height); // Draw the scaled image
+    }
+
+
     function drawFall(x,y){
         p.innerText = " xx: "+x+" | yx: "+y;
-        context.drawImage(fallF, x, y,pwidth,pheight); // Draw the scaled image
+        context.drawImage(playerFallF, x, y,width,height); // Draw the scaled image
+    }
+    function drawEFall(x,y){
+        p.innerText = " xx: "+x+" | yx: "+y;
+        context.drawImage(enemyFallF, x, y,width,height); // Draw the scaled image
     }
 
 
