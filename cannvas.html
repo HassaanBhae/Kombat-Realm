@@ -156,12 +156,13 @@ body{
     let playerTakeHitFrameCounter = 0;
     let enemyTakeHitFrameCounter = 0;
 
-    function User(name,x,y) {
+    function User(name,x,y,dpa) {
         this.name = name;
         this.health = 100;
         this.x = x;
         this.y = y;
-        this.isAttacking = false;
+        this.dpa = dpa;
+        let isAttacking = false;
         let isTakingHit = false;
         let cooldown = false;
         let dashCooldown = false;
@@ -170,41 +171,42 @@ body{
         let isFalling = false; // Flag to track jumping state
         let isDashing = false; // Flag to track jumping state
         let playingAnimation = false;
-        this.takeDamage = function(damage) {
-            this.health -= damage;
-        };
         this.attack = function(){
             if(!this.cooldown){
                 this.isAttacking = true;
                 this.cooldown = true;
             }
             setTimeout(() => {
-                    this.isAttacking = false;
-                    if (this === player) {     
-                        enemy.takeHit();       
-                        enemy.takeDamage(50);
-                        healthBarEnemy.style.width = (enemy.health) + '%';
-                    } 
-                    else if (this === enemy) {
-                        player.takeHit();       
-                        player.takeDamage(50);
-                        healthBarPlayer.style.width = (player.health) + '%';
-                    }
+                this.isAttacking = false;
+                if (this === player) {     
+                    enemy.takeHit(player.dpa);       
+                } 
+                else if (this === enemy) {
+                    player.takeHit(enemy.dpa);       
+                }
             }, 200); 
             setTimeout(() => {
                 this.cooldown = false;
             }, 500); 
         }
-        this.takeHit = function(){
+        this.takeHit = function(dpa){
             this.isTakingHit = true;
+            setTimeout(() => {                
+                this.takeDamage(dpa);
+                healthBarEnemy.style.width = (enemy.health) + '%';
+                healthBarPlayer.style.width = (player.health) + '%';
+            }, 50);
             setTimeout(() => {
                 this.isTakingHit = false;
                 playerTakeHitFrameCounter = 0;
                 enemyTakeHitFrameCounter = 0;
             }, 400); 
         }
+        this.takeDamage = function(damage) {
+            this.health -= damage;
+        };
         this.move = function(){
-            moveAnimation(this.name,this.x,this.y);
+            // moveAnimation(this.name,this.x,this.y);
         };
         this.jump = function(){
             this.isJumping = true; // Set jumping state
@@ -267,9 +269,12 @@ body{
                 this.dashCooldown = false; // Reset cooldown after 3 seconds
             }, 10000);
         }
+        this.death = function(){
+            // Death
+        }
     }
-    const player = new User('player',-120,53);
-    const enemy = new User('enemy',300,35);
+    const player = new User('player',-120,53,50);
+    const enemy = new User('enemy',300,35,25);
 
     window.onload = init;
 
@@ -301,8 +306,6 @@ body{
 
         //Take Hit Frames
         playerTakeHitF = document.querySelectorAll(".TakeHit");
-        console.log('playerTakeHitF: ', playerTakeHitF);
-        console.log('playerTakeHitF length: ', playerTakeHitF.length);
         enemyTakeHitF = document.querySelectorAll(".TakeHitE");
 
         //Death Frames
@@ -371,14 +374,14 @@ body{
         if (player.isAttacking){
             drawAttack(playerAttackF[playerAttackFrameCounter],player.x,player.y); 
         }
-        if (player.isTakingHit){
+        if (player.isTakingHit && !player.isAttacking){
             drawTakeHit(playerTakeHitF[playerTakeHitFrameCounter],player.x,player.y); 
         }
         else if (player.isMoving && !player.isAttacking) {
-            player.move();            
+            drawMove(playerMoveF[playerMoveFrameCounter],player.x,player.y);
         } 
         else if (player.isFalling) {
-            drawFall(player.x,player.y);
+            drawFall(playerFallF,player.x,player.y);
         } 
         else if(!player.isAttacking && !player.isFalling && !player.isMoving && !player.isDashing) { 
             draw(playerimg,player.x,player.y); 
@@ -386,19 +389,19 @@ body{
     }
     function enemyDraw(){
         if (enemy.isAttacking){   
-            drawEnemyAttack(enemyAttackF[enemyAttackFrameCounter],enemy.x,enemy.y); 
+            drawAttack(enemyAttackF[enemyAttackFrameCounter],enemy.x,enemy.y); 
         }
-        if (enemy.isTakingHit){
+        if (enemy.isTakingHit && !enemy.isAttacking){
             drawTakeHit(enemyTakeHitF[enemyTakeHitFrameCounter],enemy.x,enemy.y); 
         }
         else if (enemy.isMoving && !enemy.isAttacking) {
-            enemy.move();
+            drawMove(enemyMoveF[enemyMoveEFrameCounter],enemy.x,enemy.y);
         } 
         else if (enemy.isFalling) {
-            drawEFall(enemy.x,enemy.y);
+            drawFall(enemyFallF,enemy.x,enemy.y);
         } 
         else if(!enemy.isAttacking && !enemy.isFalling && !enemy.isMoving && !enemy.isDashing) { 
-            drawE(enemyimg,enemy.x, enemy.y); 
+            draw(enemyimg,enemy.x,enemy.y); 
         }
     }
     // image size + (charcter pixel size *3)
@@ -413,6 +416,9 @@ body{
         }
         if (keysPressed.has(left) || keysPressed.has(right)) {
             character.isMoving = true;
+            console.log('isMoving: ', character.name+":"+character.isMoving);
+            console.log(playerMoveFrameCounter);
+            console.log(enemyMoveEFrameCounter);
         } else {
             character.isMoving = false;
         }
@@ -440,71 +446,37 @@ body{
 
 
     function moveAnimation(name,x,y) {
-        // moveAnimation    
-            if (name === "player") {
-                // movePAnimation(x,y);
-                drawMove(playerMoveF[playerMoveFrameCounter],x,y);
 
-            } 
-            else if (name === "enemy") {
-                // moveEAnimation(x,y);
-                drawEMove(enemyMoveF[enemyMoveEFrameCounter],x,y);
-
-            }
     }
 
 
 
 
-    function draw(img,x, y) {
+    function draw(charImg,x, y) {
         p.innerText = " x: "+player.x+" | y: "+player.y; // Display current x and y positions
         p2.innerText = " x: "+enemy.x+" | y: "+enemy.y; // Display current x and y positions
-        context.drawImage(playerimg, x, y,width,height); // Draw the scaled image
-    }
-    function drawE(img,x, y) {
-        p.innerText = " x: "+player.x+" | y: "+player.y; // Display current x and y positions
-        p2.innerText = " x: "+enemy.x+" | y: "+enemy.y; // Display current x and y positions
-        context.drawImage(enemyimg, x, y,width,height); // Draw the scaled image
+        context.drawImage(charImg, x, y,width,height); // Draw the scaled image
     }
 
-
-    function drawAttack(playerAttack,x, y) {
+    function drawAttack(charAttack,x, y) {
         p.innerText = " x: "+x+" | y: "+y; // Display current x and y positions
-        context.drawImage(playerAttack, x, y,width,height); // Draw the scaled image
-    }
-    function drawEnemyAttack(enemyAttack,x, y) {
-        p.innerText = " x: "+x+" | y: "+y; // Display current x and y positions
-        context.drawImage(enemyAttack, x, y,width,height); // Draw the scaled image
+        context.drawImage(charAttack, x, y,width,height); // Draw the scaled image
     }
     
-    function drawTakeHit(playerTakeHit,x, y) {
+    function drawTakeHit(charTakeHit,x, y) {
         p.innerText = " x: "+x+" | y: "+y; // Display current x and y positions
-        context.drawImage(playerTakeHit, x, y,width,height); // Draw the scaled image
-    }
-    function drawEnemyTakeHit(enemyTakeHit,x, y) {
-        p.innerText = " x: "+x+" | y: "+y; // Display current x and y positions
-        context.drawImage(enemyTakeHit, x, y,width,height); // Draw the scaled image
+        context.drawImage(charTakeHit, x, y,width,height); // Draw the scaled image
     }
 
-    function drawMove(img,x,y){
+    function drawMove(charImgMove,x,y){
         p.innerText = " x: "+x+" | y: "+y;
-        context.drawImage(img, x, y,width,height); // Draw the scaled image
-    }
-    function drawEMove(img,x,y){
-        p.innerText = " x: "+x+" | y: "+y;
-        context.drawImage(img, x, y,width,height); // Draw the scaled image
+        context.drawImage(charImgMove, x, y,width,height); // Draw the scaled image
     }
 
-
-    function drawFall(x,y){
+    function drawFall(charFall,x,y){
         p.innerText = " xx: "+x+" | yx: "+y;
-        context.drawImage(playerFallF, x, y,width,height); // Draw the scaled image
+        context.drawImage(charFall, x, y,width,height); // Draw the scaled image
     }
-    function drawEFall(x,y){
-        p.innerText = " xx: "+x+" | yx: "+y;
-        context.drawImage(enemyFallF, x, y,width,height); // Draw the scaled image
-    }
-
 
 </script>
 
