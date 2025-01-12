@@ -140,6 +140,8 @@ body{
     let x,y;
     const keysPressed = new Set(); // Track keys pressed
     const scale = 3; // Set your scale factor here
+    const charWidht = 210;
+    const charHeight = 210;
     const width = 210 * scale; // Scaled width
     const height = 210 * scale; // Scaled height
 
@@ -156,20 +158,29 @@ body{
     let enemyTakeHitFrameCounter = 0;
 
     function User(name,x,y,dpa) {
+
         this.name = name;
         this.health = 100;
         this.x = x;
         this.y = y;
         this.dpa = dpa;
+
         let isAttacking = false;
         let isTakingHit = false;
         let cooldown = false;
         let dashCooldown = false;
         let isMoving = false;
-        let isJumping = false; // Flag to track jumping state
-        let isFalling = false; // Flag to track jumping state
-        let isDashing = false; // Flag to track jumping state
+        let isJumping = false; 
+        let isFalling = false; 
+        let isDashing = false; 
+        let isDead = false;
         let playingAnimation = false;
+
+        let hitBoxXL = this.x+charWidht;
+        let hitBoxXR = this.x+charWidht*2;
+        let hitBoxYT = this.y+charHeight;
+        let hitBoxYB = this.y+charHeight*2;
+
         this.attack = function(){
             if(!this.cooldown){
                 this.isAttacking = true;
@@ -188,6 +199,7 @@ body{
                 this.cooldown = false;
             }, 500); 
         }
+
         this.takeHit = function(dpa){
             this.isTakingHit = true;
             setTimeout(() => {                
@@ -201,12 +213,15 @@ body{
                 enemyTakeHitFrameCounter = 0;
             }, 400); 
         }
+
         this.takeDamage = function(damage) {
             this.health -= damage;
-        };
-        this.move = function(){
-            // moveAnimation(this.name,this.x,this.y);
-        };
+        }
+
+        // this.move = function(){
+        //     // moveAnimation(this.name,this.x,this.y);
+        // }
+
         this.jump = function(){
             this.isJumping = true; // Set jumping state
             let counter = 0;
@@ -220,11 +235,11 @@ body{
                     this.fall(); // Start falling back down
                 }
             }, 1);
-        };
+        }
+
         this.fall = function(){
             console.log('Falling!');
             this.isFalling = true;
-            // console.log("Fall ANimation Ended");
             let fallCounter = 0;
             const fallIntervalId = setInterval(() => {
                 if (fallCounter < 50) { // Number of downward moves
@@ -237,6 +252,7 @@ body{
                 }
             }, 1);
         }
+
         this.dash = function(){
             // If dash is on cooldown, return early
             if (this.isDashing === true || this.dashCooldown === true) {
@@ -268,12 +284,14 @@ body{
                 this.dashCooldown = false; // Reset cooldown after 3 seconds
             }, 10000);
         }
-        this.death = function(){
-            // Death
-        }
+
+        // this.death = function(){
+        //     // Death
+        // }
     }
+
     const player = new User('player',-120,53,50);
-    const enemy = new User('enemy',300,35,25);
+    const enemy = new User('enemy',300,35,50);
 
     window.onload = init;
 
@@ -352,6 +370,16 @@ body{
             if(enemy.isTakingHit){
                 enemyTakeHitFrameCounter = (enemyTakeHitFrameCounter+1) % (enemyTakeHitF.length);
             }
+            if(player.isDead){
+                if(playerDeathFrameCounter < 4){
+                    playerDeathFrameCounter++;
+                }
+            }
+            if(enemy.isDead){
+                if(enemyDeathFrameCounter < 5){
+                    enemyDeathFrameCounter++;
+                }
+            }
         }, 200);
             
 
@@ -366,10 +394,45 @@ body{
         playerDraw();
         enemyDraw();
         checkHealth();
+        
+        context.lineWidth = "6";
+        context.strokeStyle = "blue";
+        // context.strokeRect(player.x+235,player.y+220, width/5,height/3.8);
+        // context.strokeRect(enemy.x+270,enemy.y+220, width/5.8,height/3.4);
+        
+        // context.strokeRect(player.x+charWidht,player.y+charHeight, charWidht,charHeight);
+        context.strokeRect(player.x+charWidht,player.y+charHeight, 1,charHeight);
+        context.strokeRect(player.x+charWidht*2,player.y+charHeight, 1,charHeight);
+        
+        context.strokeRect(player.x+charWidht,player.y+charHeight, charHeight,1);
+        context.strokeRect(player.x+charWidht,player.y+charHeight*2,charHeight,1);
+        
+        context.lineWidth = "6";
+        context.strokeStyle = "red";
+        //Left X
+        context.strokeRect(player.x+charWidht,(player.y+charHeight)+charHeight/2, 1,1);
+        //Right X
+        context.strokeRect(player.x+charWidht*2,(player.y+charHeight)+charHeight/2, 1,1);
+        //Top Y
+        context.strokeRect((player.x+charWidht)+charHeight/2,player.y+charHeight, 1,1);
+        //Bottom Y
+        context.strokeRect((player.x+charWidht)+charHeight/2,player.y+charHeight*2, 1,1);
+
+        
+
+
+        // context.lineWidth = "6";
+        // context.strokeStyle = "red";
+        // context.strokeRect((player.x+235)+(width/5),player.y+220,235,height/3.8);
+        // context.strokeRect((enemy.x+270)-(width/2.7),enemy.y+220,230,height/3.4);
 
         window.requestAnimationFrame(gameLoop); // Keep requesting new frames
     }
     function playerDraw(){
+        if (player.isDead){
+            drawDeath(playerDeathF[playerDeathFrameCounter],player.x,player.y);
+            return;
+        }
         if (player.isAttacking){
             drawAttack(playerAttackF[playerAttackFrameCounter],player.x,player.y); 
         }
@@ -382,11 +445,15 @@ body{
         else if (player.isFalling) {
             drawFall(playerFallF,player.x,player.y);
         } 
-        else if(!player.isAttacking && !player.isFalling && !player.isMoving && !player.isDashing) { 
+        else if(!player.isAttacking && !player.isFalling && !player.isMoving && !player.isDashing && !player.isDead) { 
             draw(playerimg,player.x,player.y); 
         }
     }
     function enemyDraw(){
+        if (enemy.isDead) {
+            drawDeath(enemyDeathF[enemyDeathFrameCounter],enemy.x,enemy.y);
+            return;
+        }
         if (enemy.isAttacking){   
             drawAttack(enemyAttackF[enemyAttackFrameCounter],enemy.x,enemy.y); 
         }
@@ -399,7 +466,7 @@ body{
         else if (enemy.isFalling) {
             drawFall(enemyFallF,enemy.x,enemy.y);
         } 
-        else if(!enemy.isAttacking && !enemy.isFalling && !enemy.isMoving && !enemy.isDashing) { 
+        else if(!enemy.isAttacking && !enemy.isFalling && !enemy.isMoving && !enemy.isDashing && !enemy.isDead) { 
             draw(enemyimg,enemy.x,enemy.y); 
         }
     }
@@ -407,10 +474,10 @@ body{
     function characterMovement(character, controls) {
         const { left, right, attack, jump, dash } = controls;
 
-        if (keysPressed.has(right) && character.x < canvas.width - 380 && !character.playingAnimation) {
+        if (keysPressed.has(right) && character.x < canvas.width - 380 && !character.playingAnimation && !character.isDead) {
             character.x += 10;
         }
-        if (keysPressed.has(left) && character.x > -220 && !character.playingAnimation) {
+        if (keysPressed.has(left) && character.x > -220 && !character.playingAnimation && !character.isDead) {
             character.x -= 10;
         }
         if (keysPressed.has(left) || keysPressed.has(right)) {
@@ -424,20 +491,22 @@ body{
         if (keysPressed.has(left) && keysPressed.has(right)) {
             character.isMoving = false;
         }
-        if (keysPressed.has(attack) && !character.playingAnimation && !character.isAttacking && !character.cooldown) {
+        if (keysPressed.has(attack) && !character.playingAnimation && !character.isAttacking && !character.cooldown && !character.isDead) {
             character.attack();
         }
-        if (keysPressed.has(jump) && !character.isJumping) character.jump();
-        if (keysPressed.has(dash) && !character.isDashing &&!character.dashCooldown && !character.isAttacking) character.dash();
+        if (keysPressed.has(jump) && !character.isJumping && !character.isDead) character.jump();
+        if (keysPressed.has(dash) && !character.isDashing &&!character.dashCooldown && !character.isAttacking && !character.isDead) character.dash();
     }
 
     function checkHealth(){
         indicator.innerText = "Enemy:"+enemy.health+" Player:"+player.health;
         if(enemy.health <= 0){
+            enemy.isDead = true;
             console.log("Enemy Dead");
             indicator.innerText = "Enemy Dead";
         }
         if(player.health <= 0){
+            player.isDead = true;
             console.log("Player Dead");
             indicator.innerText = "Player Dead";
         }
@@ -475,6 +544,11 @@ body{
     function drawFall(charFall,x,y){
         p.innerText = " xx: "+x+" | yx: "+y;
         context.drawImage(charFall, x, y,width,height); // Draw the scaled image
+    }
+    
+    function drawDeath(charDeath,x,y){
+        p.innerText = " xx: "+x+" | yx: "+y;
+        context.drawImage(charDeath, x, y,width,height); // Draw the scaled image
     }
 
 </script>
