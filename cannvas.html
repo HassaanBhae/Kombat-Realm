@@ -140,8 +140,8 @@ body{
     let x,y;
     const keysPressed = new Set(); // Track keys pressed
     const scale = 3; // Set your scale factor here
-    const charWidht = 210;
-    const charHeight = 210;
+    const charWidht = 52.5*scale;
+    const charHeight = 52.5*scale;
     const width = 210 * scale; // Scaled width
     const height = 210 * scale; // Scaled height
 
@@ -401,30 +401,47 @@ body{
         // context.strokeRect(enemy.x+270,enemy.y+220, width/5.8,height/3.4);
         
         // context.strokeRect(player.x+charWidht,player.y+charHeight, charWidht,charHeight);
-        context.strokeRect(player.x+charWidht,player.y+charHeight, 1,charHeight);
-        context.strokeRect(player.x+charWidht*2,player.y+charHeight, 1,charHeight);
+        // context.strokeRect(player.x+charWidht,player.y+charHeight, 1,charHeight);
+        // context.strokeRect(player.x+charWidht*2,player.y+charHeight, 1,charHeight);
         
-        context.strokeRect(player.x+charWidht,player.y+charHeight, charHeight,1);
-        context.strokeRect(player.x+charWidht,player.y+charHeight*2,charHeight,1);
+        // context.strokeRect(player.x+charWidht,player.y+charHeight, charHeight,1);
+        // context.strokeRect(player.x+charWidht,player.y+charHeight*2,charHeight,1);
+        //Hit boroder
+        // context.lineWidth = "5";
+        // context.strokeStyle = "green";
+        // context.strokeRect(player.x+(75*scale),player.y+(75*scale), charWidht,charHeight);
+        
+        // context.strokeRect(enemy.x+(75*scale),enemy.y+(75*scale), charWidht,charHeight+20);
+        
         
         context.lineWidth = "6";
-        context.strokeStyle = "red";
+        context.strokeStyle = "green";
         //Left X
-        context.strokeRect(player.x+charWidht,(player.y+charHeight)+charHeight/2, 1,1);
-        //Right X
-        context.strokeRect(player.x+charWidht*2,(player.y+charHeight)+charHeight/2, 1,1);
-        //Top Y
-        context.strokeRect((player.x+charWidht)+charHeight/2,player.y+charHeight, 1,1);
-        //Bottom Y
-        context.strokeRect((player.x+charWidht)+charHeight/2,player.y+charHeight*2, 1,1);
-
+        context.strokeRect((player.x+(87*scale)),player.y+(height/2-6), 1,1);
+        // //Right X
+        context.strokeRect((player.x+width-(scale*87)),player.y+(height/2-6), 1,1);
+        // //Top Y
+        context.strokeRect((player.x+(width/2-6)),player.y+(75*scale), 1,1);
+        // //Bottom Y
+        context.strokeRect((player.x+(width/2-6)),player.y+height-(scale*83), 1,1);
         
+        
+        
+        //Left X 
+        context.strokeRect((enemy.x+(87*scale)),enemy.y+(height/2-6), 1,1);
+        // //Right X
+        context.strokeRect((enemy.x+width-(scale*87)),enemy.y+(height/2-6), 1,1);
+        // //Top Y
+        context.strokeRect((enemy.x+(width/2-6)),enemy.y+(75*scale), 1,1);
+        // //Bottom Y
+        context.strokeRect((enemy.x+(width/2-6)),enemy.y+height-(scale*75), 1,1);
+
 
 
         // context.lineWidth = "6";
-        // context.strokeStyle = "red";
-        // context.strokeRect((player.x+235)+(width/5),player.y+220,235,height/3.8);
-        // context.strokeRect((enemy.x+270)-(width/2.7),enemy.y+220,230,height/3.4);
+        context.strokeStyle = "red";
+        context.strokeRect((player.x+235)+(width/5),player.y+220,235,height/3.8);
+        context.strokeRect((enemy.x+270)-(width/2.7),enemy.y+220,230,height/3.4);
 
         window.requestAnimationFrame(gameLoop); // Keep requesting new frames
     }
