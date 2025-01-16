@@ -17,6 +17,23 @@ body{
     color: blueviolet;
     /* ss2 */
 }
+#playerHitBox{
+    position: absolute;
+    scale: 1.5;
+    margin-left: 50px;
+    margin-top: 460px;
+    color: yellow;
+    /* ss2 */
+}
+#enemyHitBox{
+    position: absolute;
+    scale: 1.5;
+    margin-right: 50px;
+    margin-top: 460px;
+    color: yellow;
+    right: 0;
+    /* ss2 */
+}
 #player,
 #enemy,
 .attack,
@@ -68,10 +85,12 @@ body{
 
 <p id="p" style="position: absolute;margin-left: 10px;border: 2px black solid;">A canvas element is displayed like this:</p>
 <p id="p2" style="position: absolute;margin-right:10px;right: 0;border: 2px black solid;">A canvas element is displayed like this:</p>
-
+<p id="attackRangeP" style="padding: 10px;background-color: green;position: absolute;margin-left:10px;left: 10;top:80px;border: 2px black solid;">A canvas element is displayed like this:</p>
+<p id="attackRangeE" style="padding: 10px;background-color: green;position: absolute;margin-right:10px;right: 0;top:80px;border: 2px black solid;">A canvas element is displayed like this:</p>
 <div class="healthBar1"><div id="healthBarPlayer"></div></div>
 <div class="healthBar2"><div id="healthBarEnemy"></div></div>
-
+<p id="playerHitBox">Test</p>
+<p id="enemyHitBox">Test</p>
 <!-- //Player -->
 <img id="player" src="./samurai/Idle.png">
 <img id="Attack1" class="attack"src="./samurai/attack/Attack_1.png">
@@ -178,11 +197,13 @@ body{
 
         let attackRangeS;
         let attackRangeE ;
+        let attackRangeT ;
+        let attackRangeB ;
 
-        let hitBoxXL = this.x+charWidht;
-        let hitBoxXR = this.x+charWidht*2;
-        let hitBoxYT = this.y+charHeight;
-        let hitBoxYB = this.y+charHeight*2;
+        let hitBoxXL;
+        let hitBoxXR;
+        let hitBoxYT;
+        let hitBoxYB;
 
         this.attack = function(){
             if(!this.cooldown){
@@ -192,13 +213,24 @@ body{
             setTimeout(() => {
                 this.isAttacking = false;
                 if (this === player) {     
-                    if(enemy.x >= player.attackRangeS){
-                        console.log('player.attackRangeS: ', player.attackRangeS);
-                        console.log("Hit");
-                        enemy.takeHit(player.dpa);       
+                    if(enemy.hitBoxXL >= player.attackRangeS && enemy.hitBoxXL <= player.attackRangeE){                        
+                        if(enemy.hitBoxYB <= player.attackRangeB && enemy.hitBoxYB >= player.attackRangeT || enemy.hitBoxYT <= player.attackRangeB && enemy.hitBoxYT >= player.attackRangeT ){
+                            console.log("Hit");
+                            enemy.takeHit(player.dpa);       
+                        }else{
+                            console.log("missed Y");
+                        }
                     }else{
-                        console.log("Miss");
+                        console.log("missed x");
+
                     }
+                    // else if(enemy.hitBoxXR >= player.attackRangeS && enemy.hitBoxXR <= player.attackRangeE){
+                    //     console.log("Hit");
+                    //     enemy.takeHit(player.dpa);     
+                    // }
+                    // else{
+                    //     console.log("Miss");
+                    // }
                 } 
                 else if (this === enemy) {
                     player.takeHit(enemy.dpa);       
@@ -259,7 +291,7 @@ body{
                     this.isJumping = false; // Reset jumping state
                     this.isFalling = false;
                 }
-            }, 1);
+            }, 100);
         }
 
         this.dash = function(){
@@ -309,6 +341,10 @@ body{
         btn = document.getElementById('button');
         p = document.getElementById('p');
         p2 = document.getElementById('p2');
+        pAttack = document.getElementById('attackRangeP');
+        pEAttack = document.getElementById('attackRangeE');
+        pPlayerHitBox = document.getElementById('playerHitBox');
+        pEnemyHitBox = document.getElementById('enemyHitBox');
         context = canvas.getContext('2d');
 
         indicator = document.getElementById("indicator");
@@ -404,45 +440,86 @@ body{
         enemyDraw();
         checkHealth();   
         
+
+        //Player AttackBox
+        context.strokeStyle = "red";
+
+        player.attackRangeS= (player.x+width-(scale*87));
+            context.strokeRect(player.attackRangeS,player.hitBoxYT,1,player.hitBoxYB-player.hitBoxYT);
+        player.attackRangeE = player.attackRangeS +235;
+            context.strokeRect(player.attackRangeE,player.hitBoxYT,1,player.hitBoxYB-player.hitBoxYT);
+        player.attackRangeT = player.hitBoxYT;
+            context.strokeRect(player.attackRangeS,player.attackRangeT,235,1);
+        player.attackRangeB =player.hitBoxYB;
+            context.strokeRect(player.attackRangeS,player.attackRangeB,235,1);
+        
+        //Player HitBox
         context.lineWidth = "6";
-        context.strokeStyle = "green";
+        context.strokeStyle = "blue";
         //Left X
-        context.strokeRect((player.x+(87*scale)),player.y+(height/2-6), 1,1);
-        // //Right X
-        context.strokeRect((player.x+width-(scale*87)),player.y+(height/2-6), 1,1);
-        // //Top Y
-        context.strokeRect((player.x+(width/2-6)),player.y+(75*scale), 1,1);
-        // //Bottom Y
-        context.strokeRect((player.x+(width/2-6)),player.y+height-(scale*83), 1,1);
+        player.hitBoxXL = (player.x+(87*scale));
+            context.strokeRect(player.hitBoxXL,player.y+(height/2-6), 1,1);
+        //Right X
+        player.hitBoxXR = (player.x+width-(scale*87));
+            context.strokeRect(player.hitBoxXR,player.y+(height/2-6), 1,1);
+        //Top Y
+        player.hitBoxYT = player.y+(69*scale);
+        // context.strokeRect((player.x+(width/2-6)),player.hitBoxYT, 1,1);
+            context.strokeRect(player.hitBoxXL+((player.hitBoxXR-player.hitBoxXL)/2),player.hitBoxYT, 1,1);
+        //Bottom Y
+        player.hitBoxYB = player.y+height-(scale*81);
+            context.strokeRect((player.x+(width/2-6)),player.hitBoxYB, 1,1);
+            
+
+        pAttack.innerText = "Attack Range:"+"\n"+"X : "+player.attackRangeS +"-"+player.attackRangeE +"\n"+"Y : "+player.attackRangeT+"-"+player.attackRangeB ;
+        pPlayerHitBox.innerText = "Left X:"+player.hitBoxXL+"\n"+"Right X:"+player.hitBoxXR+"\n"+"Top Y:"+player.hitBoxYT+"\n"+"Bottom Y:"+player.hitBoxYB;
+
+        //Enemy AttackBox
+        context.strokeStyle = "red";
+
+        enemy.attackRangeS= enemy.hitBoxXL;
+            context.strokeRect(enemy.attackRangeS,enemy.hitBoxYT,1,enemy.hitBoxYB-enemy.hitBoxYT);
+        enemy.attackRangeE = enemy.attackRangeS -230;
+            context.strokeRect(enemy.attackRangeE,enemy.hitBoxYT,1,enemy.hitBoxYB-enemy.hitBoxYT);
+        enemy.attackRangeT = enemy.hitBoxYT;
+            context.strokeRect(enemy.attackRangeS,enemy.attackRangeT,-230,1);
+        enemy.attackRangeB =enemy.hitBoxYB;
+            context.strokeRect(enemy.attackRangeS,enemy.attackRangeB,-230,1);
         
-        
-        
+        //Enemy HitBox    
+        context.lineWidth = "6";
+        context.strokeStyle = "blue";
         //Left X 
-        context.strokeRect((enemy.x+(87*scale)),enemy.y+(height/2-6), 1,1);
-        // //Right X
-        context.strokeRect((enemy.x+width-(scale*87)),enemy.y+(height/2-6), 1,1);
-        // //Top Y
-        context.strokeRect((enemy.x+(width/2-6)),enemy.y+(75*scale), 1,1);
-        // //Bottom Y
-        context.strokeRect((enemy.x+(width/2-6)),enemy.y+height-(scale*75), 1,1);
+        enemy.hitBoxXL = (enemy.x+(87*scale));
+            context.strokeRect((enemy.x+(87*scale)),enemy.y+(height/2-6), 1,1);
+        //Right X
+        enemy.hitBoxXR = (enemy.x+width-(scale*87));
+            context.strokeRect((enemy.x+width-(scale*87)),enemy.y+(height/2-6), 1,1);
+        //Top Y
+        enemy.hitBoxYT = enemy.y+(75*scale);
+            context.strokeRect((enemy.x+(width/2-6)),enemy.hitBoxYT, 1,1);
+        //Bottom Y
+        enemy.hitBoxYB = enemy.y+height-(scale*75);
+            context.strokeRect((enemy.x+(width/2-6)),enemy.hitBoxYB, 1,1);
+
+            
+        pEAttack.innerText = "Attack Range:"+"\n"+"X : "+enemy.attackRangeS +"-"+enemy.attackRangeE +"\n"+"Y : "+enemy.attackRangeT+"-"+enemy.attackRangeB ;
+        pEnemyHitBox.innerText = "Left X:"+enemy.hitBoxXL+"\n"+"Right X:"+enemy.hitBoxXR+"\n"+"Top Y:"+enemy.hitBoxYT+"\n"+"Bottom Y:"+enemy.hitBoxYB;    
+
 
 
 
         // context.lineWidth = "6";
-        context.strokeStyle = "red";
-        context.strokeRect((player.x+235)+(width/5),player.y+220,235,height/3.8);
-        context.strokeRect((enemy.x+270)-(width/2.7),enemy.y+220,230,height/3.4);
+        // context.strokeStyle = "red";
+        // context.strokeRect((player.x+width-(scale*87)),player.y+220,235,height/3.8);
+        // context.strokeRect((enemy.x+270)-(width/2.7),enemy.y+220,230,height/3.4);
         
 
 
-        player.attackRangeS= (player.x+235)+(width/5);
-        player.attackRangeE = player.attackRangeS +235;
-
-        context.strokeStyle = "blue";
 
 
-        context.strokeRect(player.attackRangeS,player.y+220,1,height/3.8);
-        context.strokeRect(player.attackRangeE,player.y+220,1,height/3.8);
+        //Update player hit box cords
+
 
 
         window.requestAnimationFrame(gameLoop); // Keep requesting new frames
@@ -532,7 +609,7 @@ body{
     }
 
 
-    function moveAnimation(name,x,y) {
+    function checkHitBox(){
 
     }
 
