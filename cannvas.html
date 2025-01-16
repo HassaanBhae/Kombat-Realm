@@ -176,6 +176,9 @@ body{
         let isDead = false;
         let playingAnimation = false;
 
+        let attackRangeS;
+        let attackRangeE ;
+
         let hitBoxXL = this.x+charWidht;
         let hitBoxXR = this.x+charWidht*2;
         let hitBoxYT = this.y+charHeight;
@@ -189,7 +192,13 @@ body{
             setTimeout(() => {
                 this.isAttacking = false;
                 if (this === player) {     
-                    enemy.takeHit(player.dpa);       
+                    if(enemy.x >= player.attackRangeS){
+                        console.log('player.attackRangeS: ', player.attackRangeS);
+                        console.log("Hit");
+                        enemy.takeHit(player.dpa);       
+                    }else{
+                        console.log("Miss");
+                    }
                 } 
                 else if (this === enemy) {
                     player.takeHit(enemy.dpa);       
@@ -393,26 +402,7 @@ body{
         characterMovement(enemy, {left: 'a',right: 'd',attack: 's',jump: 'w',dash: 'Enter',});
         playerDraw();
         enemyDraw();
-        checkHealth();
-        
-        context.lineWidth = "6";
-        context.strokeStyle = "blue";
-        // context.strokeRect(player.x+235,player.y+220, width/5,height/3.8);
-        // context.strokeRect(enemy.x+270,enemy.y+220, width/5.8,height/3.4);
-        
-        // context.strokeRect(player.x+charWidht,player.y+charHeight, charWidht,charHeight);
-        // context.strokeRect(player.x+charWidht,player.y+charHeight, 1,charHeight);
-        // context.strokeRect(player.x+charWidht*2,player.y+charHeight, 1,charHeight);
-        
-        // context.strokeRect(player.x+charWidht,player.y+charHeight, charHeight,1);
-        // context.strokeRect(player.x+charWidht,player.y+charHeight*2,charHeight,1);
-        //Hit boroder
-        // context.lineWidth = "5";
-        // context.strokeStyle = "green";
-        // context.strokeRect(player.x+(75*scale),player.y+(75*scale), charWidht,charHeight);
-        
-        // context.strokeRect(enemy.x+(75*scale),enemy.y+(75*scale), charWidht,charHeight+20);
-        
+        checkHealth();   
         
         context.lineWidth = "6";
         context.strokeStyle = "green";
@@ -442,6 +432,18 @@ body{
         context.strokeStyle = "red";
         context.strokeRect((player.x+235)+(width/5),player.y+220,235,height/3.8);
         context.strokeRect((enemy.x+270)-(width/2.7),enemy.y+220,230,height/3.4);
+        
+
+
+        player.attackRangeS= (player.x+235)+(width/5);
+        player.attackRangeE = player.attackRangeS +235;
+
+        context.strokeStyle = "blue";
+
+
+        context.strokeRect(player.attackRangeS,player.y+220,1,height/3.8);
+        context.strokeRect(player.attackRangeE,player.y+220,1,height/3.8);
+
 
         window.requestAnimationFrame(gameLoop); // Keep requesting new frames
     }
