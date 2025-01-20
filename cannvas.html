@@ -5,12 +5,28 @@
 body{
     background-color:#271408;
     margin: 0;
-    overflow: hidden;
-    background-image: url(./Dojo.webp);
-    background-repeat: no-repeat;
+    /* background-size: auto; */
     user-select: none; /* Disables text selection */
-
+    
+    overflow: hidden;
 }
+
+
+#background {
+    background-image: url(./Dojo-long.jpg);
+    background-repeat: no-repeat;
+    /* background-size: 1550px 800px; */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background-size:cover; */
+  background-size:contain;
+  /* background-size:1400px; */
+  z-index: -1; /* Keeps it behind other content */
+}
+
 @font-face {
     font-family: "ninja";
     src: url("./fonts/ninja-font2.ttf");
@@ -170,7 +186,7 @@ body{
 </style>
 </head>
 <body>
-
+<div id="background"></div>
 <!-- <p id="p" style="position: absolute;margin-left: 10px;border: 2px black solid;">A canvas element is displayed like this:</p> -->
 <!-- <p id="p2" style="position: absolute;margin-right:10px;right: 0;border: 2px black solid;">A canvas element is displayed like this:</p> -->
 
@@ -268,8 +284,10 @@ body{
     let x,y;
 
     //Turn this to true to turn on Debugging Visualizer
-    let debug = false;
+    let debug = true;
     const globalCooldown = 10000;
+    let countdownDuration = 60;
+    let winnerDeclared = false;
 
     const keysPressed = new Set(); // Track keys pressed
     const scale = 3; // Set your scale factor here
@@ -376,17 +394,19 @@ body{
         }
 
         this.takeHit = function(dpa){
-            this.isTakingHit = true;
-            setTimeout(() => {                
-                this.health -= dpa;
-                healthBarEnemy.style.width = (enemy.health) + '%';
-                healthBarPlayer.style.width = (player.health) + '%';
-            }, 50);
-            setTimeout(() => {
-                this.isTakingHit = false;
-                playerTakeHitFrameCounter = 0;
-                enemyTakeHitFrameCounter = 0;
-            }, 400); 
+            if(!winnerDeclared){
+                this.isTakingHit = true;
+                setTimeout(() => {                
+                    this.health -= dpa;
+                    healthBarEnemy.style.width = (enemy.health) + '%';
+                    healthBarPlayer.style.width = (player.health) + '%';
+                }, 50);
+                setTimeout(() => {
+                    this.isTakingHit = false;
+                    playerTakeHitFrameCounter = 0;
+                    enemyTakeHitFrameCounter = 0;
+                }, 400); 
+            }
         }
 
 
@@ -457,16 +477,22 @@ body{
         }
 
     }
-
+    //for scale 3
     const player = new User('player',-120,53,25);
     const enemy = new User('enemy',300,35,25);
+    //for scale 5
+    // const player = new User('player',-120,-10,25);
+    // const enemy = new User('enemy',300,-40,25);
 
     window.onload = init;
 
     function init() {
         canvas = document.getElementById('canvas');
-        // p = document.getElementById('p');
-        // p2 = document.getElementById('p2');
+
+        background = document.getElementById('background');
+        background.style.backgroundSize = window.innerWidth+"px"+" "+window.innerHeight+"px";
+        // background.style.backgroundSize = window.innerWidth+"px";
+
         pAttackRange = document.getElementById('attackRangeP');
         eAttackRange = document.getElementById('attackRangeE');
         playerHitBoxBox = document.getElementById('playerHitBoxBox');
@@ -584,10 +610,13 @@ body{
         playerDraw();
         enemyDraw();
         
-        checkHealth();   
-        
-        getPlayerAttackBoxAndHitBox();
-        getEnemyAttackBoxAndHitBox();
+        if(!winnerDeclared){
+            
+            checkHealth();   
+            
+            getPlayerAttackBoxAndHitBox();
+            getEnemyAttackBoxAndHitBox();
+        }
 
         if(debug === true){
             debugPlayerAttackBoxAndHitBox();
@@ -676,15 +705,32 @@ body{
 
     function checkHealth(){
         indicator.innerText = "Enemy:"+enemy.health+" Player:"+player.health;
-        if(enemy.health <= 0){
+        if(enemy.health <= 0 ){
             enemy.isDead = true;
             console.log("Enemy Dead");
-            indicator.innerText = "Enemy Dead";
+            indicator.innerText = "Enemy Dead";   
+            winnerDeclared = true;
+            showResult("Player");
         }
         if(player.health <= 0){
             player.isDead = true;
             console.log("Player Dead");
             indicator.innerText = "Player Dead";
+            winnerDeclared = true;
+            showResult("Enemy");
+        }
+        if(enemy.health === player.health && countdownDuration === 0){
+            console.log('showResult: Tie');
+            winnerDeclared = true;
+            showResult("Tie");
+        }
+        if(enemy.health < player.health && countdownDuration === 0){
+            winnerDeclared = true;
+            showResult("Player");
+        }
+        if(player.health < enemy.health && countdownDuration === 0){
+            winnerDeclared = true;
+            showResult("Enemy");
         }
     }
 
@@ -738,7 +784,7 @@ body{
         context.strokeRect(player.attackRangeS,player.attackRangeT,(79*scale),1);
         context.strokeRect(player.attackRangeS,player.attackRangeB,(79*scale),1);
         
-        pAttackRange.innerText = "Attack Range:"+"\n"+"X : "+player.attackRangeS +"-"+player.attackRangeE +"\n"+"Y : "+player.attackRangeT+"-"+player.attackRangeB ;
+        pAttackRange.innerText = "Attack Range:"+"\n"+"X : "+player.attackRangeS +"-"+player.attackRangeE +" ("+(player.attackRangeE-player.attackRangeS)+")"+"\n"+"Y : "+player.attackRangeT+"-"+player.attackRangeB ;
 
         //Player HitBox
         context.lineWidth = "6";
@@ -772,8 +818,12 @@ body{
         playerHitBoxBox.innerText = "Left X:"+player.hitBoxXL+"\n"+"Right X:"+player.hitBoxXR+"\n"+"Top Y:"+player.hitBoxYT+"\n"+"Bottom Y:"+player.hitBoxYB;
     }
     function getEnemyAttackBoxAndHitBox(){
-        enemy.attackRangeS= enemy.hitBoxXL;
-        enemy.attackRangeE = enemy.attackRangeS -230;
+        // enemy.attackRangeS= enemy.hitBoxXL;
+        enemy.attackRangeS= (enemy.x+(scale*87));
+
+        // enemy.attackRangeE = enemy.attackRangeS -230;
+        enemy.attackRangeE = enemy.attackRangeS -(79*scale);
+
         enemy.attackRangeT = enemy.hitBoxYT;
         enemy.attackRangeB =enemy.hitBoxYB;
 
@@ -793,10 +843,10 @@ body{
 
         context.strokeRect(enemy.attackRangeS,enemy.hitBoxYT,1,enemy.hitBoxYB-enemy.hitBoxYT);
         context.strokeRect(enemy.attackRangeE,enemy.hitBoxYT,1,enemy.hitBoxYB-enemy.hitBoxYT);
-        context.strokeRect(enemy.attackRangeS,enemy.attackRangeT,-230,1);
-        context.strokeRect(enemy.attackRangeS,enemy.attackRangeB,-230,1);
+        context.strokeRect(enemy.attackRangeS,enemy.attackRangeT,enemy.attackRangeE-enemy.attackRangeS,1);
+        context.strokeRect(enemy.attackRangeS,enemy.attackRangeB,enemy.attackRangeE-enemy.attackRangeS,1);
 
-        eAttackRange.innerText = "Attack Range:"+"\n"+"X : "+enemy.attackRangeS +"-"+enemy.attackRangeE +"\n"+"Y : "+enemy.attackRangeT+"-"+enemy.attackRangeB ;
+        eAttackRange.innerText = "Attack Range:"+"\n"+"X : "+enemy.attackRangeS +"-"+enemy.attackRangeE +" ("+(enemy.attackRangeS-enemy.attackRangeE)+")"+"\n"+"Y : "+enemy.attackRangeT+"-"+enemy.attackRangeB ;
 
         //Enemy HitBox    
             context.lineWidth = "6";
@@ -827,7 +877,6 @@ body{
     }
 
     function startCountdown(){
-        let countdownDuration = 60;
         const interval = setInterval(() => {
             countdownDuration--;
 
@@ -866,6 +915,18 @@ body{
             setTimeout(() => {
                 enemy.dashCooldown = false; // Reset cooldown after 3 seconds
             }, globalCooldown);
+        }
+    }
+    function showResult(winner){
+        if(winner != "Tie"){
+            resultIndicator.innerText = winner + "Won!";
+            resultIndicator.style.display = "block";
+            return;
+        }
+        if(countdownDuration === 0){
+            resultIndicator.innerText = "I's a Tie!";
+            resultIndicator.style.display = "block";
+
         }
     }
 </script>
