@@ -3,7 +3,7 @@
 <head>
 <style>
 body{
-    background-color:#271408;
+    /* background-color:#271408; */
     margin: 0;
     /* background-size: auto; */
     user-select: none; /* Disables text selection */
@@ -16,15 +16,15 @@ body{
     background-image: url(./Dojo-long.jpg);
     background-repeat: no-repeat;
     /* background-size: 1550px 800px; */
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* background-size:cover; */
-  background-size:contain;
-  /* background-size:1400px; */
-  z-index: -1; /* Keeps it behind other content */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% ;
+    height: 100%;
+    /* background-size:cover; */
+    /* background-size:contain !important; */
+    /* background-size:1400px; */
+    z-index: -1; /* Keeps it behind other content */
 }
 
 @font-face {
@@ -276,7 +276,7 @@ body{
 <h2 id="indicator"></h2>
 <h2 id="resultIndicator">Player Won</h2>
 <h2 id="time">60</h2>
-<canvas id="canvas" style="width: 100vw; height: 100vh;">Your browser does not support the HTML5 canvas tag.</canvas>
+<canvas id="canvas">Your browser does not support the HTML5 canvas tag.</canvas>
 <!-- <button id="button">Press</button> -->
 <script>
     let canvas;
@@ -284,13 +284,18 @@ body{
     let x,y;
 
     //Turn this to true to turn on Debugging Visualizer
-    let debug = true;
+    let debug = false;
+    // let debug = true;
     const globalCooldown = 10000;
     let countdownDuration = 60;
     let winnerDeclared = false;
+    let borderRight = window.innerWidth;
+
+    scale = setScale();
+    console.log('scale: ', scale);
 
     const keysPressed = new Set(); // Track keys pressed
-    const scale = 3; // Set your scale factor here
+    // const scale = 2.25; // Set your scale factor here
     const charWidht = 52.5*scale;
     const charHeight = 52.5*scale;
     const width = 210 * scale; // Scaled width
@@ -477,9 +482,22 @@ body{
         }
 
     }
+    // player spawn locator
+    let xSpawn = borderRight/3;
+    xSpawn = Math.floor(xSpawn);
+    console.log('xSpawn: ', xSpawn);
+
+    ySpawn = (window.innerWidth * 22) / 39;
+    ySpawn = Math.floor(ySpawn);
+    console.log('ySpawn: ', ySpawn);
+
+    // let eYCord = (ySpawn)-charHeight-charHeight-charHeight;
+    let eYCord =  (ySpawn-height)+charHeight+10;
+
+    console.log('eYCord: ', eYCord);
     //for scale 3
-    const player = new User('player',-120,53,25);
-    const enemy = new User('enemy',300,35,25);
+    const player = new User('player',(xSpawn-(2*charWidht))-100,eYCord,25);
+    const enemy = new User('enemy',100+xSpawn+(xSpawn-(2*charWidht)),eYCord,25);
     //for scale 5
     // const player = new User('player',-120,-10,25);
     // const enemy = new User('enemy',300,-40,25);
@@ -490,8 +508,10 @@ body{
         canvas = document.getElementById('canvas');
 
         background = document.getElementById('background');
-        background.style.backgroundSize = window.innerWidth+"px"+" "+window.innerHeight+"px";
+
+        // background.style.backgroundSize = window.innerWidth+"px"+" "+window.innerHeight+"px";
         // background.style.backgroundSize = window.innerWidth+"px";
+        background.style.backgroundSize = 1301+"px";
 
         pAttackRange = document.getElementById('attackRangeP');
         eAttackRange = document.getElementById('attackRangeE');
@@ -537,6 +557,9 @@ body{
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
+        // canvas.width = 300;
+        // canvas.height = 800 ;
+
 
         // Track keydown and keyup events
         window.addEventListener('keydown', (event) => {
@@ -609,7 +632,7 @@ body{
         
         playerDraw();
         enemyDraw();
-        
+
         if(!winnerDeclared){
             
             checkHealth();   
@@ -630,7 +653,7 @@ body{
             eAttackRange.style.display = "block";
             indicator.style.display = "block";
         }
-
+        
         window.requestAnimationFrame(gameLoop); // Keep requesting new frames
     }
     function playerDraw(){
@@ -679,10 +702,10 @@ body{
     function characterMovement(character, controls) {
         const { left, right, attack, jump, dash } = controls;
 
-        if (keysPressed.has(right) && character.x < canvas.width - 380 && !character.playingAnimation && !character.isDead) {
+        if (keysPressed.has(right) && character.hitBoxXR < borderRight && !character.playingAnimation && !character.isDead) {
             character.x += 10;
         }
-        if (keysPressed.has(left) && character.x > -220 && !character.playingAnimation && !character.isDead) {
+        if (keysPressed.has(left) && character.hitBoxXL > 0 && !character.playingAnimation && !character.isDead) {
             character.x -= 10;
         }
         if (keysPressed.has(left) || keysPressed.has(right)) {
@@ -778,7 +801,7 @@ body{
         //Player AttackBox
         context.lineWidth = "6";
         context.strokeStyle = "red";
-
+        
         context.strokeRect(player.attackRangeS,player.hitBoxYT,1,player.hitBoxYB-player.hitBoxYT);
         context.strokeRect(player.attackRangeE,player.hitBoxYT,1,player.hitBoxYB-player.hitBoxYT);
         context.strokeRect(player.attackRangeS,player.attackRangeT,(79*scale),1);
@@ -816,6 +839,15 @@ body{
             
 
         playerHitBoxBox.innerText = "Left X:"+player.hitBoxXL+"\n"+"Right X:"+player.hitBoxXR+"\n"+"Top Y:"+player.hitBoxYT+"\n"+"Bottom Y:"+player.hitBoxYB;
+    
+    
+    
+        context.lineWidth = "5";
+        context.strokeStyle = "blue";
+        context.strokeRect(player.x,player.y,width,height);
+
+    
+    
     }
     function getEnemyAttackBoxAndHitBox(){
         // enemy.attackRangeS= enemy.hitBoxXL;
@@ -839,6 +871,8 @@ body{
     }
     function debugEnemyAttackBoxAndHitBox(){
         //Enemy AttackBox
+        context.lineWidth = "6";
+
         context.strokeStyle = "red";
 
         context.strokeRect(enemy.attackRangeS,enemy.hitBoxYT,1,enemy.hitBoxYB-enemy.hitBoxYT);
@@ -874,6 +908,10 @@ body{
             
         pEnemyHitBoxBox.innerText = "Left X:"+enemy.hitBoxXL+"\n"+"Right X:"+enemy.hitBoxXR+"\n"+"Top Y:"+enemy.hitBoxYT+"\n"+"Bottom Y:"+enemy.hitBoxYB;    
 
+
+        context.lineWidth = "5";
+        context.strokeStyle = "blue";
+        context.strokeRect(enemy.x,enemy.y,width,height);
     }
 
     function startCountdown(){
@@ -929,6 +967,177 @@ body{
 
         }
     }
+    function setScale() {
+        if (window.innerWidth > 1440) {
+            return 4.75;
+        } else if (window.innerWidth > 1420 && window.innerWidth <= 1440) {
+            return 4.7;
+        } else if (window.innerWidth > 1400 && window.innerWidth <= 1420) {
+            return 4.65;
+        } else if (window.innerWidth > 1380 && window.innerWidth <= 1400) {
+            return 4.6;
+        } else if (window.innerWidth > 1360 && window.innerWidth <= 1380) {
+            return 4.55;
+        } else if (window.innerWidth > 1340 && window.innerWidth <= 1360) {
+            return 4.5;
+        } else if (window.innerWidth > 1320 && window.innerWidth <= 1340) {
+            return 4.45;
+        } else if (window.innerWidth > 1300 && window.innerWidth <= 1320) {
+            return 4.4;
+        } else if (window.innerWidth > 1280 && window.innerWidth <= 1300) {
+            return 4.35;
+        } else if (window.innerWidth > 1260 && window.innerWidth <= 1280) {
+            return 4.3;
+        } else if (window.innerWidth > 1240 && window.innerWidth <= 1260) {
+            return 4.25;
+        } else if (window.innerWidth > 1220 && window.innerWidth <= 1240) {
+            return 4.2;
+        } else if (window.innerWidth > 1200 && window.innerWidth <= 1220) {
+            return 4.15;
+        } else if (window.innerWidth > 1180 && window.innerWidth <= 1200) {
+            return 4.1;
+        } else if (window.innerWidth > 1160 && window.innerWidth <= 1180) {
+            return 4.05;
+        } else if (window.innerWidth > 1140 && window.innerWidth <= 1160) {
+            return 4;
+        } else if (window.innerWidth > 1120 && window.innerWidth <= 1140) {
+            return 3.95;
+        } else if (window.innerWidth > 1100 && window.innerWidth <= 1120) {
+            return 3.9;
+        } else if (window.innerWidth > 1080 && window.innerWidth <= 1100) {
+            return 3.85;
+        } else if (window.innerWidth > 1060 && window.innerWidth <= 1080) {
+            return 3.8;
+        } else if (window.innerWidth > 1040 && window.innerWidth <= 1060) {
+            return 3.75;
+        } else if (window.innerWidth > 1020 && window.innerWidth <= 1040) {
+            return 3.7;
+        } else if (window.innerWidth > 1000 && window.innerWidth <= 1020) {
+            return 3.65;
+        } else if (window.innerWidth > 980 && window.innerWidth <= 1000) {
+            return 3.6;
+        } else if (window.innerWidth > 960 && window.innerWidth <= 980) {
+            return 3.55;
+        } else if (window.innerWidth > 940 && window.innerWidth <= 960) {
+            return 3.5;
+        } else if (window.innerWidth > 900 && window.innerWidth <= 920) {
+            return 3.45;
+        } else if (window.innerWidth > 880 && window.innerWidth <= 900) {
+            return 3.4;
+        } else if (window.innerWidth > 860 && window.innerWidth <= 880) {
+            return 3.35;
+        } else if (window.innerWidth > 840 && window.innerWidth <= 860) {
+            return 3.3;
+        } else if (window.innerWidth > 820 && window.innerWidth <= 840) {
+            return 3.25;
+        } else if (window.innerWidth > 800 && window.innerWidth <= 820) {
+            return 3.2;
+        } else if (window.innerWidth > 780 && window.innerWidth <= 800) {
+            return 3.15;
+        } else if (window.innerWidth > 760 && window.innerWidth <= 780) {
+            return 3;
+        } else if (window.innerWidth > 740 && window.innerWidth <= 760) {
+            return 2.95;
+        } else if (window.innerWidth > 720 && window.innerWidth <= 740) {
+            return 2.9;
+        } else if (window.innerWidth > 700 && window.innerWidth <= 720) {
+            return 2.85;
+        } else if (window.innerWidth > 680 && window.innerWidth <= 700) {
+            return 2.75;
+        } else if (window.innerWidth > 660 && window.innerWidth <= 680) {
+            return 2.7;
+        } else if (window.innerWidth > 640 && window.innerWidth <= 660) {
+            return 2.65;
+        } else if (window.innerWidth > 620 && window.innerWidth <= 640) {
+            return 2.6;
+        } else if (window.innerWidth > 600 && window.innerWidth <= 620) {
+            return 2.5;
+        } else if (window.innerWidth > 580 && window.innerWidth <= 600) {
+            return 2.4;
+        } else if (window.innerWidth > 560 && window.innerWidth <= 580) {
+            return 2.35;
+        } else if (window.innerWidth > 540 && window.innerWidth <= 560) {
+            return 2.3;
+        } else if (window.innerWidth > 520 && window.innerWidth <= 540) {
+            return 2.25;
+        } else if (window.innerWidth > 500 && window.innerWidth <= 520) {
+            return 2.15;
+        } else if (window.innerWidth > 480 && window.innerWidth <= 500) {
+            return 2.1;
+        } else if (window.innerWidth > 460 && window.innerWidth <= 480) {
+            return 2;
+        } else if (window.innerWidth > 440 && window.innerWidth <= 460) {
+            return 2;
+        } else if (window.innerWidth > 420 && window.innerWidth <= 440) {
+            return 1.95;
+        } else if (window.innerWidth > 400 && window.innerWidth <= 420) {
+            return 1.9;
+        } else if (window.innerWidth > 380 && window.innerWidth <= 400) {
+            return 1.85;
+        } else if (window.innerWidth > 360 && window.innerWidth <= 380) {
+            return 1.8;
+        } else {
+            return 1.75; // For anything below 360px
+        }
+
+    }
+
+
+
+    // function setScale() {
+    //     if (window.innerWidth > 920) {
+    //         return 3.5;
+    //     } else if (window.innerWidth > 900 && window.innerWidth <= 920) {
+    //         return 3.45;
+    //     } else if (window.innerWidth > 880 && window.innerWidth <= 900) {
+    //         return 3.4;
+    //     } else if (window.innerWidth > 860 && window.innerWidth <= 880) {
+    //         return 3.35;
+    //     } else if (window.innerWidth > 840 && window.innerWidth <= 860) {
+    //         return 3.3;
+    //     } else if (window.innerWidth > 820 && window.innerWidth <= 840) {
+    //         return 3.25;
+    //     } else if (window.innerWidth > 800 && window.innerWidth <= 820) {
+    //         return 3.2;
+    //     } else if (window.innerWidth > 780 && window.innerWidth <= 800) {
+    //         return 3.15;
+    //     } else if (window.innerWidth > 760 && window.innerWidth <= 780) {
+    //         return 3;
+    //     } else if (window.innerWidth > 740 && window.innerWidth <= 760) {
+    //         return 2.95;
+    //     } else if (window.innerWidth > 720 && window.innerWidth <= 740) {
+    //         return 2.9;
+    //     } else if (window.innerWidth > 700 && window.innerWidth <= 720) {
+    //         return 2.85;
+    //     } else if (window.innerWidth > 680 && window.innerWidth <= 700) {
+    //         return 2.75;
+    //     } else if (window.innerWidth > 660 && window.innerWidth <= 680) {
+    //         return 2.7;
+    //     } else if (window.innerWidth > 640 && window.innerWidth <= 660) {
+    //         return 2.65;
+    //     } else if (window.innerWidth > 620 && window.innerWidth <= 640) {
+    //         return 2.6;
+    //     } else if (window.innerWidth > 600 && window.innerWidth <= 620) {
+    //         return 2.5;
+    //     } else if (window.innerWidth > 580 && window.innerWidth <= 600) {
+    //         return 2.4;
+    //     } else if (window.innerWidth > 560 && window.innerWidth <= 580) {
+    //         return 2.35;
+    //     } else if (window.innerWidth > 540 && window.innerWidth <= 560) {
+    //         return 2.3;
+    //     } else if (window.innerWidth > 520 && window.innerWidth <= 540) {
+    //         return 2.25;
+    //     } else if (window.innerWidth > 500 && window.innerWidth <= 520) {
+    //         return 2.15;
+    //     } else if (window.innerWidth > 480 && window.innerWidth <= 500) {
+    //         return 2.1;
+    //     } else if (window.innerWidth > 460 && window.innerWidth <= 480) {
+    //         return 2.05;
+    //     } else if (window.innerWidth > 440 && window.innerWidth <= 460) {
+    //         return 2;
+    //     }
+    // }
+
 </script>
 
 </body>
