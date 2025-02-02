@@ -21,9 +21,12 @@ body{
     left: 0;
     width: 100% ;
     height: 100%;
+    /* max-width: 1301px; */
+    /* max-height: 700px; */
     /* background-size:cover; */
-    /* background-size:contain !important; */
+    background-size:contain ;
     /* background-size:1400px; */
+    /* background-size:; */
     z-index: -1; /* Keeps it behind other content */
 }
 
@@ -491,16 +494,21 @@ body{
     ySpawn = Math.floor(ySpawn);
     console.log('ySpawn: ', ySpawn);
 
-    // let eYCord = (ySpawn)-charHeight-charHeight-charHeight;
-    let eYCord =  (ySpawn-height)+charHeight+10;
+    let eYCord = (ySpawn-height)+charHeight+15;
+    let pYCord = eYCord+30;
+    if(window.innerWidth >1300){
+        eYCord = -96;
+        pYCord = -60;
+    }
+    if(window.innerWidth < 940){
+        pYCord = pYCord-15;
+    }
 
     console.log('eYCord: ', eYCord);
-    //for scale 3
-    const player = new User('player',(xSpawn-(2*charWidht))-100,eYCord,25);
+    
+    const player = new User('player',(xSpawn-(2*charWidht))-100,pYCord,25);
     const enemy = new User('enemy',100+xSpawn+(xSpawn-(2*charWidht)),eYCord,25);
-    //for scale 5
-    // const player = new User('player',-120,-10,25);
-    // const enemy = new User('enemy',300,-40,25);
+
 
     window.onload = init;
 
@@ -509,9 +517,12 @@ body{
 
         background = document.getElementById('background');
 
-        // background.style.backgroundSize = window.innerWidth+"px"+" "+window.innerHeight+"px";
-        // background.style.backgroundSize = window.innerWidth+"px";
-        background.style.backgroundSize = 1301+"px";
+        if(window.innerWidth >= 1301){
+
+            background.style.backgroundSize = window.innerWidth+"px"+" "+window.innerHeight+"px";
+        }
+        // background.style.backgroundSize = window.innerWidth+"px 737px";
+        // background.style.backgroundSize = 1301+"px";
 
         pAttackRange = document.getElementById('attackRangeP');
         eAttackRange = document.getElementById('attackRangeE');
@@ -703,16 +714,13 @@ body{
         const { left, right, attack, jump, dash } = controls;
 
         if (keysPressed.has(right) && character.hitBoxXR < borderRight && !character.playingAnimation && !character.isDead) {
-            character.x += 10;
+            character.x += 15;
         }
         if (keysPressed.has(left) && character.hitBoxXL > 0 && !character.playingAnimation && !character.isDead) {
-            character.x -= 10;
+            character.x -= 15;
         }
         if (keysPressed.has(left) || keysPressed.has(right)) {
             character.isMoving = true;
-            console.log('isMoving: ', character.name+":"+character.isMoving);
-            console.log(playerMoveFrameCounter);
-            console.log(enemyMoveEFrameCounter);
         } else {
             character.isMoving = false;
         }
@@ -968,64 +976,65 @@ body{
         }
     }
     function setScale() {
-        if (window.innerWidth > 1440) {
-            return 4.75;
-        } else if (window.innerWidth > 1420 && window.innerWidth <= 1440) {
-            return 4.7;
-        } else if (window.innerWidth > 1400 && window.innerWidth <= 1420) {
-            return 4.65;
-        } else if (window.innerWidth > 1380 && window.innerWidth <= 1400) {
-            return 4.6;
-        } else if (window.innerWidth > 1360 && window.innerWidth <= 1380) {
-            return 4.55;
-        } else if (window.innerWidth > 1340 && window.innerWidth <= 1360) {
-            return 4.5;
-        } else if (window.innerWidth > 1320 && window.innerWidth <= 1340) {
-            return 4.45;
-        } else if (window.innerWidth > 1300 && window.innerWidth <= 1320) {
-            return 4.4;
+        if (window.innerWidth > 1300) {
+            // return 4.75;
+            return 5.4;
+        // } else if (window.innerWidth > 1420 && window.innerWidth <= 1440) {
+        //     return 4.7;
+        // } else if (window.innerWidth > 1400 && window.innerWidth <= 1420) {
+        //     return 4.65;
+        // } else if (window.innerWidth > 1380 && window.innerWidth <= 1400) {
+        //     return 4.6;
+        // } else if (window.innerWidth > 1360 && window.innerWidth <= 1380) {
+        //     return 4.55;
+        // } else if (window.innerWidth > 1340 && window.innerWidth <= 1360) {
+        //     return 4.5;
+        // } else if (window.innerWidth > 1320 && window.innerWidth <= 1340) {
+        //     return 4.45;
+        // } else if (window.innerWidth > 1300 && window.innerWidth <= 1320) {
+        //     return 4.4;
         } else if (window.innerWidth > 1280 && window.innerWidth <= 1300) {
-            return 4.35;
+            return 5.35;
         } else if (window.innerWidth > 1260 && window.innerWidth <= 1280) {
-            return 4.3;
+            return 5.2;
         } else if (window.innerWidth > 1240 && window.innerWidth <= 1260) {
-            return 4.25;
+            return 4.95;
         } else if (window.innerWidth > 1220 && window.innerWidth <= 1240) {
-            return 4.2;
+            return 4.85;
         } else if (window.innerWidth > 1200 && window.innerWidth <= 1220) {
-            return 4.15;
+            return 4.75;
         } else if (window.innerWidth > 1180 && window.innerWidth <= 1200) {
-            return 4.1;
+            return 4.65;
         } else if (window.innerWidth > 1160 && window.innerWidth <= 1180) {
-            return 4.05;
+            return 4.55;
         } else if (window.innerWidth > 1140 && window.innerWidth <= 1160) {
-            return 4;
+            return 4.45;
         } else if (window.innerWidth > 1120 && window.innerWidth <= 1140) {
-            return 3.95;
+            return 4.35;
         } else if (window.innerWidth > 1100 && window.innerWidth <= 1120) {
-            return 3.9;
+            return 4.25;
         } else if (window.innerWidth > 1080 && window.innerWidth <= 1100) {
-            return 3.85;
+            return 4.15;
         } else if (window.innerWidth > 1060 && window.innerWidth <= 1080) {
-            return 3.8;
+            return 4.1;
         } else if (window.innerWidth > 1040 && window.innerWidth <= 1060) {
-            return 3.75;
+            return 4.05;
         } else if (window.innerWidth > 1020 && window.innerWidth <= 1040) {
-            return 3.7;
+            return 4;
         } else if (window.innerWidth > 1000 && window.innerWidth <= 1020) {
-            return 3.65;
+            return 3.95;
         } else if (window.innerWidth > 980 && window.innerWidth <= 1000) {
-            return 3.6;
+            return 3.9;
         } else if (window.innerWidth > 960 && window.innerWidth <= 980) {
-            return 3.55;
+            return 3.85;
         } else if (window.innerWidth > 940 && window.innerWidth <= 960) {
-            return 3.5;
-        } else if (window.innerWidth > 900 && window.innerWidth <= 920) {
-            return 3.45;
+            return 3.8;
+        } else if (window.innerWidth > 900 && window.innerWidth <= 940) {
+            return 3.6;
         } else if (window.innerWidth > 880 && window.innerWidth <= 900) {
-            return 3.4;
+            return 3.5;
         } else if (window.innerWidth > 860 && window.innerWidth <= 880) {
-            return 3.35;
+            return 3.4;
         } else if (window.innerWidth > 840 && window.innerWidth <= 860) {
             return 3.3;
         } else if (window.innerWidth > 820 && window.innerWidth <= 840) {
