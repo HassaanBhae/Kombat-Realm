@@ -13,7 +13,7 @@ body{
 
 
 #background {
-    background-image: url(./Dojo-long.jpg);
+    background-image: url(./assets/Dojo-long2x.jpg);
     background-repeat: no-repeat;
     /* background-size: 1550px 800px; */
     position: absolute;
@@ -88,29 +88,32 @@ body{
     display:none;
     scale: 3;
 }
+/* .statusMenu{
+    scale: 0.5;
+} */
 .icon{
     position: absolute;
     height: 55px;
-    z-index: 100;
+    z-index: 1000;
 }
 .healthBar1 >.icon{
     left: -75px;
     top: -15px;
 }
+.healthBar2 > .icon{
+    right: -75px;
+    top: -15px;
+}
 .healthBar1{
-    width: 250px;
+    width: 25%;
     height: 30px;
     outline: black solid 3px;
     position: absolute;
     margin: 40px;
     margin-left: 60px;
 }
-.healthBar2 > .icon{
-    right: -75px;
-    top: -15px;
-}
 .healthBar2{
-    width: 250px;
+    width: 25%;
     height: 30px;
     outline: black solid 3px;
     position: absolute;
@@ -135,13 +138,19 @@ body{
 .specialPower{
     position: absolute;
     height: 25px;
-    top: -3px;
+    z-index: 1000;
 }
-.progress-container1 > .specialPower{
+.healthBar1 > .specialPower{
     left: -40px;
+    top: 30px;
+}
+.healthBar2 > .specialPower{
+    right: -40px;
+    transform: scaleX(-1);
+    top: 30px;
 }
 .progress-container1 {
-    width: 200px;
+    width: 20%;
     background-color: transparent;
     /* border-radius: 25px; */
     /* overflow: hidden; */
@@ -152,21 +161,69 @@ body{
     margin-left: 40px;
     margin-left: 60px;
     margin-top: 74px;
+    overflow: hidden;
 
 }
 .progress-bar1 {
     height: 100%;
     width: 0px;
+    /* width: 100%; */
     background-color: #4caf50;
     transition: width 10s linear;
+    overflow: hidden;
+    position: absolute;
 }
-.progress-container2 > .specialPower {
-    right: -40px;
-    transform: scaleX(-1);
+.glareP{
+    height: 3000%;
+    width: 0px;
+    width: 150%;
+    /* background-color: blue; */
+    position: absolute;
+    z-index: 20;
+    rotate: 10deg;
+    bottom: -20px;
+    /* left: -200px; */
+    /* top: 200px; */
 }
+.glareE{
+    height: 3000%;
+    width: 0px;
+    width: 150%;
+    /* background-color: blue; */
+    position: absolute;
+    z-index: 20;
+    rotate: -10deg;
+    bottom: -20px;
+    left: -40px;
+    /* top: 200px; */
+    scale: -1;
+}
+.glareP::after{
+    content: "";
+    width: 10px;
+    height: 100%;
+    background-color: #fff;
+    opacity: 1;
+    position: absolute;
+    animation: glare 1s linear;
+    animation-direction: forwards;
+    animation-iteration-count: infinite;
+} 
+.glareE::after{
+    content: "";
+    width: 10px;
+    height: 100%;
+    background-color: #fff;
+    opacity: 1;
+    position: absolute;
+    animation: glare 1s linear;
+    animation-direction: forwards;
+    animation-iteration-count: infinite;
+} 
+
 
 .progress-container2 {
-    width: 200px;
+    width: 20%;
     background-color: transparent;
     /* border-radius: 25px; */
     /* overflow: hidden; */
@@ -178,7 +235,7 @@ body{
     margin-right: 60px;
     margin-top: 74px;
     right: 0;
-
+    overflow: hidden;
 }
 
 .progress-bar2 {
@@ -216,6 +273,34 @@ body{
     transform: translate(-50%,-50%);
     display: none;
 }
+@keyframes flash {
+  0%   {background-color: #4caf50;}
+  25%  {background-color: green;}
+  50%  {background-color: #4caf50;}
+  75%  {background-color: green;}
+  100% {background-color: #4caf50;}
+}
+@keyframes shine {
+  0% {
+    background-position: 0;
+  }
+  60% {
+    background-position: 600px;
+  }
+  100% {
+    background-position: 600px;
+  }
+}
+@keyframes glare {
+  from {
+    left: -5%;
+    opacity: 0.7;
+  }
+  to {
+    left: 100%;
+    opacity: 0.7;
+  }
+}
 </style>
 </head>
 <body>
@@ -226,23 +311,28 @@ body{
 <p id="attackRangeP" style="display: none;padding: 10px;background-color: green;position: absolute;margin-left:10px;left: 10;top:80px;border: 2px black solid;">A canvas element is displayed like this:</p>
 <p id="attackRangeE" style="display: none;padding: 10px;background-color: green;position: absolute;margin-right:10px;right: 0;top:80px;border: 2px black solid;">A canvas element is displayed like this:</p>
 
+<div class="statusMenu">
+
 <div class="healthBar1">
     <img src = "./assets/healthIcon.png" class="icon">
+    <img src = "./assets/dashIcon.png" class="specialPower">
     <div id="healthBarPlayer"></div>
 </div>
 
 <div class="healthBar2">
     <img src = "./assets/healthIcon.png" class="icon">
+    <img src = "./assets/dashIcon.png" class="specialPower">
     <div id="healthBarEnemy"></div>
 </div>
 
 <div class="progress-container1">
-    <img src = "./assets/dashIcon.png" class="icon specialPower" >
     <div class="progress-bar1" id="specialBar1"></div>
+    <div class="glareP"></div>
 </div>
 <div class="progress-container2">
-    <img src = "./assets/dashIcon.png" class="icon specialPower" >
     <div class="progress-bar2" id="specialBar2"></div>
+    <div class="glareE"></div>
+</div>
 </div>
 
 <p id="playerHitBoxBox">boxbox</p>
@@ -579,6 +669,11 @@ body{
         
         specialBar1 = document.getElementById('specialBar1');
         specialBar2 = document.getElementById('specialBar2');
+
+        glareClassP = document.querySelector('.glareP');
+        glareClassP.style.display = "none"; // Removes from layout
+        glareClassE = document.querySelector('.glareE');
+        glareClassE.style.display = "none"; // Removes from layout
 
         playerimg = document.getElementById("player");
         enemyimg = document.getElementById("enemy");
@@ -975,10 +1070,12 @@ body{
     function resetCoolDown(name) {
         console.log("Reset CoolDown:"+name);
         if(name === "player"){
+            glareClassP.style.display = "none"; // Removes from layout
             specialBar1.style.transition = "width 0.1s linear";
             specialBar1.style.width = 0 + '%';
         }
         if(name === "enemy"){
+            glareClassE.style.display = "none"; // Removes from layout
             specialBar2.style.transition = "width 0.1s linear";
             specialBar2.style.width = 0 + '%';
         }
@@ -989,6 +1086,7 @@ body{
             specialBar1.style.transition = "width 10s linear";
             specialBar1.style.width = 100 + '%';
             setTimeout(() => {
+                glareClassP.style.display = "block"; // Removes from layout
                 player.dashCooldown = false; // Reset cooldown after 3 seconds
             }, globalCooldown);
         }
@@ -996,6 +1094,7 @@ body{
             specialBar2.style.transition = "width 10s linear";
             specialBar2.style.width = 100 + '%';
             setTimeout(() => {
+                glareClassE.style.display = "block"; // Removes from layout
                 enemy.dashCooldown = false; // Reset cooldown after 3 seconds
             }, globalCooldown);
         }
