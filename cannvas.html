@@ -72,18 +72,19 @@ body{
     font-weight: 900;
     display: none;
 }
-#player,
-#enemy,
-.attack,
-.Eattack,
-.Death,
-.DeathE,
-.TakeHit,
-.TakeHitE,
-#fall,
-#fallE,
-.run,
-.runE{
+#p1Idle,
+#e1Idle,
+.P2attack,
+.p1Attack,
+.e1Attack,
+.p1Death,
+.e1Death,
+.p1TakeHit,
+.e1TakeHit,
+#p1Fall,
+#e1Fall,
+.p1Run,
+.e1Run{
     position: absolute;
     display:none;
     scale: 3;
@@ -347,62 +348,91 @@ body{
 <p class="hitBoxCords" id="YB">YB</p>
 
 <!-- //Player -->
-<img id="player" src="./samurai/Idle.png">
-<img id="Attack1" class="attack"src="./samurai/attack/Attack_1.png">
-<img id="Attack2" class="attack"src="./samurai/attack/Attack_2.png">
-<img id="Attack3" class="attack"src="./samurai/attack/Attack_3.png">
-<img id="Attack4" class="attack"src="./samurai/attack/Attack_4.png">
+<img id="p1Idle" class="p1Idle" src="./characters/samurai/idle/idle.png">
+<img id="p1Attack1" class="p1Attack"src="./characters/samurai/attack/attack_1.png">
+<img id="p1Attack2" class="p1Attack"src="./characters/samurai/attack/attack_2.png">
+<img id="p1Attack3" class="p1Attack"src="./characters/samurai/attack/attack_3.png">
+<img id="p1Attack4" class="p1Attack"src="./characters/samurai/attack/attack_4.png">
 
-<img id="Run0" class="run" src="./samurai/run/Run_0.png">
-<img id="Run1" class="run" src="./samurai/run/Run_1.png">
-<img id="Run2" class="run" src="./samurai/run/Run_2.png">
-<img id="Run3" class="run" src="./samurai/run/Run_3.png">
-<img id="Run4" class="run" src="./samurai/run/Run_4.png">
-<img id="Run5" class="run" src="./samurai/run/Run_5.png">
-<img id="Run6" class="run" src="./samurai/run/Run_6.png">
-<img id="Run7" class="run" src="./samurai/run/Run_7.png">
+<img id="p1Run0" class="p1Run" src="./characters/samurai/run/run_0.png">
+<img id="p1Run1" class="p1Run" src="./characters/samurai/run/run_1.png">
+<img id="p1Run2" class="p1Run" src="./characters/samurai/run/run_2.png">
+<img id="p1Run3" class="p1Run" src="./characters/samurai/run/run_3.png">
+<img id="p1Run4" class="p1Run" src="./characters/samurai/run/run_4.png">
+<img id="p1Run5" class="p1Run" src="./characters/samurai/run/run_5.png">
+<img id="p1Run6" class="p1Run" src="./characters/samurai/run/run_6.png">
+<img id="p1Run7" class="p1Run" src="./characters/samurai/run/run_7.png">
 
-<img id="fall" src="./samurai/fall/Fall.png">
+<img id="p1Fall" class="p1Fall" src="./characters/samurai/fall/fall.png">
 
-<img id="TakeHit0" class="TakeHit" src="./samurai/TakeHit/TakeHit_0.png">
-<img id="TakeHit1" class="TakeHit" src="./samurai/TakeHit/TakeHit_1.png">
-<img id="TakeHit2" class="TakeHit" src="./samurai/TakeHit/TakeHit_2.png">
+<img id="p1TakeHit0" class="p1TakeHit" src="./characters/samurai/takeHit/takeHit_0.png">
+<img id="p1TakeHit1" class="p1TakeHit" src="./characters/samurai/takeHit/takeHit_1.png">
+<img id="p1TakeHit2" class="p1TakeHit" src="./characters/samurai/takeHit/takeHit_2.png">
 
-<img id="Death0" class="Death" src="./samurai/Death/Death_0.png">
-<img id="Death1" class="Death" src="./samurai/Death/Death_1.png">
-<img id="Death2" class="Death" src="./samurai/Death/Death_2.png">
-<img id="Death3" class="Death" src="./samurai/Death/Death_3.png">
-<img id="Death4" class="Death" src="./samurai/Death/Death_4.png">
-<img id="Death5" class="Death" src="./samurai/Death/Death_5.png">
+<img id="p1Death0" class="p1Death" src="./characters/samurai/death/death_0.png">
+<img id="p1Death1" class="p1Death" src="./characters/samurai/death/death_1.png">
+<img id="p1Death2" class="p1Death" src="./characters/samurai/death/death_2.png">
+<img id="p1Death3" class="p1Death" src="./characters/samurai/death/death_3.png">
+<img id="p1Death4" class="p1Death" src="./characters/samurai/death/death_4.png">
+<img id="p1Death5" class="p1Death" src="./characters/samurai/death/death_5.png">
+
+<!-- //Player2 -->
+<!-- <img id="player2" src="./yasuke/Idle.png"> -->
+<!-- <img id="AttackP21" class="P2attack"src="./yasuke/attack/Attack_1.png">
+<img id="AttackP22" class="P2attack"src="./yasuke/attack/Attack_2.png">
+<img id="AttackP23" class="P2attack"src="./yasuke/attack/Attack_3.png">
+<img id="AttackP24" class="P2attack"src="./yasuke/attack/Attack_4.png"> -->
+
+<!-- <img id="RunP20" class="run" src="./yasuke/run/Run_0.png">
+<img id="RunP21" class="run" src="./yasuke/run/Run_1.png">
+<img id="RunP22" class="run" src="./yasuke/run/Run_2.png">
+<img id="RunP23" class="run" src="./yasuke/run/Run_3.png">
+<img id="RunP24" class="run" src="./yasuke/run/Run_4.png">
+<img id="RunP25" class="run" src="./yasuke/run/Run_5.png">
+<img id="RunP26" class="run" src="./yasuke/run/Run_6.png">
+<img id="RunP27" class="run" src="./yasuke/run/Run_7.png"> -->
+
+<!-- <img id="fallP2" src="./yasuke/fall/Fall.png">
+
+<img id="TakeHitP20" class="TakeHit" src="./yasuke/TakeHit/TakeHit_0.png">
+<img id="TakeHitP21" class="TakeHit" src="./yasuke/TakeHit/TakeHit_1.png">
+<img id="TakeHitP22" class="TakeHit" src="./yasuke/TakeHit/TakeHit_2.png">
+
+<img id="DeathP20" class="Death" src="./yasuke/Death/Death_0.png">
+<img id="DeathP21" class="Death" src="./yasuke/Death/Death_1.png">
+<img id="DeathP22" class="Death" src="./yasuke/Death/Death_2.png">
+<img id="DeathP23" class="Death" src="./yasuke/Death/Death_3.png">
+<img id="DeathP24" class="Death" src="./yasuke/Death/Death_4.png">
+<img id="DeathP25" class="Death" src="./yasuke/Death/Death_5.png"> -->
 
 <!-- //Enemy -->
-<img id="enemy" src="./kenji/idle.png">
-<img id="AttackE1" class="Eattack"src="./kenji/attack/Attack1.png">
-<img id="AttackE2" class="Eattack"src="./kenji/attack/Attack2.png">
-<img id="AttackE3" class="Eattack"src="./kenji/attack/Attack3.png">
-<img id="AttackE4" class="Eattack"src="./kenji/attack/Attack4.png">
+<img id="e1Idle" class="e1Idle" src="./characters/kenji/idle/idle.png">
+<img id="e1Attack1" class="e1Attack"src="./characters/kenji/attack/attack_1.png">
+<img id="e1Attack2" class="e1Attack"src="./characters/kenji/attack/attack_2.png">
+<img id="e1Attack3" class="e1Attack"src="./characters/kenji/attack/attack_3.png">
+<img id="e1Attack4" class="e1Attack"src="./characters/kenji/attack/attack_4.png">
 
-<img id="RunE0" class="runE" src="./kenji/run/Run_0.png">
-<img id="RunE1" class="runE" src="./kenji/run/Run_1.png">
-<img id="RunE2" class="runE" src="./kenji/run/Run_2.png">
-<img id="RunE3" class="runE" src="./kenji/run/Run_3.png">
-<img id="RunE4" class="runE" src="./kenji/run/Run_4.png">
-<img id="RunE5" class="runE" src="./kenji/run/Run_5.png">
-<img id="RunE6" class="runE" src="./kenji/run/Run_6.png">
-<img id="RunE7" class="runE" src="./kenji/run/Run_7.png">
+<img id="e1Run0" class="e1Run" src="./characters/kenji/run/run_0.png">
+<img id="e1Run1" class="e1Run" src="./characters/kenji/run/run_1.png">
+<img id="e1Run2" class="e1Run" src="./characters/kenji/run/run_2.png">
+<img id="e1Run3" class="e1Run" src="./characters/kenji/run/run_3.png">
+<img id="e1Run4" class="e1Run" src="./characters/kenji/run/run_4.png">
+<img id="e1Run5" class="e1Run" src="./characters/kenji/run/run_5.png">
+<img id="e1Run6" class="e1Run" src="./characters/kenji/run/run_6.png">
+<img id="e1Run7" class="e1Run" src="./characters/kenji/run/run_7.png">
 
-<img id="fallE" src="./kenji/fall/Fall.png">
+<img id="e1Fall" class="e1Fall" src="./characters/kenji/fall/fall.png">
 
-<img id="TakeHitE0" class="TakeHitE" src="./kenji/TakeHit/TakeHit_0.png">
-<img id="TakeHitE1" class="TakeHitE" src="./kenji/TakeHit/TakeHit_1.png">
-<img id="TakeHitE2" class="TakeHitE" src="./kenji/TakeHit/TakeHit_2.png">
+<img id="e1TakeHit0" class="e1TakeHit" src="./characters/kenji/takeHit/takeHit_0.png">
+<img id="e1TakeHit1" class="e1TakeHit" src="./characters/kenji/takeHit/takeHit_1.png">
+<img id="e1TakeHit2" class="e1TakeHit" src="./characters/kenji/takeHit/takeHit_2.png">
 
-<img id="DeathE0" class="DeathE" src="./kenji/Death/Death_0.png">
-<img id="DeathE1" class="DeathE" src="./kenji/Death/Death_1.png">
-<img id="DeathE2" class="DeathE" src="./kenji/Death/Death_2.png">
-<img id="DeathE3" class="DeathE" src="./kenji/Death/Death_3.png">
-<img id="DeathE4" class="DeathE" src="./kenji/Death/Death_4.png">
-<img id="DeathE5" class="DeathE" src="./kenji/Death/Death_5.png">
+<img id="e1Death0" class="e1Death" src="./characters/kenji/death/death_0.png">
+<img id="e1Death1" class="e1Death" src="./characters/kenji/death/death_1.png">
+<img id="e1Death2" class="e1Death" src="./characters/kenji/death/death_2.png">
+<img id="e1Death3" class="e1Death" src="./characters/kenji/death/death_3.png">
+<img id="e1Death4" class="e1Death" src="./characters/kenji/death/death_4.png">
+<img id="e1Death5" class="e1Death" src="./characters/kenji/death/death_5.png">
 
 
 <h2 id="indicator"></h2>
@@ -675,28 +705,29 @@ body{
         glareClassE = document.querySelector('.glareE');
         glareClassE.style.display = "none"; // Removes from layout
 
-        playerimg = document.getElementById("player");
-        enemyimg = document.getElementById("enemy");
+        //Idle Frame
+        playerimg = document.getElementById("p1Idle");
+        enemyimg = document.getElementById("e1Idle");
 
         //Attack Frames
-        playerAttackF =  document.querySelectorAll(".attack");
-        enemyAttackF = document.querySelectorAll(".Eattack");
+        playerAttackF =  document.querySelectorAll(".p1Attack");
+        enemyAttackF = document.querySelectorAll(".e1Attack");
 
         //Fall Frame
-        playerFallF = document.getElementById("fall");
-        enemyFallF = document.getElementById("fallE");
+        playerFallF = document.getElementById("p1Fall");
+        enemyFallF = document.getElementById("e1Fall");
 
         //Move Frames
-        playerMoveF = document.querySelectorAll(".run");
-        enemyMoveF = document.querySelectorAll(".runE");
+        playerMoveF = document.querySelectorAll(".p1Run");
+        enemyMoveF = document.querySelectorAll(".e1Run");
 
         //Take Hit Frames
-        playerTakeHitF = document.querySelectorAll(".TakeHit");
-        enemyTakeHitF = document.querySelectorAll(".TakeHitE");
+        playerTakeHitF = document.querySelectorAll(".p1TakeHit");
+        enemyTakeHitF = document.querySelectorAll(".e1TakeHit");
 
         //Death Frames
-        playerDeathF = document.querySelectorAll(".Death");
-        enemyDeathF = document.querySelectorAll(".DeathE");
+        playerDeathF = document.querySelectorAll(".p1Death");
+        enemyDeathF = document.querySelectorAll(".e1Death");
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
