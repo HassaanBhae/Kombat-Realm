@@ -73,9 +73,10 @@ body{
     display: none;
 }
 #p1Idle,
+#p2Idle,
 #e1Idle,
-.P2attack,
 .p1Attack,
+.p2Attack,
 .e1Attack,
 .p1Death,
 .e1Death,
@@ -377,33 +378,35 @@ body{
 <img id="p1Death5" class="p1Death" src="./characters/samurai/death/death_5.png">
 
 <!-- //Player2 -->
-<!-- <img id="player2" src="./yasuke/Idle.png"> -->
-<!-- <img id="AttackP21" class="P2attack"src="./yasuke/attack/Attack_1.png">
-<img id="AttackP22" class="P2attack"src="./yasuke/attack/Attack_2.png">
-<img id="AttackP23" class="P2attack"src="./yasuke/attack/Attack_3.png">
-<img id="AttackP24" class="P2attack"src="./yasuke/attack/Attack_4.png"> -->
+<img id="p2Idle" class="p2Idle" src="./characters/knight/idle/idle.png">
+<img id="p2Attack1" class="p2Attack"src="./characters/knight/attack/attack_1.png">
+<img id="p2Attack2" class="p2Attack"src="./characters/knight/attack/attack_2.png">
+<img id="p2Attack3" class="p2Attack"src="./characters/knight/attack/attack_3.png">
+<img id="p2Attack4" class="p2Attack"src="./characters/knight/attack/attack_4.png">
+<img id="p2Attack5" class="p2Attack"src="./characters/knight/attack/attack_5.png">
+<img id="p2Attack6" class="p2Attack"src="./characters/knight/attack/attack_6.png">
 
-<!-- <img id="RunP20" class="run" src="./yasuke/run/Run_0.png">
-<img id="RunP21" class="run" src="./yasuke/run/Run_1.png">
-<img id="RunP22" class="run" src="./yasuke/run/Run_2.png">
-<img id="RunP23" class="run" src="./yasuke/run/Run_3.png">
-<img id="RunP24" class="run" src="./yasuke/run/Run_4.png">
-<img id="RunP25" class="run" src="./yasuke/run/Run_5.png">
-<img id="RunP26" class="run" src="./yasuke/run/Run_6.png">
-<img id="RunP27" class="run" src="./yasuke/run/Run_7.png"> -->
+<!-- <img id="RunP20" class="run" src="./knight/run/Run_0.png">
+<img id="RunP21" class="run" src="./knight/run/Run_1.png">
+<img id="RunP22" class="run" src="./knight/run/Run_2.png">
+<img id="RunP23" class="run" src="./knight/run/Run_3.png">
+<img id="RunP24" class="run" src="./knight/run/Run_4.png">
+<img id="RunP25" class="run" src="./knight/run/Run_5.png">
+<img id="RunP26" class="run" src="./knight/run/Run_6.png">
+<img id="RunP27" class="run" src="./knight/run/Run_7.png"> -->
 
-<!-- <img id="fallP2" src="./yasuke/fall/Fall.png">
+<!-- <img id="fallP2" src="./knight/fall/Fall.png">
 
-<img id="TakeHitP20" class="TakeHit" src="./yasuke/TakeHit/TakeHit_0.png">
-<img id="TakeHitP21" class="TakeHit" src="./yasuke/TakeHit/TakeHit_1.png">
-<img id="TakeHitP22" class="TakeHit" src="./yasuke/TakeHit/TakeHit_2.png">
+<img id="TakeHitP20" class="TakeHit" src="./knight/TakeHit/TakeHit_0.png">
+<img id="TakeHitP21" class="TakeHit" src="./knight/TakeHit/TakeHit_1.png">
+<img id="TakeHitP22" class="TakeHit" src="./knight/TakeHit/TakeHit_2.png">
 
-<img id="DeathP20" class="Death" src="./yasuke/Death/Death_0.png">
-<img id="DeathP21" class="Death" src="./yasuke/Death/Death_1.png">
-<img id="DeathP22" class="Death" src="./yasuke/Death/Death_2.png">
-<img id="DeathP23" class="Death" src="./yasuke/Death/Death_3.png">
-<img id="DeathP24" class="Death" src="./yasuke/Death/Death_4.png">
-<img id="DeathP25" class="Death" src="./yasuke/Death/Death_5.png"> -->
+<img id="DeathP20" class="Death" src="./knight/Death/Death_0.png">
+<img id="DeathP21" class="Death" src="./knight/Death/Death_1.png">
+<img id="DeathP22" class="Death" src="./knight/Death/Death_2.png">
+<img id="DeathP23" class="Death" src="./knight/Death/Death_3.png">
+<img id="DeathP24" class="Death" src="./knight/Death/Death_4.png">
+<img id="DeathP25" class="Death" src="./knight/Death/Death_5.png"> -->
 
 <!-- //Enemy -->
 <img id="e1Idle" class="e1Idle" src="./characters/kenji/idle/idle.png">
@@ -452,8 +455,12 @@ body{
     let countdownDuration = 60;
     let winnerDeclared = false;
     let borderRight = window.innerWidth;
+    // let chosenCharacter = "samurai";
+    let chosenCharacter = "knight";
+    let FrameMS = 200;//Default
 
     scale = setScale();
+    // scale =1.3;
     console.log('scale: ', scale);
 
     const keysPressed = new Set(); // Track keys pressed
@@ -463,25 +470,29 @@ body{
     const width = 210 * scale; // Scaled width
     const height = 210 * scale; // Scaled height
 
-    let playerMoveFrameCounter = 0;  // Keeps track of the current frame
-    let enemyMoveEFrameCounter = 0;  // Keeps track of the current frame
+    let p1MoveFCounter = 0;  // Keeps track of the current frame
+    let e1MoveFCounter = 0;  // Keeps track of the current frame
 
-    let playerAttackFrameCounter = 0;  // Keeps track of the current frame
-    let enemyAttackFrameCounter = 0;  // Keeps track of the current frame
+    let p1AttackFCounter = 0;  // Keeps track of the current frame
+    let p2AttackFCounter = 0;  // Keeps track of the current frame
+    let e1AttackFCounter = 0;  // Keeps track of the current frame
 
-    let playerDeathFrameCounter = 0;
-    let enemyDeathFrameCounter = 0;
+    let p1DeathFCounter = 0;
+    let e1DeathFCounter = 0;
     
-    let playerTakeHitFrameCounter = 0;
-    let enemyTakeHitFrameCounter = 0;
+    let p1TakeHitFCounter = 0;
+    let e1TakeHitFCounter = 0;
 
-    function User(name,x,y,dpa) {
+    function User(name,x,y,dpa,character) {
 
         this.name = name;
         this.health = 100;
         this.x = x;
         this.y = y;
         this.dpa = dpa;
+        this.character = character;
+        console.log('this.character: ', this.character);
+        console.log('FrameMS: ', FrameMS);
 
         let isAttacking = false;
         let isTakingHit = false;
@@ -504,7 +515,15 @@ body{
         let hitBoxYT;
         let hitBoxYB;
 
+        
         this.attack = function(){
+            if (this.character === "samurai" || this.character === "kenji"){
+                FrameMS = 200;
+                console.log('FrameMS: ', FrameMS);
+            }else{
+                FrameMS = 300;
+                console.log('FrameMS: ', FrameMS);
+            }
             if(!this.cooldown){
                 this.isAttacking = true;
                 this.cooldown = true;
@@ -554,7 +573,7 @@ body{
                         console.log("Miss");
                     }       
                 }
-            }, 200); 
+            }, FrameMS); //300 for knight //200 Overall
             setTimeout(() => {
                 this.cooldown = false;
             }, 500); 
@@ -570,8 +589,8 @@ body{
                 }, 50);
                 setTimeout(() => {
                     this.isTakingHit = false;
-                    playerTakeHitFrameCounter = 0;
-                    enemyTakeHitFrameCounter = 0;
+                    p1TakeHitFCounter = 0;
+                    e1TakeHitFCounter = 0;
                 }, 400); 
             }
         }
@@ -664,10 +683,20 @@ body{
     }
 
     console.log('eYCord: ', eYCord);
-    
-    const player = new User('player',(xSpawn-(2*charWidht))-100,pYCord,25);
-    const enemy = new User('enemy',100+xSpawn+(xSpawn-(2*charWidht)),eYCord,25);
 
+    //Character Select Init
+    const player = new User('player',(xSpawn-(2*charWidht))-100,pYCord,25,"default");
+    const enemy = new User('enemy',100+xSpawn+(xSpawn-(2*charWidht)),eYCord,25,"default");
+
+    //For Setting Correct Frame MS
+    if(chosenCharacter === "knight"){
+        player.character = "knight";
+        console.log('player.charcter: ', player.character);
+    }else if(chosenCharacter === "samurai"){
+        player.character = "samurai";
+        console.log('player.charcter: ', player.character);
+    }
+    enemy.character = "kenji";
 
     window.onload = init;
 
@@ -706,28 +735,30 @@ body{
         glareClassE.style.display = "none"; // Removes from layout
 
         //Idle Frame
-        playerimg = document.getElementById("p1Idle");
-        enemyimg = document.getElementById("e1Idle");
+        p1Idle = document.getElementById("p1Idle");
+        p2Idle = document.getElementById("p2Idle");
+        e1Idle = document.getElementById("e1Idle");
 
         //Attack Frames
-        playerAttackF =  document.querySelectorAll(".p1Attack");
-        enemyAttackF = document.querySelectorAll(".e1Attack");
+        p1AttackF =  document.querySelectorAll(".p1Attack");
+        p2AttackF =  document.querySelectorAll(".p2Attack");
+        e1AttackF = document.querySelectorAll(".e1Attack");
 
         //Fall Frame
-        playerFallF = document.getElementById("p1Fall");
-        enemyFallF = document.getElementById("e1Fall");
+        p1FallF = document.getElementById("p1Fall");
+        e1FallF = document.getElementById("e1Fall");
 
         //Move Frames
-        playerMoveF = document.querySelectorAll(".p1Run");
-        enemyMoveF = document.querySelectorAll(".e1Run");
+        p1MoveF = document.querySelectorAll(".p1Run");
+        e1MoveF = document.querySelectorAll(".e1Run");
 
         //Take Hit Frames
-        playerTakeHitF = document.querySelectorAll(".p1TakeHit");
-        enemyTakeHitF = document.querySelectorAll(".e1TakeHit");
+        p1TakeHitF = document.querySelectorAll(".p1TakeHit");
+        e1TakeHitF = document.querySelectorAll(".e1TakeHit");
 
         //Death Frames
-        playerDeathF = document.querySelectorAll(".p1Death");
-        enemyDeathF = document.querySelectorAll(".e1Death");
+        p1DeathF = document.querySelectorAll(".p1Death");
+        e1DeathF = document.querySelectorAll(".e1Death");
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -748,35 +779,38 @@ body{
         // Moving and Attacking Frame Interval
         setInterval(() => {
             if(player.isMoving){
-                playerMoveFrameCounter = (playerMoveFrameCounter + 1) % (playerMoveF.length);  
+                p1MoveFCounter = (p1MoveFCounter + 1) % (p1MoveF.length);  
             }
             if(enemy.isMoving){
-                enemyMoveEFrameCounter = (enemyMoveEFrameCounter + 1) % (enemyMoveF.length);  
+                e1MoveFCounter = (e1MoveFCounter + 1) % (e1MoveF.length);  
             }
             if(enemy.isAttacking){
-                enemyAttackFrameCounter = (enemyAttackFrameCounter+1) % (enemyAttackF.length);
+                e1AttackFCounter = (e1AttackFCounter+1) % (e1AttackF.length);
             }
             if(player.isAttacking){
-                playerAttackFrameCounter = (playerAttackFrameCounter+1) % (playerAttackF.length);
+                p1AttackFCounter = (p1AttackFCounter+1) % (p1AttackF.length);
+                // console.log('p1AttackFCounter: ', p1AttackFCounter);
+                p2AttackFCounter = (p2AttackFCounter+1) % (p2AttackF.length);
+                console.log('p2AttackFCounter: ', p2AttackFCounter);
             }
             
         }, 50);
         //Taking Hit Frame Interval
         setInterval(() => {
             if(player.isTakingHit){
-                playerTakeHitFrameCounter = (playerTakeHitFrameCounter+1) % (playerTakeHitF.length);
+                p1TakeHitFCounter = (p1TakeHitFCounter+1) % (p1TakeHitF.length);
             }
             if(enemy.isTakingHit){
-                enemyTakeHitFrameCounter = (enemyTakeHitFrameCounter+1) % (enemyTakeHitF.length);
+                e1TakeHitFCounter = (e1TakeHitFCounter+1) % (e1TakeHitF.length);
             }
             if(player.isDead){
-                if(playerDeathFrameCounter < 4){
-                    playerDeathFrameCounter++;
+                if(p1DeathFCounter < 4){
+                    p1DeathFCounter++;
                 }
             }
             if(enemy.isDead){
-                if(enemyDeathFrameCounter < 5){
-                    enemyDeathFrameCounter++;
+                if(e1DeathFCounter < 5){
+                    e1DeathFCounter++;
                 }
             }
         }, 200);
@@ -804,7 +838,14 @@ body{
         characterMovement(player, {left: 'a',right: 'd',attack: 's',jump: 'w',dash: ' ',});
         characterMovement(enemy, {left: 'ArrowLeft',right: 'ArrowRight',attack: 'ArrowDown',jump: 'ArrowUp',dash: 'Enter',});
         
-        playerDraw();
+        switch(chosenCharacter){
+            case "samurai":
+                playerDrawSamurai();
+                break;
+            case "knight":
+                playerDrawKnight();
+                break;
+        }
         enemyDraw();
 
         if(!winnerDeclared){
@@ -830,46 +871,67 @@ body{
         
         window.requestAnimationFrame(gameLoop); // Keep requesting new frames
     }
-    function playerDraw(){
+    function playerDrawSamurai(){
         if (player.isDead){
-            drawDeath(playerDeathF[playerDeathFrameCounter],player.x,player.y);
+            drawDeath(p1DeathF[p1DeathFCounter],player.x,player.y);
             return;
         }
         if (player.isAttacking){
-            drawAttack(playerAttackF[playerAttackFrameCounter],player.x,player.y); 
+            drawAttack(p1AttackF[p1AttackFCounter],player.x,player.y); 
         }
         if (player.isTakingHit && !player.isAttacking){
-            drawTakeHit(playerTakeHitF[playerTakeHitFrameCounter],player.x,player.y); 
+            drawTakeHit(p1TakeHitF[p1TakeHitFCounter],player.x,player.y); 
         }
         else if (player.isMoving && !player.isAttacking) {
-            drawMove(playerMoveF[playerMoveFrameCounter],player.x,player.y);
+            drawMove(p1MoveF[p1MoveFCounter],player.x,player.y);
         } 
         else if (player.isFalling) {
-            drawFall(playerFallF,player.x,player.y);
+            drawFall(p1FallF,player.x,player.y);
         } 
         else if(!player.isAttacking && !player.isFalling && !player.isMoving && !player.isDashing && !player.isDead) { 
-            draw(playerimg,player.x,player.y); 
+            draw(p1Idle,player.x,player.y); 
+        }
+    }
+    function playerDrawKnight(){
+        if (player.isDead){
+            drawDeath(p2DeathF[p2DeathFCounter],player.x,player.y);
+            return;
+        }
+        if (player.isAttacking){
+            drawAttack(p2AttackF[p2AttackFCounter],player.x,player.y); 
+        }
+        if (player.isTakingHit && !player.isAttacking){
+            drawTakeHit(p2TakeHitF[p2TakeHitFCounter],player.x,player.y); 
+        }
+        else if (player.isMoving && !player.isAttacking) {
+            drawMove(p2MoveF[p2MoveFCounter],player.x,player.y);
+        } 
+        else if (player.isFalling) {
+            drawFall(p2FallF,player.x,player.y);
+        } 
+        else if(!player.isAttacking && !player.isFalling && !player.isMoving && !player.isDashing && !player.isDead) { 
+            draw(p2Idle,player.x,player.y); 
         }
     }
     function enemyDraw(){
         if (enemy.isDead) {
-            drawDeath(enemyDeathF[enemyDeathFrameCounter],enemy.x,enemy.y);
+            drawDeath(e1DeathF[e1DeathFCounter],enemy.x,enemy.y);
             return;
         }
         if (enemy.isAttacking){   
-            drawAttack(enemyAttackF[enemyAttackFrameCounter],enemy.x,enemy.y); 
+            drawAttack(e1AttackF[e1AttackFCounter],enemy.x,enemy.y); 
         }
         if (enemy.isTakingHit && !enemy.isAttacking){
-            drawTakeHit(enemyTakeHitF[enemyTakeHitFrameCounter],enemy.x,enemy.y); 
+            drawTakeHit(e1TakeHitF[e1TakeHitFCounter],enemy.x,enemy.y); 
         }
         else if (enemy.isMoving && !enemy.isAttacking) {
-            drawMove(enemyMoveF[enemyMoveEFrameCounter],enemy.x,enemy.y);
+            drawMove(e1MoveF[e1MoveFCounter],enemy.x,enemy.y);
         } 
         else if (enemy.isFalling) {
-            drawFall(enemyFallF,enemy.x,enemy.y);
+            drawFall(e1FallF,enemy.x,enemy.y);
         } 
         else if(!enemy.isAttacking && !enemy.isFalling && !enemy.isMoving && !enemy.isDashing && !enemy.isDead) { 
-            draw(enemyimg,enemy.x,enemy.y); 
+            draw(e1Idle,enemy.x,enemy.y); 
         }
     }
 
