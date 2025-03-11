@@ -383,8 +383,8 @@ body{
 <img id="p2Attack2" class="p2Attack"src="./characters/knight/attack/attack_2.png">
 <img id="p2Attack3" class="p2Attack"src="./characters/knight/attack/attack_3.png">
 <img id="p2Attack4" class="p2Attack"src="./characters/knight/attack/attack_4.png">
-<img id="p2Attack5" class="p2Attack"src="./characters/knight/attack/attack_5.png">
-<img id="p2Attack6" class="p2Attack"src="./characters/knight/attack/attack_6.png">
+<!-- <img id="p2Attack5" class="p2Attack"src="./characters/knight/attack/attack_5.png"> -->
+<!-- <img id="p2Attack6" class="p2Attack"src="./characters/knight/attack/attack_6.png"> -->
 
 <!-- <img id="RunP20" class="run" src="./knight/run/Run_0.png">
 <img id="RunP21" class="run" src="./knight/run/Run_1.png">
@@ -457,10 +457,9 @@ body{
     let borderRight = window.innerWidth;
     // let chosenCharacter = "samurai";
     let chosenCharacter = "knight";
-    let FrameMS = 200;//Default
 
     scale = setScale();
-    // scale =1.3;
+    // scale =1;
     console.log('scale: ', scale);
 
     const keysPressed = new Set(); // Track keys pressed
@@ -492,7 +491,6 @@ body{
         this.dpa = dpa;
         this.character = character;
         console.log('this.character: ', this.character);
-        console.log('FrameMS: ', FrameMS);
 
         let isAttacking = false;
         let isTakingHit = false;
@@ -517,13 +515,6 @@ body{
 
         
         this.attack = function(){
-            if (this.character === "samurai" || this.character === "kenji"){
-                FrameMS = 200;
-                console.log('FrameMS: ', FrameMS);
-            }else{
-                FrameMS = 300;
-                console.log('FrameMS: ', FrameMS);
-            }
             if(!this.cooldown){
                 this.isAttacking = true;
                 this.cooldown = true;
@@ -573,7 +564,7 @@ body{
                         console.log("Miss");
                     }       
                 }
-            }, FrameMS); //300 for knight //200 Overall
+            }, 200); //300 for knight //200 Overall
             setTimeout(() => {
                 this.cooldown = false;
             }, 500); 
