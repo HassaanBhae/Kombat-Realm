@@ -3,7 +3,8 @@
 <head>
 <style>
 body{
-    background-color:#271408;
+    background-color:#271408; 
+    /* background-color:#9999; */
     margin: 0;
     /* background-size: auto; */
     user-select: none; /* Disables text selection */
@@ -13,7 +14,8 @@ body{
 
 
 #background {
-    background-image: url(./assets/Dojo-long2x.jpg);
+    /* background-image: url(./assets/Dojo-long2x.jpg); */
+    background-image: url(./assets/Dojo-long-under.jpg);
     background-repeat: no-repeat;
     /* background-size: 1550px 800px; */
     position: absolute;
@@ -455,17 +457,50 @@ body{
     let countdownDuration = 60;
     let winnerDeclared = false;
     let borderRight = window.innerWidth;
-    // let chosenCharacter = "samurai";
-    let chosenCharacter = "knight";
+    let chosenCharacter = "samurai";
+    // let chosenCharacter = "knight";
 
     scale = setScale();
     // scale =1;
     console.log('scale: ', scale);
 
+    const bgElement = document.getElementById('background');
+
+    // Get container size
+    const containerWidth = bgElement.clientWidth;
+    const containerHeight = bgElement.clientHeight;
+
+    // Define intrinsic size of the background image (you must know this)
+    const imageNaturalWidth = 1808;  // Example intrinsic width
+    const imageNaturalHeight = 872;  // Example intrinsic height
+
+    const containerRatio = containerWidth / containerHeight;
+    const imageRatio = imageNaturalWidth / imageNaturalHeight;
+
+    let renderedWidth, renderedHeight;
+
+    if (imageRatio > containerRatio) {
+    // Image fills width
+    renderedWidth = containerWidth;
+    renderedHeight = containerWidth / imageRatio;
+    } else {
+    // Image fills height
+    renderedHeight = containerHeight;
+    renderedWidth = containerHeight * imageRatio;
+    }
+
+    // Get computed width and height
+    const bgWidth = renderedWidth;
+    const bgHeight = renderedHeight;
+
+    console.log('bgWidth:', bgWidth);
+    console.log('bgHeight:', bgHeight);
+
+
     const keysPressed = new Set(); // Track keys pressed
     // const scale = 2.25; // Set your scale factor here
-    const charWidht = 52.5*scale;
-    const charHeight = 52.5*scale;
+    // const charWidht = 52.5*scale;
+    // const charHeight = 52.5*scale;
     const width = 210 * scale; // Scaled width
     const height = 210 * scale; // Scaled height
 
@@ -655,29 +690,21 @@ body{
 
     }
     // player spawn locator
-    let xSpawn = borderRight/3;
-    xSpawn = Math.floor(xSpawn);
-    console.log('xSpawn: ', xSpawn);
+    let eXSpawn = Math.floor(bgWidth/3);
+    let pXSpawn = -30-(210/scale);
 
-    ySpawn = (window.innerWidth * 22) / 39;
-    ySpawn = Math.floor(ySpawn);
-    console.log('ySpawn: ', ySpawn);
+    let pYOffset = height-84*scale;
+    let eYOffset = height-79*scale;
+ 
+    eYSpawn = bgHeight - eYOffset;
+    pYSpawn = bgHeight - pYOffset;
 
-    let eYCord = (ySpawn-height)+charHeight+15;
-    let pYCord = eYCord+30;
-    if(window.innerWidth >1300){
-        eYCord = -96;
-        pYCord = -60;
-    }
-    if(window.innerWidth < 940){
-        pYCord = pYCord-15;
-    }
 
-    console.log('eYCord: ', eYCord);
+    // console.log('eYSpawn: ', eYSpawn);
 
     //Character Select Init
-    const player = new User('player',(xSpawn-(2*charWidht))-100,pYCord,25,"default");
-    const enemy = new User('enemy',100+xSpawn+(xSpawn-(2*charWidht)),eYCord,25,"default");
+    const player = new User('player',pXSpawn,pYSpawn,25,"default");
+    const enemy = new User('enemy',eXSpawn,eYSpawn,25,"default");
 
     //For Setting Correct Frame MS
     if(chosenCharacter === "knight"){
@@ -700,6 +727,7 @@ body{
             background.style.backgroundSize = window.innerWidth+"px"+" "+window.innerHeight+"px";
         }
         console.log('window.innerWidth: ', window.innerWidth);
+        console.log('window.innerHEight: ', window.innerHeight);
 
         pAttackRange = document.getElementById('attackRangeP');
         eAttackRange = document.getElementById('attackRangeE');
@@ -855,8 +883,8 @@ body{
             }
             playerHitBoxBox.style.display = "block";
             enemyHitBoxBox.style.display = "block";
-            pAttackRange.style.display = "block";
-            eAttackRange.style.display = "block";
+            // pAttackRange.style.display = "block";
+            // eAttackRange.style.display = "block";
             indicator.style.display = "block";
         }
         
@@ -1012,13 +1040,13 @@ body{
         player.attackRangeB =player.hitBoxYB;
 
         //Left X
-        player.hitBoxXL = (player.x+(87*scale));
+        player.hitBoxXL = Math.floor(player.x + (87 * scale));
         //Right X
-        player.hitBoxXR = (player.x+width-(scale*87));
+        player.hitBoxXR = Math.floor(player.x+width-(scale*87));
         //Top Y
-        player.hitBoxYT = player.y+(69*scale);
+        player.hitBoxYT = Math.floor(player.y+(69*scale));
         //Bottom Y
-        player.hitBoxYB = player.y+height-(scale*81);
+        player.hitBoxYB = Math.floor(player.y+height-(scale*81));
 
     }
     function debugPlayerAttackBoxAndHitBox(){
@@ -1084,13 +1112,13 @@ body{
         enemy.attackRangeB =enemy.hitBoxYB;
 
         //Left X 
-        enemy.hitBoxXL = (enemy.x+(87*scale));
+        enemy.hitBoxXL = Math.floor(enemy.x+(87*scale));
         //Right X
-        enemy.hitBoxXR = (enemy.x+width-(scale*87));
+        enemy.hitBoxXR = Math.floor(enemy.x+width-(scale*87));
         //Top Y
-        enemy.hitBoxYT = enemy.y+(75*scale);
+        enemy.hitBoxYT = Math.floor(enemy.y+(75*scale));
         //Bottom Y
-        enemy.hitBoxYB = enemy.y+height-(scale*75);
+        enemy.hitBoxYB = Math.floor(enemy.y+height-(scale*75));
 
     }
     function debugEnemyAttackBoxAndHitBox(){
