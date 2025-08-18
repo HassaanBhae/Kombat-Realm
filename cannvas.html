@@ -352,6 +352,7 @@ body{
 
 <!-- //Player -->
 <img id="p1Idle" class="p1Idle" src="./characters/samurai/idle/idle.png">
+
 <img id="p1Attack1" class="p1Attack"src="./characters/samurai/attack/attack_1.png">
 <img id="p1Attack2" class="p1Attack"src="./characters/samurai/attack/attack_2.png">
 <img id="p1Attack3" class="p1Attack"src="./characters/samurai/attack/attack_3.png">
@@ -381,6 +382,7 @@ body{
 
 <!-- //Player2 -->
 <img id="p2Idle" class="p2Idle" src="./characters/knight/idle/idle.png">
+
 <img id="p2Attack1" class="p2Attack"src="./characters/knight/attack/attack_1.png">
 <img id="p2Attack2" class="p2Attack"src="./characters/knight/attack/attack_2.png">
 <img id="p2Attack3" class="p2Attack"src="./characters/knight/attack/attack_3.png">
@@ -412,6 +414,7 @@ body{
 
 <!-- //Enemy -->
 <img id="e1Idle" class="e1Idle" src="./characters/kenji/idle/idle.png">
+
 <img id="e1Attack1" class="e1Attack"src="./characters/kenji/attack/attack_1.png">
 <img id="e1Attack2" class="e1Attack"src="./characters/kenji/attack/attack_2.png">
 <img id="e1Attack3" class="e1Attack"src="./characters/kenji/attack/attack_3.png">
@@ -451,8 +454,8 @@ body{
     let x,y;
 
     //Turn this to true to turn on Debugging Visualizer
-    let debug = false;
-    // let debug = true;
+    // let debug = false;
+    let debug = true;
     const globalCooldown = 10000;
     let countdownDuration = 60;
     let winnerDeclared = false;
@@ -461,8 +464,15 @@ body{
     // let chosenCharacter = "knight";
 
     scale = setScale();
-    // scale =1;
+    scale = 1;
     console.log('scale: ', scale);
+
+    //Character width and height
+    const width = 600 * scale; // Scaled width
+    console.log('Character width: ', width);
+    const height = 365 * scale; // Scaled height
+    console.log('Character height: ', height);
+
 
     const bgElement = document.getElementById('background');
 
@@ -498,11 +508,6 @@ body{
 
 
     const keysPressed = new Set(); // Track keys pressed
-    // const scale = 2.25; // Set your scale factor here
-    // const charWidht = 52.5*scale;
-    // const charHeight = 52.5*scale;
-    const width = 210 * scale; // Scaled width
-    const height = 210 * scale; // Scaled height
 
     let p1MoveFCounter = 0;  // Keeps track of the current frame
     let e1MoveFCounter = 0;  // Keeps track of the current frame
@@ -877,7 +882,7 @@ body{
 
         if(debug === true){
             debugPlayerAttackBoxAndHitBox();
-            debugEnemyAttackBoxAndHitBox();
+            // debugEnemyAttackBoxAndHitBox();
             for (let i = 0; i < 8; i++) { // Loop from 0 to 7
                 hitBoxCords[i].style.display = "block";
             }
@@ -908,7 +913,7 @@ body{
             drawFall(p1FallF,player.x,player.y);
         } 
         else if(!player.isAttacking && !player.isFalling && !player.isMoving && !player.isDashing && !player.isDead) { 
-            draw(p1Idle,player.x,player.y); 
+            drawIdle(p1Idle,player.x,player.y); 
         }
     }
     function playerDrawKnight(){
@@ -929,7 +934,7 @@ body{
             drawFall(p2FallF,player.x,player.y);
         } 
         else if(!player.isAttacking && !player.isFalling && !player.isMoving && !player.isDashing && !player.isDead) { 
-            draw(p2Idle,player.x,player.y); 
+            drawIdle(p2Idle,player.x,player.y); 
         }
     }
     function enemyDraw(){
@@ -950,7 +955,7 @@ body{
             drawFall(e1FallF,enemy.x,enemy.y);
         } 
         else if(!enemy.isAttacking && !enemy.isFalling && !enemy.isMoving && !enemy.isDashing && !enemy.isDead) { 
-            draw(e1Idle,enemy.x,enemy.y); 
+            drawIdle(e1Idle,enemy.x,enemy.y); 
         }
     }
 
@@ -1010,8 +1015,9 @@ body{
     }
 
 
-    function draw(charImg,x, y) {
+    function drawIdle(charImg,x, y) {
         context.drawImage(charImg, x, y,width,height); // Draw the scaled image
+        // context.drawImage(charImg, x, y); // Draw the scaled image
     }
 
     function drawAttack(charAttack,x, y) {
@@ -1033,21 +1039,22 @@ body{
     function drawDeath(charDeath,x,y){
         context.drawImage(charDeath, x, y,width,height); // Draw the scaled image
     }
+    
     function getPlayerAttackBoxAndHitBox(){
-        player.attackRangeS= (player.x+width-(scale*87));
-        player.attackRangeE = player.attackRangeS +(79*scale);
+        
+        //Left X
+        player.hitBoxXL = Math.floor(player.x +(width/2.5));
+        //Right X
+        player.hitBoxXR = Math.floor(player.x+(width/1.75));
+        //Top Y
+        player.hitBoxYT = Math.floor(player.y+(height/2));
+        //Bottom Y
+        player.hitBoxYB = Math.floor(player.y+height);
+        
+        player.attackRangeS= player.hitBoxXR;
+        player.attackRangeE = player.attackRangeS + (width/2.7);
         player.attackRangeT = player.hitBoxYT;
         player.attackRangeB =player.hitBoxYB;
-
-        //Left X
-        player.hitBoxXL = Math.floor(player.x + (87 * scale));
-        //Right X
-        player.hitBoxXR = Math.floor(player.x+width-(scale*87));
-        //Top Y
-        player.hitBoxYT = Math.floor(player.y+(69*scale));
-        //Bottom Y
-        player.hitBoxYB = Math.floor(player.y+height-(scale*81));
-
     }
     function debugPlayerAttackBoxAndHitBox(){
         //Player AttackBox
@@ -1056,37 +1063,37 @@ body{
         
         context.strokeRect(player.attackRangeS,player.hitBoxYT,1,player.hitBoxYB-player.hitBoxYT);
         context.strokeRect(player.attackRangeE,player.hitBoxYT,1,player.hitBoxYB-player.hitBoxYT);
-        context.strokeRect(player.attackRangeS,player.attackRangeT,(79*scale),1);
-        context.strokeRect(player.attackRangeS,player.attackRangeB,(79*scale),1);
+        context.strokeRect(player.attackRangeS,player.attackRangeT,player.attackRangeE-player.attackRangeS,1);
+        context.strokeRect(player.attackRangeS,player.attackRangeB,player.attackRangeE-player.attackRangeS,1);
         
         pAttackRange.innerText = "Attack Range:"+"\n"+"X : "+player.attackRangeS +"-"+player.attackRangeE +" ("+(player.attackRangeE-player.attackRangeS)+")"+"\n"+"Y : "+player.attackRangeT+"-"+player.attackRangeB ;
 
         //Player HitBox
         context.lineWidth = "6";
-        context.strokeStyle = "blue";
+        context.strokeStyle = "green";
 
         //Left X
-            context.strokeRect(player.hitBoxXL,player.y+(height/2-6), 1,1);
-            hitBoxCords[2].style.top = player.hitBoxYT+(26*scale)+"px";
-            hitBoxCords[2].style.left = player.hitBoxXL-(3*scale)+"px";
+            context.strokeRect(player.hitBoxXL,player.y+(height/1.3), 1,1);
+            hitBoxCords[2].style.top = player.y+(height/1.3)+"px";
+            hitBoxCords[2].style.left = player.hitBoxXL+"px";
             hitBoxCords[2].innerText = player.hitBoxXL;
         
-        //Right X
-            context.strokeRect(player.hitBoxXR,player.y+(height/2-6), 1,1);
-            hitBoxCords[3].style.top = player.hitBoxYT+(26*scale)+"px";
-            hitBoxCords[3].style.left = player.hitBoxXR-(3*scale)+"px";
+        // //Right X
+            context.strokeRect(player.hitBoxXR,player.y+(height/1.3), 1,1);
+            hitBoxCords[3].style.top = player.y+(height/1.3)+"px";
+            hitBoxCords[3].style.left = player.hitBoxXR+"px";
             hitBoxCords[3].innerText = player.hitBoxXR;
             
-        //Top Y
-            context.strokeRect(player.hitBoxXL+((player.hitBoxXR-player.hitBoxXL)/2),player.hitBoxYT, 1,1);
-            hitBoxCords[0].style.top = player.hitBoxYT-(8*scale)+"px";
-            hitBoxCords[0].style.left = player.hitBoxXL+(14*scale)+"px";
+        // //Top Y
+            context.strokeRect(player.x+(width/2),player.hitBoxYT, 1,1);
+            hitBoxCords[0].style.top = player.hitBoxYT+"px";
+            hitBoxCords[0].style.left = player.x+(width/2)+"px";
             hitBoxCords[0].innerText = player.hitBoxYT;
 
-        //Bottom Y
-            context.strokeRect((player.x+(width/2-6)),player.hitBoxYB, 1,1);
-            hitBoxCords[1].style.top = player.hitBoxYB-(8*scale)+"px";
-            hitBoxCords[1].style.left = player.hitBoxXL+(14*scale)+"px";
+        // //Bottom Y
+            context.strokeRect((player.x+(width/2)),player.hitBoxYB, 1,1);
+            hitBoxCords[1].style.top = player.hitBoxYB+"px";
+            hitBoxCords[1].style.left = player.x+(width/2)+"px";
             hitBoxCords[1].innerText = player.hitBoxYB;
             
 
