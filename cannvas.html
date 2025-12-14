@@ -3,8 +3,8 @@
 <head>
 <style>
 body{
-    background-color:#271408; 
-    /* background-color:#9999; */
+    /* background-color:#271408;  */
+    background-color:#9999;
     margin: 0;
     /* background-size: auto; */
     user-select: none; /* Disables text selection */
@@ -74,20 +74,21 @@ body{
     font-weight: 900;
     display: none;
 }
-#p1Idle,
-#p2Idle,
-#e1Idle,
-.p1Attack,
-.p2Attack,
-.e1Attack,
-.p1Death,
-.e1Death,
-.p1TakeHit,
-.e1TakeHit,
-#p1Fall,
-#e1Fall,
-.p1Run,
-.e1Run{
+.samuraiIdle,
+.knightIdle,
+.kenjiIdle,
+.akazaIdle,
+.samuraiAttack,
+.knightAttack,
+.kenjiAttack,
+.samuraiDeath,
+.kenjiDeath,
+.samuraiTakeHit,
+.kenjiTakeHit,
+.samuraiFall,
+.kenjiFall,
+.samuraiRun,
+.kenjiRun{
     position: absolute;
     display:none;
     scale: 3;
@@ -277,6 +278,10 @@ body{
     transform: translate(-50%,-50%);
     display: none;
 }
+.flip {
+  transform: scaleX(-1);
+}
+
 @keyframes flash {
   0%   {background-color: #4caf50;}
   25%  {background-color: green;}
@@ -351,44 +356,42 @@ body{
 <p class="hitBoxCords" id="YB">YB</p>
 
 <!-- //Player -->
-<img id="p1Idle" class="p1Idle" src="./characters/samurai/idle/idle.png">
+<img  class="samuraiIdle" src="./characters/samurai/idle/idle.png">
 
-<img id="p1Attack0" class="p1Attack"src="./characters/samurai/attack/attack_0.png">
-<img id="p1Attack1" class="p1Attack"src="./characters/samurai/attack/attack_1.png">
-<img id="p1Attack2" class="p1Attack"src="./characters/samurai/attack/attack_2.png">
-<img id="p1Attack3" class="p1Attack"src="./characters/samurai/attack/attack_3.png">
+<img  class="samuraiAttack"src="./characters/samurai/attack/attack_0.png">
+<img  class="samuraiAttack"src="./characters/samurai/attack/attack_1.png">
+<img  class="samuraiAttack"src="./characters/samurai/attack/attack_2.png">
+<img  class="samuraiAttack"src="./characters/samurai/attack/attack_3.png">
 
-<img id="p1Run0" class="p1Run" src="./characters/samurai/run/run_0.png">
-<img id="p1Run1" class="p1Run" src="./characters/samurai/run/run_1.png">
-<img id="p1Run2" class="p1Run" src="./characters/samurai/run/run_2.png">
-<img id="p1Run3" class="p1Run" src="./characters/samurai/run/run_3.png">
-<img id="p1Run4" class="p1Run" src="./characters/samurai/run/run_4.png">
-<img id="p1Run5" class="p1Run" src="./characters/samurai/run/run_5.png">
-<img id="p1Run6" class="p1Run" src="./characters/samurai/run/run_6.png">
-<img id="p1Run7" class="p1Run" src="./characters/samurai/run/run_7.png">
+<img  class="samuraiRun" src="./characters/samurai/run/run_0.png">
+<img  class="samuraiRun" src="./characters/samurai/run/run_1.png">
+<img  class="samuraiRun" src="./characters/samurai/run/run_2.png">
+<img  class="samuraiRun" src="./characters/samurai/run/run_3.png">
+<img  class="samuraiRun" src="./characters/samurai/run/run_4.png">
+<img  class="samuraiRun" src="./characters/samurai/run/run_5.png">
+<img  class="samuraiRun" src="./characters/samurai/run/run_6.png">
+<img  class="samuraiRun" src="./characters/samurai/run/run_7.png">
 
-<img id="p1Fall" class="p1Fall" src="./characters/samurai/fall/fall.png">
+<img  class="samuraiFall" src="./characters/samurai/fall/fall.png">
 
-<img id="p1TakeHit0" class="p1TakeHit" src="./characters/samurai/takeHit/takeHit_0.png">
-<img id="p1TakeHit1" class="p1TakeHit" src="./characters/samurai/takeHit/takeHit_1.png">
-<img id="p1TakeHit2" class="p1TakeHit" src="./characters/samurai/takeHit/takeHit_2.png">
+<img  class="samuraiTakeHit" src="./characters/samurai/takeHit/takeHit_0.png">
+<img  class="samuraiTakeHit" src="./characters/samurai/takeHit/takeHit_1.png">
+<img  class="samuraiTakeHit" src="./characters/samurai/takeHit/takeHit_2.png">
 
-<img id="p1Death0" class="p1Death" src="./characters/samurai/death/death_0.png">
-<img id="p1Death1" class="p1Death" src="./characters/samurai/death/death_1.png">
-<img id="p1Death2" class="p1Death" src="./characters/samurai/death/death_2.png">
-<img id="p1Death3" class="p1Death" src="./characters/samurai/death/death_3.png">
-<img id="p1Death4" class="p1Death" src="./characters/samurai/death/death_4.png">
-<img id="p1Death5" class="p1Death" src="./characters/samurai/death/death_5.png">
+<img  class="samuraiDeath" src="./characters/samurai/death/death_0.png">
+<img  class="samuraiDeath" src="./characters/samurai/death/death_1.png">
+<img  class="samuraiDeath" src="./characters/samurai/death/death_2.png">
+<img  class="samuraiDeath" src="./characters/samurai/death/death_3.png">
+<img  class="samuraiDeath" src="./characters/samurai/death/death_4.png">
+<img  class="samuraiDeath" src="./characters/samurai/death/death_5.png">
 
 <!-- //Player2 -->
-<img id="p2Idle" class="p2Idle" src="./characters/knight/idle/idle.png">
+<img  class="knightIdle" src="./characters/knight/idle/idle.png">
 
-<img id="p2Attack0" class="p2Attack"src="./characters/knight/attack/attack_0.png">
-<img id="p2Attack1" class="p2Attack"src="./characters/knight/attack/attack_1.png">
-<img id="p2Attack2" class="p2Attack"src="./characters/knight/attack/attack_2.png">
-<img id="p2Attack3" class="p2Attack"src="./characters/knight/attack/attack_3.png">
-<!-- <img id="p2Attack5" class="p2Attack"src="./characters/knight/attack/attack_5.png"> -->
-<!-- <img id="p2Attack6" class="p2Attack"src="./characters/knight/attack/attack_6.png"> -->
+<img  class="knightAttack"src="./characters/knight/attack/attack_0.png">
+<img  class="knightAttack"src="./characters/knight/attack/attack_1.png">
+<img  class="knightAttack"src="./characters/knight/attack/attack_2.png">
+<img  class="knightAttack"src="./characters/knight/attack/attack_3.png">
 
 <!-- <img id="RunP20" class="run" src="./knight/run/Run_0.png">
 <img id="RunP21" class="run" src="./knight/run/Run_1.png">
@@ -413,34 +416,44 @@ body{
 <img id="DeathP25" class="Death" src="./knight/Death/Death_5.png"> -->
 
 <!-- //Enemy -->
-<img id="e1Idle" class="e1Idle" src="./characters/kenji/idle/idle.png">
+<img  class="kenjiIdle" src="./characters/kenji/idle/idle.png">
 
-<img id="e1Attack0" class="e1Attack"src="./characters/kenji/attack/attack_0.png">
-<img id="e1Attack1" class="e1Attack"src="./characters/kenji/attack/attack_1.png">
-<img id="e1Attack2" class="e1Attack"src="./characters/kenji/attack/attack_2.png">
-<img id="e1Attack3" class="e1Attack"src="./characters/kenji/attack/attack_3.png">
+<img  class="kenjiAttack"src="./characters/kenji/attack/attack_0.png">
+<img  class="kenjiAttack"src="./characters/kenji/attack/attack_1.png">
+<img  class="kenjiAttack"src="./characters/kenji/attack/attack_2.png">
+<img  class="kenjiAttack"src="./characters/kenji/attack/attack_3.png">
 
-<img id="e1Run0" class="e1Run" src="./characters/kenji/run/run_0.png">
-<img id="e1Run1" class="e1Run" src="./characters/kenji/run/run_1.png">
-<img id="e1Run2" class="e1Run" src="./characters/kenji/run/run_2.png">
-<img id="e1Run3" class="e1Run" src="./characters/kenji/run/run_3.png">
-<img id="e1Run4" class="e1Run" src="./characters/kenji/run/run_4.png">
-<img id="e1Run5" class="e1Run" src="./characters/kenji/run/run_5.png">
-<img id="e1Run6" class="e1Run" src="./characters/kenji/run/run_6.png">
-<img id="e1Run7" class="e1Run" src="./characters/kenji/run/run_7.png">
+<img  class="kenjiRun" src="./characters/kenji/run/run_0.png">
+<img  class="kenjiRun" src="./characters/kenji/run/run_1.png">
+<img  class="kenjiRun" src="./characters/kenji/run/run_2.png">
+<img  class="kenjiRun" src="./characters/kenji/run/run_3.png">
+<img  class="kenjiRun" src="./characters/kenji/run/run_4.png">
+<img  class="kenjiRun" src="./characters/kenji/run/run_5.png">
+<img  class="kenjiRun" src="./characters/kenji/run/run_6.png">
+<img  class="kenjiRun" src="./characters/kenji/run/run_7.png">
 
-<img id="e1Fall" class="e1Fall" src="./characters/kenji/fall/fall.png">
+<img  class="kenjiFall" src="./characters/kenji/fall/fall.png">
 
-<img id="e1TakeHit0" class="e1TakeHit" src="./characters/kenji/takeHit/takeHit_0.png">
-<img id="e1TakeHit1" class="e1TakeHit" src="./characters/kenji/takeHit/takeHit_1.png">
-<img id="e1TakeHit2" class="e1TakeHit" src="./characters/kenji/takeHit/takeHit_2.png">
+<img  class="kenjiTakeHit" src="./characters/kenji/takeHit/takeHit_0.png">
+<img  class="kenjiTakeHit" src="./characters/kenji/takeHit/takeHit_1.png">
+<img  class="kenjiTakeHit" src="./characters/kenji/takeHit/takeHit_2.png">
 
-<img id="e1Death0" class="e1Death" src="./characters/kenji/death/death_0.png">
-<img id="e1Death1" class="e1Death" src="./characters/kenji/death/death_1.png">
-<img id="e1Death2" class="e1Death" src="./characters/kenji/death/death_2.png">
-<img id="e1Death3" class="e1Death" src="./characters/kenji/death/death_3.png">
-<img id="e1Death4" class="e1Death" src="./characters/kenji/death/death_4.png">
-<img id="e1Death5" class="e1Death" src="./characters/kenji/death/death_5.png">
+<img  class="kenjiDeath" src="./characters/kenji/death/death_0.png">
+<img  class="kenjiDeath" src="./characters/kenji/death/death_1.png">
+<img  class="kenjiDeath" src="./characters/kenji/death/death_2.png">
+<img  class="kenjiDeath" src="./characters/kenji/death/death_3.png">
+<img  class="kenjiDeath" src="./characters/kenji/death/death_4.png">
+<img  class="kenjiDeath" src="./characters/kenji/death/death_5.png">
+<!-- AKAZA -->
+
+<img  class="akazaIdle" src="./characters/akaza/idle/idle.png">
+
+
+
+
+
+
+
 
 
 <h2 id="indicator"></h2>
@@ -455,16 +468,20 @@ body{
 
     //Turn this to true to turn on Debugging Visualizer
     let debug = false;
-    // let debug = true;
+        // debug = true;
     const globalCooldown = 10000;
     let countdownDuration = 60;
     let winnerDeclared = false;
     let borderRight = window.innerWidth;
     let chosenCharacter = "samurai";
-    // let chosenCharacter = "knight";
+        // chosenCharacter = "knight";
+    let chosenEnemy = "kenji";
+        // chosenEnemy = "akaza";
+        // chosenEnemy = "samurai";
+        console.log('chosenEnemy: ', chosenEnemy);
 
     scale = setScale();
-    scale = 1;
+    scale = 1.3;
     console.log('scale: ', scale);
 
     //Character width and height
@@ -509,28 +526,26 @@ body{
 
     const keysPressed = new Set(); // Track keys pressed
 
-    let p1MoveFCounter = 0;  // Keeps track of the current frame
-    let e1MoveFCounter = 0;  // Keeps track of the current frame
+    let pMoveFCounter = 0;  // Keeps track of the current frame
+    let eMoveFCounter = 0;  // Keeps track of the current frame
 
-    let p1AttackFCounter = 0;  // Keeps track of the current frame
-    let p2AttackFCounter = 0;  // Keeps track of the current frame
-    let e1AttackFCounter = 0;  // Keeps track of the current frame
+    let pAttackFCounter = 0;  // Keeps track of the current frame
+    let eAttackFCounter = 0;  // Keeps track of the current frame
 
-    let p1DeathFCounter = 0;
-    let e1DeathFCounter = 0;
+    let pDeathFCounter = 0;
+    let eDeathFCounter = 0;
     
-    let p1TakeHitFCounter = 0;
-    let e1TakeHitFCounter = 0;
+    let pTakeHitFCounter = 0;
+    let eTakeHitFCounter = 0;
 
-    function User(name,x,y,dpa,character) {
+    function User(name,x,y,dpa,maxHealth) {
 
         this.name = name;
-        this.health = 100;
         this.x = x;
         this.y = y;
         this.dpa = dpa;
-        this.character = character;
-        console.log('this.character: ', this.character);
+        this.maxHealth = maxHealth;
+        this.currentHealth = maxHealth;
 
         let isAttacking = false;
         let isTakingHit = false;
@@ -614,14 +629,18 @@ body{
             if(!winnerDeclared){
                 this.isTakingHit = true;
                 setTimeout(() => {                
-                    this.health -= dpa;
-                    healthBarEnemy.style.width = (enemy.health) + '%';
-                    healthBarPlayer.style.width = (player.health) + '%';
+                    this.currentHealth -= dpa;
+
+                    console.log('player.currentHealth: ', player.currentHealth);
+                    console.log('enemy.currentHealth: ', enemy.currentHealth);
+
+                    healthBarEnemy.style.width = (enemy.currentHealth/enemy.maxHealth)*100 + '%';
+                    healthBarPlayer.style.width = (player.currentHealth/player.maxHealth)*100 + '%';
                 }, 50);
                 setTimeout(() => {
                     this.isTakingHit = false;
-                    p1TakeHitFCounter = 0;
-                    e1TakeHitFCounter = 0;
+                    pTakeHitFCounter = 0;
+                    eTakeHitFCounter = 0;
                 }, 400); 
             }
         }
@@ -695,31 +714,21 @@ body{
 
     }
     // player spawn locator
-    let eXSpawn = Math.floor(bgWidth/3);
-    let pXSpawn = -30-(210/scale);
-
-    let pYOffset = height-84*scale;
-    let eYOffset = height-79*scale;
- 
-    eYSpawn = bgHeight - eYOffset;
-    pYSpawn = bgHeight - pYOffset;
+    // let eXSpawn = Math.floor(bgWidth/3);
+    // let pXSpawn = Math.floor(bgWidth/3);
+    let eXSpawn = bgWidth-(width/1.3);
+    let pXSpawn = 0 - 140;
+    //Why 140? Because widht/1.3 is 461 for enemy so for
+    //the other side 461-600 = 139 or 140
 
 
-    // console.log('eYSpawn: ', eYSpawn);
+    let eYSpawn = bgHeight-height;
+    let pYSpawn = bgHeight-height;
 
     //Character Select Init
-    const player = new User('player',pXSpawn,pYSpawn,25,"default");
-    const enemy = new User('enemy',eXSpawn,eYSpawn,25,"default");
-
-    //For Setting Correct Frame MS
-    if(chosenCharacter === "knight"){
-        player.character = "knight";
-        console.log('player.charcter: ', player.character);
-    }else if(chosenCharacter === "samurai"){
-        player.character = "samurai";
-        console.log('player.charcter: ', player.character);
-    }
-    enemy.character = "kenji";
+    //Format = (player or enemy , xcord , ycord , damage , health )
+    const player = new User('player',pXSpawn,pYSpawn,25,100);
+    const enemy = new User('enemy',eXSpawn,eYSpawn,25,100);
 
     window.onload = init;
 
@@ -758,36 +767,55 @@ body{
         glareClassE = document.querySelector('.glareE');
         glareClassE.style.display = "none"; // Removes from layout
 
-        //Idle Frame
-        p1Idle = document.getElementById("p1Idle");
-        p2Idle = document.getElementById("p2Idle");
-        e1Idle = document.getElementById("e1Idle");
-
-        //Attack Frames
-        p1AttackF =  document.querySelectorAll(".p1Attack");
-        p2AttackF =  document.querySelectorAll(".p2Attack");
-        e1AttackF = document.querySelectorAll(".e1Attack");
-
-        //Fall Frame
-        p1FallF = document.getElementById("p1Fall");
-        e1FallF = document.getElementById("e1Fall");
-
-        //Move Frames
-        p1MoveF = document.querySelectorAll(".p1Run");
-        e1MoveF = document.querySelectorAll(".e1Run");
-
-        //Take Hit Frames
-        p1TakeHitF = document.querySelectorAll(".p1TakeHit");
-        e1TakeHitF = document.querySelectorAll(".e1TakeHit");
-
-        //Death Frames
-        p1DeathF = document.querySelectorAll(".p1Death");
-        e1DeathF = document.querySelectorAll(".e1Death");
-
+        //LOAD FRAMES CHARACTER
+        if(chosenCharacter === "samurai"){
+            pIdle = document.querySelector(".samuraiIdle");
+            pAttackF =  document.querySelectorAll(".samuraiAttack");
+            pFallF = document.querySelector(".samuraiFall");
+            pMoveF = document.querySelectorAll(".samuraiRun");
+            pTakeHitF = document.querySelectorAll(".samuraiTakeHit");
+            pDeathF = document.querySelectorAll(".samuraiDeath");
+            
+        }else if(chosenCharacter === "knight"){
+            pIdle = document.querySelector(".knightIdle");
+            pAttackF =  document.querySelectorAll(".knightAttack");
+            pFallF = document.querySelector(".knightFall");
+            pMoveF = document.querySelectorAll(".knightRun");
+            pTakeHitF = document.querySelectorAll(".knightTakeHit");
+            pDeathF = document.querySelectorAll(".knightDeath");
+        }
+        //LOAD FRAMES ENEMY
+        if(chosenEnemy === "kenji"){
+            eIdle = document.querySelector(".kenjiIdle");
+            eAttackF =  document.querySelectorAll(".kenjiAttack");
+            eFallF = document.querySelector(".kenjiFall");
+            eMoveF = document.querySelectorAll(".kenjiRun");
+            eTakeHitF = document.querySelectorAll(".kenjiTakeHit");
+            eDeathF = document.querySelectorAll(".kenjiDeath");
+            console.log("LOADED ENEMY kenji");
+            
+        }else if(chosenEnemy === "samurai"){
+            eIdle = document.querySelector(".samuraiIdle");
+            eAttackF =  document.querySelectorAll(".samuraiAttack");
+            eFallF = document.querySelector(".samuraiFall");
+            eMoveF = document.querySelectorAll(".samuraiRun");
+            eTakeHitF = document.querySelectorAll(".samuraiTakeHit");
+            eDeathF = document.querySelectorAll(".samuraiDeath");
+            console.log("LOADED ENEMY samurai");
+            
+        }
+        else if(chosenCharacter === "akaza"){
+            eIdle = document.querySelector(".akazaIdle");
+            eAttackF =  document.querySelectorAll(".akazaAttack");
+            eFallF = document.querySelector(".akazaFall");
+            eMoveF = document.querySelectorAll(".akazaRun");
+            eTakeHitF = document.querySelectorAll(".akazaTakeHit");
+            eDeathF = document.querySelectorAll(".akazaDeath");
+            console.log("LOADED ENEMY akaza");
+        }
+        
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-        // canvas.width = 300;
-        // canvas.height = 800 ;
 
 
         // Track keydown and keyup events
@@ -803,38 +831,36 @@ body{
         // Moving and Attacking Frame Interval
         setInterval(() => {
             if(player.isMoving){
-                p1MoveFCounter = (p1MoveFCounter + 1) % (p1MoveF.length);  
+                pMoveFCounter = (pMoveFCounter + 1) % (pMoveF.length);  
             }
             if(enemy.isMoving){
-                e1MoveFCounter = (e1MoveFCounter + 1) % (e1MoveF.length);  
+                eMoveFCounter = (eMoveFCounter + 1) % (eMoveF.length);  
             }
             if(enemy.isAttacking){
-                e1AttackFCounter = (e1AttackFCounter+1) % (e1AttackF.length);
+                eAttackFCounter = (eAttackFCounter+1) % (eAttackF.length);
             }
             if(player.isAttacking){
-                p1AttackFCounter = (p1AttackFCounter+1) % (p1AttackF.length);
-                // console.log('p1AttackFCounter: ', p1AttackFCounter);
-                p2AttackFCounter = (p2AttackFCounter+1) % (p2AttackF.length);
-                console.log('p2AttackFCounter: ', p2AttackFCounter);
+                pAttackFCounter = (pAttackFCounter+1) % (pAttackF.length);
+
             }
             
         }, 50);
         //Taking Hit Frame Interval
         setInterval(() => {
             if(player.isTakingHit){
-                p1TakeHitFCounter = (p1TakeHitFCounter+1) % (p1TakeHitF.length);
+                pTakeHitFCounter = (pTakeHitFCounter+1) % (pTakeHitF.length);
             }
             if(enemy.isTakingHit){
-                e1TakeHitFCounter = (e1TakeHitFCounter+1) % (e1TakeHitF.length);
+                eTakeHitFCounter = (eTakeHitFCounter+1) % (eTakeHitF.length);
             }
             if(player.isDead){
-                if(p1DeathFCounter < 4){
-                    p1DeathFCounter++;
+                if(pDeathFCounter < 5){
+                    pDeathFCounter++;
                 }
             }
             if(enemy.isDead){
-                if(e1DeathFCounter < 5){
-                    e1DeathFCounter++;
+                if(eDeathFCounter < 5){
+                    eDeathFCounter++;
                 }
             }
         }, 200);
@@ -862,14 +888,8 @@ body{
         characterMovement(player, {left: 'a',right: 'd',attack: 's',jump: 'w',dash: ' ',});
         characterMovement(enemy, {left: 'ArrowLeft',right: 'ArrowRight',attack: 'ArrowDown',jump: 'ArrowUp',dash: 'Enter',});
         
-        switch(chosenCharacter){
-            case "samurai":
-                playerDrawSamurai();
-                break;
-            case "knight":
-                playerDrawKnight();
-                break;
-        }
+        //Render BOTH
+        playerDraw();
         enemyDraw();
 
         if(!winnerDeclared){
@@ -882,7 +902,7 @@ body{
 
         if(debug === true){
             debugPlayerAttackBoxAndHitBox();
-            // debugEnemyAttackBoxAndHitBox();
+            debugEnemyAttackBoxAndHitBox();
             for (let i = 0; i < 8; i++) { // Loop from 0 to 7
                 hitBoxCords[i].style.display = "block";
             }
@@ -895,67 +915,47 @@ body{
         
         window.requestAnimationFrame(gameLoop); // Keep requesting new frames
     }
-    function playerDrawSamurai(){
+    function playerDraw(){
         if (player.isDead){
-            drawDeath(p1DeathF[p1DeathFCounter],player.x,player.y);
+            drawDeath(pDeathF[pDeathFCounter],player.x,player.y);
             return;
         }
         if (player.isAttacking){
-            drawAttack(p1AttackF[p1AttackFCounter],player.x,player.y); 
+            drawAttack(pAttackF[pAttackFCounter],player.x,player.y); 
         }
         if (player.isTakingHit && !player.isAttacking){
-            drawTakeHit(p1TakeHitF[p1TakeHitFCounter],player.x,player.y); 
+            drawTakeHit(pTakeHitF[pTakeHitFCounter],player.x,player.y); 
         }
         else if (player.isMoving && !player.isAttacking) {
-            drawMove(p1MoveF[p1MoveFCounter],player.x,player.y);
+            drawMove(pMoveF[pMoveFCounter],player.x,player.y);
         } 
         else if (player.isFalling) {
-            drawFall(p1FallF,player.x,player.y);
+            drawFall(pFallF,player.x,player.y);
         } 
         else if(!player.isAttacking && !player.isFalling && !player.isMoving && !player.isDashing && !player.isDead) { 
-            drawIdle(p1Idle,player.x,player.y); 
+            drawIdle(pIdle,player.x,player.y,"player"); 
         }
     }
-    function playerDrawKnight(){
-        if (player.isDead){
-            drawDeath(p2DeathF[p2DeathFCounter],player.x,player.y);
-            return;
-        }
-        if (player.isAttacking){
-            drawAttack(p2AttackF[p2AttackFCounter],player.x,player.y); 
-        }
-        if (player.isTakingHit && !player.isAttacking){
-            drawTakeHit(p2TakeHitF[p2TakeHitFCounter],player.x,player.y); 
-        }
-        else if (player.isMoving && !player.isAttacking) {
-            drawMove(p2MoveF[p2MoveFCounter],player.x,player.y);
-        } 
-        else if (player.isFalling) {
-            drawFall(p2FallF,player.x,player.y);
-        } 
-        else if(!player.isAttacking && !player.isFalling && !player.isMoving && !player.isDashing && !player.isDead) { 
-            drawIdle(p2Idle,player.x,player.y); 
-        }
-    }
+
     function enemyDraw(){
         if (enemy.isDead) {
-            drawDeath(e1DeathF[e1DeathFCounter],enemy.x,enemy.y);
+            drawDeath(eDeathF[eDeathFCounter],enemy.x,enemy.y,"enemy");
             return;
         }
         if (enemy.isAttacking){   
-            drawAttack(e1AttackF[e1AttackFCounter],enemy.x,enemy.y); 
+            drawAttack(eAttackF[eAttackFCounter],enemy.x,enemy.y,"enemy"); 
         }
         if (enemy.isTakingHit && !enemy.isAttacking){
-            drawTakeHit(e1TakeHitF[e1TakeHitFCounter],enemy.x,enemy.y); 
+            drawTakeHit(eTakeHitF[eTakeHitFCounter],enemy.x,enemy.y,"enemy"); 
         }
         else if (enemy.isMoving && !enemy.isAttacking) {
-            drawMove(e1MoveF[e1MoveFCounter],enemy.x,enemy.y);
+            drawMove(eMoveF[eMoveFCounter],enemy.x,enemy.y,"enemy");
         } 
         else if (enemy.isFalling) {
-            drawFall(e1FallF,enemy.x,enemy.y);
+            drawFall(eFallF,enemy.x,enemy.y,"enemy");
         } 
         else if(!enemy.isAttacking && !enemy.isFalling && !enemy.isMoving && !enemy.isDashing && !enemy.isDead) { 
-            drawIdle(e1Idle,enemy.x,enemy.y); 
+            drawIdle(eIdle,enemy.x,enemy.y,"enemy"); 
         }
     }
 
@@ -984,60 +984,116 @@ body{
     }
 
     function checkHealth(){
-        indicator.innerText = "Enemy:"+enemy.health+" Player:"+player.health;
-        if(enemy.health <= 0 ){
+        indicator.innerText = "Enemy:"+enemy.currentHealth+" Player:"+player.currentHealth;
+        if(enemy.currentHealth <= 0 ){
             enemy.isDead = true;
             console.log("Enemy Dead");
-            indicator.innerText = "Enemy Dead";   
+            indicator.innerText = "Enemy Dead";
+            healthBarEnemy.style.width = 0;   
             winnerDeclared = true;
             showResult("Player");
         }
-        if(player.health <= 0){
+        if(player.currentHealth <= 0){
             player.isDead = true;
             console.log("Player Dead");
             indicator.innerText = "Player Dead";
+            healthBarPlayer.style.width = 0;   
             winnerDeclared = true;
             showResult("Enemy");
         }
-        if(enemy.health === player.health && countdownDuration === 0){
+        if(enemy.currentHealth === player.currentHealth && countdownDuration === 0){
             console.log('showResult: Tie');
             winnerDeclared = true;
             showResult("Tie");
         }
-        if(enemy.health < player.health && countdownDuration === 0){
+        if(enemy.currentHealth < player.currentHealth && countdownDuration === 0){
             winnerDeclared = true;
             showResult("Player");
         }
-        if(player.health < enemy.health && countdownDuration === 0){
+        if(player.currentHealth < enemy.currentHealth && countdownDuration === 0){
             winnerDeclared = true;
             showResult("Enemy");
         }
     }
 
+    //FLip when enemy calls this function
+    function drawIdle(charImg, x, y, name) {
+        if(name === "enemy"){
+            context.save();
+            context.translate(x + width, y);
+            context.scale(-1, 1);
+            context.drawImage(charImg, 0, 0, width, height);
+            context.restore();
+        }else{
+            context.drawImage(charImg, x, y, width, height);
+            
+        }
 
-    function drawIdle(charImg,x, y) {
-        context.drawImage(charImg, x, y,width,height); // Draw the scaled image
-        // context.drawImage(charImg, x, y); // Draw the scaled image
     }
 
-    function drawAttack(charAttack,x, y) {
-        context.drawImage(charAttack, x, y,width,height); // Draw the scaled image
+    function drawAttack(charAttack,x, y, name) {
+        if(name === "enemy"){
+            context.save();
+            context.translate(x + width, y);
+            context.scale(-1, 1);
+            context.drawImage(charAttack, 0, 0, width, height);
+            context.restore();
+        }else{
+            context.drawImage(charAttack, x, y, width, height);
+            
+        }
     }
     
-    function drawTakeHit(charTakeHit,x, y) {
-        context.drawImage(charTakeHit, x, y,width,height); // Draw the scaled image
-    }
-
-    function drawMove(charImgMove,x,y){
-        context.drawImage(charImgMove, x, y,width,height); // Draw the scaled image
-    }
-
-    function drawFall(charFall,x,y){
-        context.drawImage(charFall, x, y,width,height); // Draw the scaled image
+    function drawTakeHit(charTakeHit,x, y, name) {
+        if(name === "enemy"){
+            context.save();
+            context.translate(x + width, y);
+            context.scale(-1, 1);
+            context.drawImage(charTakeHit, 0, 0,width,height); // Draw the scaled image
+            context.restore();
+        }else{
+            context.drawImage(charTakeHit, x, y,width,height); // Draw the scaled image
+            
+        }
     }
     
-    function drawDeath(charDeath,x,y){
-        context.drawImage(charDeath, x, y,width,height); // Draw the scaled image
+    function drawMove(charImgMove,x,y, name){
+        if(name === "enemy"){
+            context.save();
+            context.translate(x + width, y);
+            context.scale(-1, 1);
+            context.drawImage(charImgMove, 0, 0,width,height); // Draw the scaled image
+            context.restore();
+        }else{
+            context.drawImage(charImgMove, x, y,width,height); // Draw the scaled image
+            
+        }
+    }
+    
+    function drawFall(charFall,x,y, name){
+        if(name === "enemy"){
+            context.save();
+            context.translate(x + width, y);
+            context.scale(-1, 1);
+            context.drawImage(charFall, 0, 0,width,height); // Draw the scaled image
+            context.restore();
+        }else{
+            context.drawImage(charFall, x, y,width,height); // Draw the scaled image
+            
+        }
+    }
+    
+    function drawDeath(charDeath,x,y, name){
+        if(name === "enemy"){
+            context.save();
+            context.translate(x + width, y);
+            context.scale(-1, 1);
+            context.drawImage(charDeath, 0, 0,width,height); // Draw the scaled image
+            context.restore();
+        }else{
+            context.drawImage(charDeath, x, y,width,height); // Draw the scaled image
+            
+        }
     }
     
     function getPlayerAttackBoxAndHitBox(){
@@ -1051,10 +1107,10 @@ body{
         //Bottom Y
         player.hitBoxYB = Math.floor(player.y+height);
         
-        player.attackRangeS= player.hitBoxXR;
-        player.attackRangeE = player.attackRangeS + (width/2.7);
+        player.attackRangeS = player.hitBoxXR;
+        player.attackRangeE = player.attackRangeS + (width/3);
         player.attackRangeT = player.hitBoxYT;
-        player.attackRangeB =player.hitBoxYB;
+        player.attackRangeB = player.hitBoxYB;
     }
     function debugPlayerAttackBoxAndHitBox(){
         //Player AttackBox
@@ -1109,23 +1165,21 @@ body{
     
     }
     function getEnemyAttackBoxAndHitBox(){
-        // enemy.attackRangeS= enemy.hitBoxXL;
-        enemy.attackRangeS= (enemy.x+(scale*87));
-
-        // enemy.attackRangeE = enemy.attackRangeS -230;
-        enemy.attackRangeE = enemy.attackRangeS -(79*scale);
-
-        enemy.attackRangeT = enemy.hitBoxYT;
-        enemy.attackRangeB =enemy.hitBoxYB;
 
         //Left X 
-        enemy.hitBoxXL = Math.floor(enemy.x+(87*scale));
+        enemy.hitBoxXL = Math.floor(enemy.x+(width/2.5));
         //Right X
-        enemy.hitBoxXR = Math.floor(enemy.x+width-(scale*87));
+        enemy.hitBoxXR = Math.floor(enemy.x+(width/1.75));
         //Top Y
-        enemy.hitBoxYT = Math.floor(enemy.y+(75*scale));
+        enemy.hitBoxYT = Math.floor(enemy.y+(height/2));
         //Bottom Y
-        enemy.hitBoxYB = Math.floor(enemy.y+height-(scale*75));
+        enemy.hitBoxYB = Math.floor(enemy.y+height);
+        
+        enemy.attackRangeS = enemy.hitBoxXL;
+        enemy.attackRangeE = enemy.attackRangeS - (width/3);
+        enemy.attackRangeT = enemy.hitBoxYT;
+        enemy.attackRangeB = enemy.hitBoxYB;
+
 
     }
     function debugEnemyAttackBoxAndHitBox(){
@@ -1145,25 +1199,27 @@ body{
             context.lineWidth = "6";
             context.strokeStyle = "blue";
         //Left X 
-            context.strokeRect((enemy.x+(87*scale)),enemy.y+(height/2-6), 1,1);
-            hitBoxCords[4].style.top = enemy.hitBoxYT+(20*scale)+"px";
-            hitBoxCords[4].style.left = enemy.hitBoxXL-(3*scale)+"px";
-            hitBoxCords[4].innerText = enemy.hitBoxXL;
-        //Right X
-            context.strokeRect((enemy.x+width-(scale*87)),enemy.y+(height/2-6), 1,1);
-            hitBoxCords[5].style.top = enemy.hitBoxYT+(20*scale)+"px";
-            hitBoxCords[5].style.left = enemy.hitBoxXR-(3*scale)+"px";
-            hitBoxCords[5].innerText = enemy.hitBoxXR;
-        //Top Y
-            context.strokeRect((enemy.x+(width/2-6)),enemy.hitBoxYT, 1,1);
-            hitBoxCords[6].style.top = enemy.hitBoxYT-(8*scale)+"px";
-            hitBoxCords[6].style.left = enemy.hitBoxXL+(14*scale)+"px";
-            hitBoxCords[6].innerText = enemy.hitBoxYT;
-        //Bottom Y
-            context.strokeRect((enemy.x+(width/2-6)),enemy.hitBoxYB, 1,1);
-            hitBoxCords[7].style.top = enemy.hitBoxYB-(8*scale)+"px";
-            hitBoxCords[7].style.left = enemy.hitBoxXL+(14*scale)+"px";
-            hitBoxCords[7].innerText = enemy.hitBoxYB;
+            context.strokeRect(enemy.hitBoxXL,enemy.y+(height/1.3), 1,1);
+            hitBoxCords[2].style.top = enemy.y+(height/1.3)+"px";
+            hitBoxCords[2].style.left = enemy.hitBoxXL+"px";
+            hitBoxCords[2].innerText = enemy.hitBoxXL;
+        // //Right X
+            context.strokeRect(enemy.hitBoxXR,enemy.y+(height/1.3), 1,1);
+            hitBoxCords[3].style.top = enemy.y+(height/1.3)+"px";
+            hitBoxCords[3].style.left = enemy.hitBoxXR+"px";
+            hitBoxCords[3].innerText = enemy.hitBoxXR;
+            
+        // //Top Y
+            context.strokeRect(enemy.x+(width/2),enemy.hitBoxYT, 1,1);
+            hitBoxCords[0].style.top = enemy.hitBoxYT+"px";
+            hitBoxCords[0].style.left = enemy.x+(width/2)+"px";
+            hitBoxCords[0].innerText = enemy.hitBoxYT;
+
+        // //Bottom Y
+            context.strokeRect((enemy.x+(width/2)),enemy.hitBoxYB, 1,1);
+            hitBoxCords[1].style.top = enemy.hitBoxYB+"px";
+            hitBoxCords[1].style.left = enemy.x+(width/2)+"px";
+            hitBoxCords[1].innerText = enemy.hitBoxYB;
             
         pEnemyHitBoxBox.innerText = "Left X:"+enemy.hitBoxXL+"\n"+"Right X:"+enemy.hitBoxXR+"\n"+"Top Y:"+enemy.hitBoxYT+"\n"+"Bottom Y:"+enemy.hitBoxYB;    
 
