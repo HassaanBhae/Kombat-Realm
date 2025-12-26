@@ -74,6 +74,7 @@ body{
     font-weight: 900;
     display: none;
 }
+img,
 .samuraiIdle,
 .knightIdle,
 .kenjiIdle,
@@ -448,13 +449,34 @@ body{
 
 <img  class="akazaIdle" src="./characters/akaza/idle/idle.png">
 
+<img  class="akazaAttack"src="./characters/akaza/attack/attack_0.png">
+<img  class="akazaAttack"src="./characters/akaza/attack/attack_1.png">
+<img  class="akazaAttack"src="./characters/akaza/attack/attack_2.png">
+<img  class="akazaAttack"src="./characters/akaza/attack/attack_3.png">
 
+<img  class="akazaRun" src="./characters/akaza/run/run_0.png">
+<img  class="akazaRun" src="./characters/akaza/run/run_1.png">
+<img  class="akazaRun" src="./characters/akaza/run/run_2.png">
+<img  class="akazaRun" src="./characters/akaza/run/run_3.png">
+<img  class="akazaRun" src="./characters/akaza/run/run_4.png">
+<img  class="akazaRun" src="./characters/akaza/run/run_5.png">
+<img  class="akazaRun" src="./characters/akaza/run/run_6.png">
+<img  class="akazaRun" src="./characters/akaza/run/run_7.png">
 
+<img  class="akazaFall" src="./characters/akaza/fall/fall.png">
 
+<img  class="akazaTakeHit" src="./characters/akaza/takeHit/takeHit_0.png">
+<img  class="akazaTakeHit" src="./characters/akaza/takeHit/takeHit_1.png">
+<img  class="akazaTakeHit" src="./characters/akaza/takeHit/takeHit_2.png">
 
+<img  class="akazaDeath" src="./characters/akaza/death/death_0.png">
+<img  class="akazaDeath" src="./characters/akaza/death/death_1.png">
+<img  class="akazaDeath" src="./characters/akaza/death/death_2.png">
+<img  class="akazaDeath" src="./characters/akaza/death/death_3.png">
+<img  class="akazaDeath" src="./characters/akaza/death/death_4.png">
+<img  class="akazaDeath" src="./characters/akaza/death/death_5.png">
 
-
-
+<!-- /////////////////////////////////////////////////////////////// -->
 
 <h2 id="indicator"></h2>
 <h2 id="resultIndicator">Player Won</h2>
@@ -475,8 +497,8 @@ body{
     let borderRight = window.innerWidth;
     let chosenCharacter = "samurai";
         // chosenCharacter = "knight";
-    let chosenEnemy = "kenji";
-        // chosenEnemy = "akaza";
+    // let chosenEnemy = "kenji";
+        chosenEnemy = "akaza";
         // chosenEnemy = "samurai";
         console.log('chosenEnemy: ', chosenEnemy);
 
@@ -804,7 +826,7 @@ body{
             console.log("LOADED ENEMY samurai");
             
         }
-        else if(chosenCharacter === "akaza"){
+        else if(chosenEnemy === "akaza"){
             eIdle = document.querySelector(".akazaIdle");
             eAttackF =  document.querySelectorAll(".akazaAttack");
             eFallF = document.querySelector(".akazaFall");
