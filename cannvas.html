@@ -357,7 +357,7 @@ img,
 <p class="hitBoxCords" id="YB">YB</p>
 
 <!-- //Player -->
-<img  class="samuraiIdle" src="./characters/samurai/idle/idle.png">
+<img  class="samuraiIdle" src="./characters/samurai/idle/idle_0.png">
 
 <img  class="samuraiAttack"src="./characters/samurai/attack/attack_0.png">
 <img  class="samuraiAttack"src="./characters/samurai/attack/attack_1.png">
@@ -387,37 +387,37 @@ img,
 <img  class="samuraiDeath" src="./characters/samurai/death/death_5.png">
 
 <!-- //Player2 -->
-<img  class="knightIdle" src="./characters/knight/idle/idle.png">
+<img  class="knightIdle" src="./characters/knight/idle/idle_0.png">
 
 <img  class="knightAttack"src="./characters/knight/attack/attack_0.png">
 <img  class="knightAttack"src="./characters/knight/attack/attack_1.png">
 <img  class="knightAttack"src="./characters/knight/attack/attack_2.png">
 <img  class="knightAttack"src="./characters/knight/attack/attack_3.png">
 
-<!-- <img id="RunP20" class="run" src="./knight/run/Run_0.png">
-<img id="RunP21" class="run" src="./knight/run/Run_1.png">
-<img id="RunP22" class="run" src="./knight/run/Run_2.png">
-<img id="RunP23" class="run" src="./knight/run/Run_3.png">
-<img id="RunP24" class="run" src="./knight/run/Run_4.png">
-<img id="RunP25" class="run" src="./knight/run/Run_5.png">
-<img id="RunP26" class="run" src="./knight/run/Run_6.png">
-<img id="RunP27" class="run" src="./knight/run/Run_7.png"> -->
+<img  class="knightRun" src="./characters/knight/run/run_0.png">
+<img  class="knightRun" src="./characters/knight/run/run_1.png">
+<img  class="knightRun" src="./characters/knight/run/run_2.png">
+<img  class="knightRun" src="./characters/knight/run/run_3.png">
+<img  class="knightRun" src="./characters/knight/run/run_4.png">
+<img  class="knightRun" src="./characters/knight/run/run_5.png">
+<img  class="knightRun" src="./characters/knight/run/run_6.png">
+<img  class="knightRun" src="./characters/knight/run/run_7.png">
 
-<!-- <img id="fallP2" src="./knight/fall/Fall.png">
+<img  class="knightFall" src="./characters/knight/fall/fall.png">
 
-<img id="TakeHitP20" class="TakeHit" src="./knight/TakeHit/TakeHit_0.png">
-<img id="TakeHitP21" class="TakeHit" src="./knight/TakeHit/TakeHit_1.png">
-<img id="TakeHitP22" class="TakeHit" src="./knight/TakeHit/TakeHit_2.png">
+<img  class="knightTakeHit" src="./characters/knight/takeHit/takeHit_0.png">
+<img  class="knightTakeHit" src="./characters/knight/takeHit/takeHit_1.png">
+<img  class="knightTakeHit" src="./characters/knight/takeHit/takeHit_2.png">
 
-<img id="DeathP20" class="Death" src="./knight/Death/Death_0.png">
-<img id="DeathP21" class="Death" src="./knight/Death/Death_1.png">
-<img id="DeathP22" class="Death" src="./knight/Death/Death_2.png">
-<img id="DeathP23" class="Death" src="./knight/Death/Death_3.png">
-<img id="DeathP24" class="Death" src="./knight/Death/Death_4.png">
-<img id="DeathP25" class="Death" src="./knight/Death/Death_5.png"> -->
+<img  class="knightDeath" src="./characters/knight/death/death_0.png">
+<img  class="knightDeath" src="./characters/knight/death/death_1.png">
+<img  class="knightDeath" src="./characters/knight/death/death_2.png">
+<img  class="knightDeath" src="./characters/knight/death/death_3.png">
+<img  class="knightDeath" src="./characters/knight/death/death_4.png">
+<img  class="knightDeath" src="./characters/knight/death/death_5.png">
 
 <!-- //Enemy -->
-<img  class="kenjiIdle" src="./characters/kenji/idle/idle.png">
+<img  class="kenjiIdle" src="./characters/kenji/idle/idle_0.png">
 
 <img  class="kenjiAttack"src="./characters/kenji/attack/attack_0.png">
 <img  class="kenjiAttack"src="./characters/kenji/attack/attack_1.png">
@@ -447,7 +447,7 @@ img,
 <img  class="kenjiDeath" src="./characters/kenji/death/death_5.png">
 <!-- AKAZA -->
 
-<img  class="akazaIdle" src="./characters/akaza/idle/idle.png">
+<img  class="akazaIdle" src="./characters/akaza/idle/idle_0.png">
 
 <img  class="akazaAttack"src="./characters/akaza/attack/attack_0.png">
 <img  class="akazaAttack"src="./characters/akaza/attack/attack_1.png">
@@ -495,8 +495,8 @@ img,
     let countdownDuration = 60;
     let winnerDeclared = false;
     let borderRight = window.innerWidth;
-    let chosenCharacter = "samurai";
-        // chosenCharacter = "knight";
+    // let chosenCharacter = "samurai";
+    let chosenCharacter = "knight";
     // let chosenEnemy = "kenji";
         chosenEnemy = "akaza";
         // chosenEnemy = "samurai";
@@ -800,7 +800,7 @@ img,
             
         }else if(chosenCharacter === "knight"){
             pIdle = document.querySelector(".knightIdle");
-            pAttackF =  document.querySelectorAll(".knightAttack");
+            pAttackF = document.querySelectorAll(".knightAttack");
             pFallF = document.querySelector(".knightFall");
             pMoveF = document.querySelectorAll(".knightRun");
             pTakeHitF = document.querySelectorAll(".knightTakeHit");
@@ -1071,9 +1071,11 @@ img,
             context.save();
             context.translate(x + width, y);
             context.scale(-1, 1);
+            console.log('charTakeHit: ', charTakeHit);
             context.drawImage(charTakeHit, 0, 0,width,height); // Draw the scaled image
             context.restore();
         }else{
+            console.log('charTakeHit: ', charTakeHit);
             context.drawImage(charTakeHit, x, y,width,height); // Draw the scaled image
             
         }
