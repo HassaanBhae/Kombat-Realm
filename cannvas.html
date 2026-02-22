@@ -356,7 +356,7 @@ img,
 <p class="hitBoxCords" id="YT">YT</p>
 <p class="hitBoxCords" id="YB">YB</p>
 
-<!-- //Player -->
+<!-- //Samurai -->
 <img  class="samuraiIdle" src="./characters/samurai/idle/idle_0.png">
 
 <img  class="samuraiAttack"src="./characters/samurai/attack/attack_0.png">
@@ -386,7 +386,7 @@ img,
 <img  class="samuraiDeath" src="./characters/samurai/death/death_4.png">
 <img  class="samuraiDeath" src="./characters/samurai/death/death_5.png">
 
-<!-- //Player2 -->
+<!-- //Knight -->
 <img  class="knightIdle" src="./characters/knight/idle/idle_0.png">
 
 <img  class="knightAttack"src="./characters/knight/attack/attack_0.png">
@@ -416,7 +416,7 @@ img,
 <img  class="knightDeath" src="./characters/knight/death/death_4.png">
 <img  class="knightDeath" src="./characters/knight/death/death_5.png">
 
-<!-- //Enemy -->
+<!-- //Kenji -->
 <img  class="kenjiIdle" src="./characters/kenji/idle/idle_0.png">
 
 <img  class="kenjiAttack"src="./characters/kenji/attack/attack_0.png">
@@ -445,8 +445,8 @@ img,
 <img  class="kenjiDeath" src="./characters/kenji/death/death_3.png">
 <img  class="kenjiDeath" src="./characters/kenji/death/death_4.png">
 <img  class="kenjiDeath" src="./characters/kenji/death/death_5.png">
-<!-- AKAZA -->
 
+<!-- AKAZA -->
 <img  class="akazaIdle" src="./characters/akaza/idle/idle_0.png">
 
 <img  class="akazaAttack"src="./characters/akaza/attack/attack_0.png">
@@ -495,12 +495,16 @@ img,
     let countdownDuration = 60;
     let winnerDeclared = false;
     let borderRight = window.innerWidth;
+    // <------------------ CHARACTER SELECT ------------------->
     // let chosenCharacter = "samurai";
+    // let chosenCharacter = "kenji";
     let chosenCharacter = "knight";
+    // let chosenCharacter = "akaza";
+    // <------------------ ENEMY SELECT ------------------->
+    //let chosenEnemy = "samurai";
     // let chosenEnemy = "kenji";
-        chosenEnemy = "akaza";
-        // chosenEnemy = "samurai";
-        console.log('chosenEnemy: ', chosenEnemy);
+    //let chosenEnemy = "knight";
+    let chosenEnemy = "akaza";
 
     scale = setScale();
     scale = 1.3;
@@ -806,6 +810,22 @@ img,
             pTakeHitF = document.querySelectorAll(".knightTakeHit");
             pDeathF = document.querySelectorAll(".knightDeath");
         }
+        if(chosenCharacter === "kenji"){
+            pIdle = document.querySelector(".kenjiIdle");
+            pAttackF =  document.querySelectorAll(".kenjiAttack");
+            pFallF = document.querySelector(".kenjiFall");
+            pMoveF = document.querySelectorAll(".kenjiRun");
+            pTakeHitF = document.querySelectorAll(".kenjiTakeHit");
+            pDeathF = document.querySelectorAll(".kenjiDeath");
+            
+        }else if(chosenCharacter === "akaza"){
+            pIdle = document.querySelector(".akazaIdle");
+            pAttackF = document.querySelectorAll(".akazaAttack");
+            pFallF = document.querySelector(".akazaFall");
+            pMoveF = document.querySelectorAll(".akazaRun");
+            pTakeHitF = document.querySelectorAll(".akazaTakeHit");
+            pDeathF = document.querySelectorAll(".akazaDeath");
+        }
         //LOAD FRAMES ENEMY
         if(chosenEnemy === "kenji"){
             eIdle = document.querySelector(".kenjiIdle");
@@ -834,6 +854,15 @@ img,
             eTakeHitF = document.querySelectorAll(".akazaTakeHit");
             eDeathF = document.querySelectorAll(".akazaDeath");
             console.log("LOADED ENEMY akaza");
+        }
+        else if(chosenEnemy === "knight"){
+            eIdle = document.querySelector(".knightIdle");
+            eAttackF =  document.querySelectorAll(".knightAttack");
+            eFallF = document.querySelector(".knightFall");
+            eMoveF = document.querySelectorAll(".knightRun");
+            eTakeHitF = document.querySelectorAll(".knightTakeHit");
+            eDeathF = document.querySelectorAll(".knightDeath");
+            console.log("LOADED ENEMY knight");
         }
         
         canvas.width = window.innerWidth;
