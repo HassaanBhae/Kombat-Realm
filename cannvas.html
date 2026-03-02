@@ -569,6 +569,37 @@ img,
 <img  class="lawDeath" src="./characters/law/death/death_5.png">
 
 
+<!-- Death -->
+<img  class="deathIdle" src="./characters/death/idle/idle_0.png">
+
+<img  class="deathAttack"src="./characters/death/attack/attack_0.png">
+<img  class="deathAttack"src="./characters/death/attack/attack_1.png">
+<img  class="deathAttack"src="./characters/death/attack/attack_2.png">
+<img  class="deathAttack"src="./characters/death/attack/attack_3.png">
+
+<img  class="deathRun" src="./characters/death/run/run_0.png">
+<img  class="deathRun" src="./characters/death/run/run_1.png">
+<img  class="deathRun" src="./characters/death/run/run_2.png">
+<img  class="deathRun" src="./characters/death/run/run_3.png">
+<img  class="deathRun" src="./characters/death/run/run_4.png">
+<img  class="deathRun" src="./characters/death/run/run_5.png">
+<img  class="deathRun" src="./characters/death/run/run_6.png">
+<img  class="deathRun" src="./characters/death/run/run_7.png">
+
+<img  class="deathFall" src="./characters/death/fall/fall_0.png">
+
+<img  class="deathTakeHit" src="./characters/death/takeHit/takeHit_0.png">
+<img  class="deathTakeHit" src="./characters/death/takeHit/takeHit_1.png">
+<img  class="deathTakeHit" src="./characters/death/takeHit/takeHit_2.png">
+
+<img  class="deathDeath" src="./characters/death/death/death_0.png">
+<img  class="deathDeath" src="./characters/death/death/death_1.png">
+<img  class="deathDeath" src="./characters/death/death/death_2.png">
+<img  class="deathDeath" src="./characters/death/death/death_3.png">
+<img  class="deathDeath" src="./characters/death/death/death_4.png">
+<img  class="deathDeath" src="./characters/death/death/death_5.png">
+
+
 
 
 
@@ -599,7 +630,8 @@ img,
     // let chosenCharacter = "akaza";
     // let chosenCharacter = "anakin";
     // let chosenCharacter = "rambo";
-    let chosenCharacter = "law";
+    // let chosenCharacter = "law";
+    let chosenCharacter = "death";
     // <------------------ ENEMY SELECT ------------------->
     // let chosenEnemy = "samurai";
     // let chosenEnemy = "kenji";
@@ -607,7 +639,8 @@ img,
     // let chosenEnemy = "akaza";
     // let chosenEnemy = "anakin";
     // let chosenEnemy = "rambo";
-    let chosenEnemy = "law";
+    // let chosenEnemy = "law";
+    let chosenEnemy = "death";
 
     scale = setScale();
     scale = 1.3;
@@ -948,6 +981,13 @@ img,
             pMoveF = document.querySelectorAll(".lawRun");
             pTakeHitF = document.querySelectorAll(".lawTakeHit");
             pDeathF = document.querySelectorAll(".lawDeath");
+        }else if(chosenCharacter === "death"){
+            pIdle = document.querySelector(".deathIdle");
+            pAttackF = document.querySelectorAll(".deathAttack");
+            pFallF = document.querySelector(".deathFall");
+            pMoveF = document.querySelectorAll(".deathRun");
+            pTakeHitF = document.querySelectorAll(".deathTakeHit");
+            pDeathF = document.querySelectorAll(".deathDeath");
         }
         //LOAD FRAMES ENEMY
         if(chosenEnemy === "kenji"){
@@ -1009,6 +1049,13 @@ img,
             eMoveF = document.querySelectorAll(".lawRun");
             eTakeHitF = document.querySelectorAll(".lawTakeHit");
             eDeathF = document.querySelectorAll(".lawDeath");
+        }else if(chosenCharacter === "death"){
+            eIdle = document.querySelector(".deathIdle");
+            eAttackF = document.querySelectorAll(".deathAttack");
+            eFallF = document.querySelector(".deathFall");
+            eMoveF = document.querySelectorAll(".deathRun");
+            eTakeHitF = document.querySelectorAll(".deathTakeHit");
+            eDeathF = document.querySelectorAll(".deathDeath");
         }
         
         canvas.width = window.innerWidth;
