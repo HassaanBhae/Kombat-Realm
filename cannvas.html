@@ -724,9 +724,11 @@ img,
         this.dpa = dpa;
         this.maxHealth = maxHealth;
         this.currentHealth = maxHealth;
+        this.stamina = 100;
 
         let isAttacking = false;
         let isTakingHit = false;
+        let isBlocking = false;
         let cooldown = false;
         let dashCooldown = false;
         let isMoving = false;
@@ -804,7 +806,7 @@ img,
         }
 
         this.takeHit = function(dpa){
-            if(!winnerDeclared){
+            if(!winnerDeclared && !this.isBlocking){
                 this.isTakingHit = true;
                 setTimeout(() => {                
                     this.currentHealth -= dpa;
@@ -820,7 +822,20 @@ img,
                     pTakeHitFCounter = 0;
                     eTakeHitFCounter = 0;
                 }, 400); 
+            }else{
+                console.log(this.name+" Blocked the Attack!");
             }
+        }
+
+        this.block = function(){
+            while(this.stamina > 0 && !this.isMoving){
+                this.isBlocking = true;
+                setTimeout(() => {
+                    this.stamina -= 1;
+                }, 100); 
+            }
+            this.isBlocking = false;
+
         }
 
 
@@ -953,7 +968,7 @@ img,
             pMoveF = document.querySelectorAll(".samuraiRun");
             pTakeHitF = document.querySelectorAll(".samuraiTakeHit");
             pDeathF = document.querySelectorAll(".samuraiDeath");
-            pBlockF = document.querySelectorAll(".samuraiBlock");
+            pBlockF = document.querySelector(".samuraiBlock");
             
         }else if(chosenCharacter === "knight"){
             pIdle = document.querySelector(".knightIdle");
@@ -962,7 +977,7 @@ img,
             pMoveF = document.querySelectorAll(".knightRun");
             pTakeHitF = document.querySelectorAll(".knightTakeHit");
             pDeathF = document.querySelectorAll(".knightDeath");
-            pBlockF = document.querySelectorAll(".knightBlock");
+            pBlockF = document.querySelector(".knightBlock");
         }else if(chosenCharacter === "kenji"){
             pIdle = document.querySelector(".kenjiIdle");
             pAttackF =  document.querySelectorAll(".kenjiAttack");
@@ -970,7 +985,7 @@ img,
             pMoveF = document.querySelectorAll(".kenjiRun");
             pTakeHitF = document.querySelectorAll(".kenjiTakeHit");
             pDeathF = document.querySelectorAll(".kenjiDeath");
-            pBlockF = document.querySelectorAll(".kenjiBlock");
+            pBlockF = document.querySelector(".kenjiBlock");
         }else if(chosenCharacter === "akaza"){
             pIdle = document.querySelector(".akazaIdle");
             pAttackF = document.querySelectorAll(".akazaAttack");
@@ -978,7 +993,7 @@ img,
             pMoveF = document.querySelectorAll(".akazaRun");
             pTakeHitF = document.querySelectorAll(".akazaTakeHit");
             pDeathF = document.querySelectorAll(".akazaDeath");
-            pBlockF = document.querySelectorAll(".akazaBlock");
+            pBlockF = document.querySelector(".akazaBlock");
         }else if(chosenCharacter === "anakin"){
             pIdle = document.querySelector(".anakinIdle");
             pAttackF = document.querySelectorAll(".anakinAttack");
@@ -986,7 +1001,7 @@ img,
             pMoveF = document.querySelectorAll(".anakinRun");
             pTakeHitF = document.querySelectorAll(".anakinTakeHit");
             pDeathF = document.querySelectorAll(".anakinDeath");
-            pBlockF = document.querySelectorAll(".anakinBlock");
+            pBlockF = document.querySelector(".anakinBlock");
         }else if(chosenCharacter === "rambo"){
             pIdle = document.querySelector(".ramboIdle");
             pAttackF = document.querySelectorAll(".ramboAttack");
@@ -994,7 +1009,7 @@ img,
             pMoveF = document.querySelectorAll(".ramboRun");
             pTakeHitF = document.querySelectorAll(".ramboTakeHit");
             pDeathF = document.querySelectorAll(".ramboDeath");
-            pBlockF = document.querySelectorAll(".ramboBlock");
+            pBlockF = document.querySelector(".ramboBlock");
         }else if(chosenCharacter === "law"){
             pIdle = document.querySelector(".lawIdle");
             pAttackF = document.querySelectorAll(".lawAttack");
@@ -1002,7 +1017,7 @@ img,
             pMoveF = document.querySelectorAll(".lawRun");
             pTakeHitF = document.querySelectorAll(".lawTakeHit");
             pDeathF = document.querySelectorAll(".lawDeath");
-            pBlockF = document.querySelectorAll(".lawBlock");
+            pBlockF = document.querySelector(".lawBlock");
         }else if(chosenCharacter === "death"){
             pIdle = document.querySelector(".deathIdle");
             pAttackF = document.querySelectorAll(".deathAttack");
@@ -1010,7 +1025,7 @@ img,
             pMoveF = document.querySelectorAll(".deathRun");
             pTakeHitF = document.querySelectorAll(".deathTakeHit");
             pDeathF = document.querySelectorAll(".deathDeath");
-            pBlockF = document.querySelectorAll(".deathBlock");
+            pBlockF = document.querySelector(".deathBlock");
         }
         //LOAD FRAMES ENEMY
         if(chosenEnemy === "kenji"){
@@ -1020,7 +1035,7 @@ img,
             eMoveF = document.querySelectorAll(".kenjiRun");
             eTakeHitF = document.querySelectorAll(".kenjiTakeHit");
             eDeathF = document.querySelectorAll(".kenjiDeath");
-            eBlockF = document.querySelectorAll(".kenjiBlock");
+            eBlockF = document.querySelector(".kenjiBlock");
             console.log("LOADED ENEMY kenji");
             
         }else if(chosenEnemy === "samurai"){
@@ -1030,7 +1045,7 @@ img,
             eMoveF = document.querySelectorAll(".samuraiRun");
             eTakeHitF = document.querySelectorAll(".samuraiTakeHit");
             eDeathF = document.querySelectorAll(".samuraiDeath");
-            eBlockF = document.querySelectorAll(".knightBlock");
+            eBlockF = document.querySelector(".knightBlock");
             console.log("LOADED ENEMY samurai");
             
         }
@@ -1041,7 +1056,7 @@ img,
             eMoveF = document.querySelectorAll(".akazaRun");
             eTakeHitF = document.querySelectorAll(".akazaTakeHit");
             eDeathF = document.querySelectorAll(".akazaDeath");
-            eBlockF = document.querySelectorAll(".akazaBlock");
+            eBlockF = document.querySelector(".akazaBlock");
             console.log("LOADED ENEMY akaza");
         }
         else if(chosenEnemy === "knight"){
@@ -1051,7 +1066,7 @@ img,
             eMoveF = document.querySelectorAll(".knightRun");
             eTakeHitF = document.querySelectorAll(".knightTakeHit");
             eDeathF = document.querySelectorAll(".knightDeath");
-            eBlockF = document.querySelectorAll(".knightBlock");
+            eBlockF = document.querySelector(".knightBlock");
             console.log("LOADED ENEMY knight");
         }
         else if(chosenEnemy === "anakin"){
@@ -1061,7 +1076,7 @@ img,
             eMoveF = document.querySelectorAll(".anakinRun");
             eTakeHitF = document.querySelectorAll(".anakinTakeHit");
             eDeathF = document.querySelectorAll(".anakinDeath");
-            eBlockF = document.querySelectorAll(".anakinBlock");
+            eBlockF = document.querySelector(".anakinBlock");
             console.log("LOADED ENEMY anakin");
         }else if(chosenEnemy === "rambo"){
             eIdle = document.querySelector(".ramboIdle");
@@ -1070,7 +1085,7 @@ img,
             eMoveF = document.querySelectorAll(".ramboRun");
             eTakeHitF = document.querySelectorAll(".ramboTakeHit");
             eDeathF = document.querySelectorAll(".ramboDeath");
-            eBlockF = document.querySelectorAll(".ramboBlock");
+            eBlockF = document.querySelector(".ramboBlock");
         }else if(chosenEnemy === "law"){
             eIdle = document.querySelector(".lawIdle");
             eAttackF = document.querySelectorAll(".lawAttack");
@@ -1078,7 +1093,7 @@ img,
             eMoveF = document.querySelectorAll(".lawRun");
             eTakeHitF = document.querySelectorAll(".lawTakeHit");
             eDeathF = document.querySelectorAll(".lawDeath");
-            eBlockF = document.querySelectorAll(".lawBlock");
+            eBlockF = document.querySelector(".lawBlock");
         }else if(chosenEnemy === "death"){
             eIdle = document.querySelector(".deathIdle");
             eAttackF = document.querySelectorAll(".deathAttack");
@@ -1086,7 +1101,7 @@ img,
             eMoveF = document.querySelectorAll(".deathRun");
             eTakeHitF = document.querySelectorAll(".deathTakeHit");
             eDeathF = document.querySelectorAll(".deathDeath");
-            eBlockF = document.querySelectorAll(".deathBlock");
+            eBlockF = document.querySelector(".deathBlock");
         }
         
         canvas.width = window.innerWidth;
@@ -1164,8 +1179,11 @@ img,
         characterMovement(enemy, {left: 'ArrowLeft',right: 'ArrowRight',attack: 'ArrowDown',jump: 'ArrowUp',dash: 'Enter',});
         
         //Render BOTH
+        player.isBlocking = true;
         playerDraw();
         enemyDraw();
+
+// context.drawImage(eBlockF, 100, 100,width,height); // Draw the scaled image
 
         if(!winnerDeclared){
             
@@ -1198,6 +1216,9 @@ img,
         if (player.isAttacking){
             drawAttack(pAttackF[pAttackFCounter],player.x,player.y); 
         }
+        if (player.isBlocking){
+            drawBlock(pBlockF,player.x,player.y); 
+        }
         if (player.isTakingHit && !player.isAttacking){
             drawTakeHit(pTakeHitF[pTakeHitFCounter],player.x,player.y); 
         }
@@ -1207,7 +1228,7 @@ img,
         else if (player.isFalling) {
             drawFall(pFallF,player.x,player.y);
         } 
-        else if(!player.isAttacking && !player.isFalling && !player.isMoving && !player.isDashing && !player.isDead) { 
+        else if(!player.isAttacking && !player.isFalling && !player.isMoving && !player.isDashing && !player.isDead && !player.isBlocking) { 
             drawIdle(pIdle,player.x,player.y,"player"); 
         }
     }
@@ -1220,6 +1241,9 @@ img,
         if (enemy.isAttacking){   
             drawAttack(eAttackF[eAttackFCounter],enemy.x,enemy.y,"enemy"); 
         }
+        if (enemy.isBlocking){   
+            drawBlock(eBlockF,enemy.x,enemy.y,"enemy"); 
+        }
         if (enemy.isTakingHit && !enemy.isAttacking){
             drawTakeHit(eTakeHitF[eTakeHitFCounter],enemy.x,enemy.y,"enemy"); 
         }
@@ -1229,7 +1253,7 @@ img,
         else if (enemy.isFalling) {
             drawFall(eFallF,enemy.x,enemy.y,"enemy");
         } 
-        else if(!enemy.isAttacking && !enemy.isFalling && !enemy.isMoving && !enemy.isDashing && !enemy.isDead) { 
+        else if(!enemy.isAttacking && !enemy.isFalling && !enemy.isMoving && !enemy.isDashing && !enemy.isDead && !enemy.isBlocking) { 
             drawIdle(eIdle,enemy.x,enemy.y,"enemy"); 
         }
     }
@@ -1315,6 +1339,18 @@ img,
             context.restore();
         }else{
             context.drawImage(charAttack, x, y, width, height);
+            
+        }
+    }
+    function drawBlock(charBlock,x, y, name) {
+        if(name === "enemy"){
+            context.save();
+            context.translate(x + width, y);
+            context.scale(-1, 1);
+            context.drawImage(charBlock, 0, 0, width, height);
+            context.restore();
+        }else{
+            context.drawImage(charBlock, x, y, width, height);
             
         }
     }
