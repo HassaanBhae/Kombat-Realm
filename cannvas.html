@@ -39,8 +39,8 @@ body{
 #indicator{
     position: absolute;
     scale: 3;
-    margin-left: 260px;
-    margin-top: 600px;
+    margin-left: 300px;
+    margin-top: 900px;
     color: blueviolet;
     display: none;
 }
@@ -59,7 +59,7 @@ body{
     position: absolute;
     scale: 1.5;
     margin-left: 50px;
-    margin-top: 490px;
+    margin-top: 600px;
     color: yellow;
     font-weight: 900;
     display: none;
@@ -68,7 +68,7 @@ body{
     position: absolute;
     scale: 1.5;
     margin-right: 50px;
-    margin-top: 490px;
+    margin-top: 600px;
     color: yellow;
     right: 0;
     font-weight: 900;
@@ -634,7 +634,7 @@ img,
 
     //Turn this to true to turn on Debugging Visualizer
     let debug = false;
-        // debug = true;
+        debug = true;
     const globalCooldown = 10000;
     let countdownDuration = 60;
     let winnerDeclared = false;
@@ -724,7 +724,7 @@ img,
         this.dpa = dpa;
         this.maxHealth = maxHealth;
         this.currentHealth = maxHealth;
-        this.stamina = 100;
+        this.blockCounter = 5;
 
         let isAttacking = false;
         let isTakingHit = false;
@@ -738,7 +738,8 @@ img,
         let isDead = false;
         let playingAnimation = false;
 
-        let attackRangeS;
+        let attackRange;
+        let attackRangeS ;
         let attackRangeE ;
         let attackRangeT ;
         let attackRangeB ;
@@ -807,6 +808,7 @@ img,
 
         this.takeHit = function(dpa){
             if(!winnerDeclared && !this.isBlocking){
+                console.log("Took a Hit!");
                 this.isTakingHit = true;
                 setTimeout(() => {                
                     this.currentHealth -= dpa;
@@ -824,18 +826,21 @@ img,
                 }, 400); 
             }else{
                 console.log(this.name+" Blocked the Attack!");
+                this.blockCounter--;
+                console.log('blockCounter--: ', this.blockCounter);
+                this.block();//to check status and unblock if blockCounter is 0
             }
         }
 
         this.block = function(){
-            while(this.stamina > 0 && !this.isMoving){
+            
+            if(this.blockCounter > 0 && !this.isMoving){
                 this.isBlocking = true;
-                setTimeout(() => {
-                    this.stamina -= 1;
-                }, 100); 
+                console.log(this.name+" Is Blocking!"+this.isBlocking+":"+this.blockCounter);
+            }else{
+                this.isBlocking = false;
+                console.log(this.name+" Can't Block!:"+this.blockCounter);
             }
-            this.isBlocking = false;
-
         }
 
 
@@ -1110,9 +1115,19 @@ img,
 
         // Track keydown and keyup events
         window.addEventListener('keydown', (event) => {
+            console.log("Key Pressed: ", event.key);
+            //lOWER CASE SO THAT IT WORKS FOR BOTH UPPER AND LOWER CASE KEYS
+            if(event.key === "A" || event.key === "D" || event.key === "W" || event.key === "S"){
+                keysPressed.add(event.key.toLowerCase());
+            }
+            // keysPressed.add(event.key);
             keysPressed.add(event.key);
         });
         window.addEventListener('keyup', (event) => {
+            if(event.key === "A" || event.key === "D" || event.key === "W" || event.key === "S"){
+                keysPressed.delete(event.key.toLowerCase());
+            }
+            // keysPressed.delete(event.key);
             keysPressed.delete(event.key);
         });
 
@@ -1175,15 +1190,27 @@ img,
         // Clear the canvas for each frame
         context.clearRect(0, 0, canvas.width, canvas.height);
 
-        characterMovement(player, {left: 'a',right: 'd',attack: 's',jump: 'w',dash: ' ',});
-        characterMovement(enemy, {left: 'ArrowLeft',right: 'ArrowRight',attack: 'ArrowDown',jump: 'ArrowUp',dash: 'Enter',});
+        characterMovement(player, {
+            left: 'a',
+            right: 'd',
+            attack: 's',
+            jump: 'w',
+            dash: ' ',
+            block: "Shift"
+        });
+        characterMovement(enemy, {
+            left: 'ArrowLeft',
+            right: 'ArrowRight',
+            attack: 'ArrowDown',
+            jump: 'ArrowUp',
+            dash: 'Enter',
+            block: "Backspace"
+        });
         
         //Render BOTH
-        player.isBlocking = true;
         playerDraw();
         enemyDraw();
 
-// context.drawImage(eBlockF, 100, 100,width,height); // Draw the scaled image
 
         if(!winnerDeclared){
             
@@ -1195,14 +1222,12 @@ img,
 
         if(debug === true){
             debugPlayerAttackBoxAndHitBox();
-            debugEnemyAttackBoxAndHitBox();
+            // debugEnemyAttackBoxAndHitBox();
             for (let i = 0; i < 8; i++) { // Loop from 0 to 7
                 hitBoxCords[i].style.display = "block";
             }
             playerHitBoxBox.style.display = "block";
             enemyHitBoxBox.style.display = "block";
-            // pAttackRange.style.display = "block";
-            // eAttackRange.style.display = "block";
             indicator.style.display = "block";
         }
         
@@ -1259,27 +1284,41 @@ img,
     }
 
     function characterMovement(character, controls) {
-        const { left, right, attack, jump, dash } = controls;
-
-        if (keysPressed.has(right) && character.hitBoxXR < borderRight && !character.playingAnimation && !character.isDead) {
-            character.x += 15;
+        const { left, right, attack, jump, dash, block } = controls;
+        if(!character.isDead){
+            if (keysPressed.has(right) && character.hitBoxXR < borderRight && !character.playingAnimation) {
+                character.x += 15;
+            }
+            if (keysPressed.has(left) && character.hitBoxXL > 0 && !character.playingAnimation) {
+                character.x -= 15;
+            }
+            if (keysPressed.has(left) || keysPressed.has(right)) {
+                character.isMoving = true;
+            } else {
+                character.isMoving = false;
+            }
+            if (keysPressed.has(left) && keysPressed.has(right)) {
+                character.isMoving = false;
+            }
+            if (keysPressed.has(attack) && !character.playingAnimation && !character.isAttacking && !character.cooldown) {
+                character.attack();
+            }
+            if (keysPressed.has(jump) && !character.isJumping && !character.isDashing){ 
+                character.jump();
+            }
+            if (keysPressed.has(dash) && !character.isDashing &&!character.dashCooldown && !character.isAttacking) {
+                character.dash();
+            }
+            if (keysPressed.has(block) && !character.isAttacking && !character.isDashing && !character.isFalling && !character.isMoving){
+                if(!character.isBlocking){
+                    character.block();
+                    character.blockCounter--;
+                    console.log('character.blockCounter: ', character.blockCounter);
+                }
+            } else {
+                character.isBlocking = false;
+            }
         }
-        if (keysPressed.has(left) && character.hitBoxXL > 0 && !character.playingAnimation && !character.isDead) {
-            character.x -= 15;
-        }
-        if (keysPressed.has(left) || keysPressed.has(right)) {
-            character.isMoving = true;
-        } else {
-            character.isMoving = false;
-        }
-        if (keysPressed.has(left) && keysPressed.has(right)) {
-            character.isMoving = false;
-        }
-        if (keysPressed.has(attack) && !character.playingAnimation && !character.isAttacking && !character.cooldown && !character.isDead) {
-            character.attack();
-        }
-        if (keysPressed.has(jump) && !character.isJumping && !character.isDead) character.jump();
-        if (keysPressed.has(dash) && !character.isDashing &&!character.dashCooldown && !character.isAttacking && !character.isDead) character.dash();
     }
 
     function checkHealth(){
@@ -1360,11 +1399,9 @@ img,
             context.save();
             context.translate(x + width, y);
             context.scale(-1, 1);
-            console.log('charTakeHit: ', charTakeHit);
             context.drawImage(charTakeHit, 0, 0,width,height); // Draw the scaled image
             context.restore();
         }else{
-            console.log('charTakeHit: ', charTakeHit);
             context.drawImage(charTakeHit, x, y,width,height); // Draw the scaled image
             
         }
@@ -1420,10 +1457,19 @@ img,
         //Bottom Y
         player.hitBoxYB = Math.floor(player.y+height);
         
-        player.attackRangeS = player.hitBoxXR;
+        player.attackRangeS = player.hitBoxXR ;
         player.attackRangeE = player.attackRangeS + (width/3);
         player.attackRangeT = player.hitBoxYT;
         player.attackRangeB = player.hitBoxYB;
+
+        // player.width = Math.abs(player.hitBoxXR - player.hitBoxXL);
+
+        //WHen flip
+        player.attackRange = Math.abs(player.attackRangeE - player.attackRangeS);
+
+        player.attackRangeS = player.hitBoxXL - player.attackRange;
+        player.attackRangeE = player.attackRangeS + (width/3);
+
     }
     function debugPlayerAttackBoxAndHitBox(){
         //Player AttackBox
@@ -1434,8 +1480,6 @@ img,
         context.strokeRect(player.attackRangeE,player.hitBoxYT,1,player.hitBoxYB-player.hitBoxYT);
         context.strokeRect(player.attackRangeS,player.attackRangeT,player.attackRangeE-player.attackRangeS,1);
         context.strokeRect(player.attackRangeS,player.attackRangeB,player.attackRangeE-player.attackRangeS,1);
-        
-        pAttackRange.innerText = "Attack Range:"+"\n"+"X : "+player.attackRangeS +"-"+player.attackRangeE +" ("+(player.attackRangeE-player.attackRangeS)+")"+"\n"+"Y : "+player.attackRangeT+"-"+player.attackRangeB ;
 
         //Player HitBox
         context.lineWidth = "6";
@@ -1466,7 +1510,7 @@ img,
             hitBoxCords[1].innerText = player.hitBoxYB;
             
 
-        playerHitBoxBox.innerText = "Left X:"+player.hitBoxXL+"\n"+"Right X:"+player.hitBoxXR+"\n"+"Top Y:"+player.hitBoxYT+"\n"+"Bottom Y:"+player.hitBoxYB;
+        playerHitBoxBox.innerText = "Left X:"+player.hitBoxXL+"\n"+"Right X:"+player.hitBoxXR+"\n"+"Top Y:"+player.hitBoxYT+"\n"+"Bottom Y:"+player.hitBoxYB+"\n" + "Attack Range:" +  (player.attackRangeS - player.attackRangeE);
     
     
     
