@@ -74,22 +74,7 @@ body{
     font-weight: 900;
     display: none;
 }
-img,
-.samuraiIdle,
-.knightIdle,
-.kenjiIdle,
-.akazaIdle,
-.samuraiAttack,
-.knightAttack,
-.kenjiAttack,
-.samuraiDeath,
-.kenjiDeath,
-.samuraiTakeHit,
-.kenjiTakeHit,
-.samuraiFall,
-.kenjiFall,
-.samuraiRun,
-.kenjiRun{
+.sprite{
     position: absolute;
     display:none;
     scale: 3;
@@ -99,16 +84,16 @@ img,
 } */
 .icon{
     position: absolute;
-    height: 55px;
+    height: 120px;
     z-index: 1000;
 }
 .healthBar1 >.icon{
-    left: -75px;
-    top: -15px;
+    left: -105px;
+    top: -50px;
 }
 .healthBar2 > .icon{
-    right: -75px;
-    top: -15px;
+    right: -105px;
+    top: -50px;
 }
 .healthBar1{
     width: 25%;
@@ -318,31 +303,30 @@ img,
 <!-- <p id="p" style="position: absolute;margin-left: 10px;border: 2px black solid;">A canvas element is displayed like this:</p> -->
 <!-- <p id="p2" style="position: absolute;margin-right:10px;right: 0;border: 2px black solid;">A canvas element is displayed like this:</p> -->
 
-<p id="attackRangeP" style="display: none;padding: 10px;background-color: green;position: absolute;margin-left:10px;left: 10;top:80px;border: 2px black solid;">A canvas element is displayed like this:</p>
-<p id="attackRangeE" style="display: none;padding: 10px;background-color: green;position: absolute;margin-right:10px;right: 0;top:80px;border: 2px black solid;">A canvas element is displayed like this:</p>
+<!-- <p id="attackRangeP" style="display: none;padding: 10px;background-color: green;position: absolute;margin-left:10px;left: 10;top:80px;border: 2px black solid;">A canvas element is displayed like this:</p> -->
+<!-- <p id="attackRangeE" style="display: none;padding: 10px;background-color: green;position: absolute;margin-right:10px;right: 0;top:80px;border: 2px black solid;">A canvas element is displayed like this:</p> -->
 
 <div class="statusMenu">
+    <div class="healthBar1">
+        <img src = "./assets/healthIcon.png" class="icon">
+        <img src = "./assets/dashIcon.png" class="specialPower">
+        <div id="healthBarPlayer"></div>
+    </div>
 
-<div class="healthBar1">
-    <img src = "./assets/healthIcon.png" class="icon">
-    <img src = "./assets/dashIcon.png" class="specialPower">
-    <div id="healthBarPlayer"></div>
-</div>
+    <div class="healthBar2">
+        <img src = "./assets/healthIcon.png" class="icon">
+        <img src = "./assets/dashIcon.png" class="specialPower">
+        <div id="healthBarEnemy"></div>
+    </div>
 
-<div class="healthBar2">
-    <img src = "./assets/healthIcon.png" class="icon">
-    <img src = "./assets/dashIcon.png" class="specialPower">
-    <div id="healthBarEnemy"></div>
-</div>
-
-<div class="progress-container1">
-    <div class="progress-bar1" id="specialBar1"></div>
-    <div class="glareP"></div>
-</div>
-<div class="progress-container2">
-    <div class="progress-bar2" id="specialBar2"></div>
-    <div class="glareE"></div>
-</div>
+    <div class="progress-container1">
+        <div class="progress-bar1" id="specialBar1"></div>
+        <div class="glareP"></div>
+    </div>
+    <div class="progress-container2">
+        <div class="progress-bar2" id="specialBar2"></div>
+        <div class="glareE"></div>
+    </div>
 </div>
 
 <p id="playerHitBoxBox">boxbox</p>
@@ -357,263 +341,279 @@ img,
 <p class="hitBoxCords" id="YB">YB</p>
 
 <!-- //Samurai -->
-<img  class="samuraiIdle" src="./characters/samurai/idle/idle_0.png">
+<img  class="sprite samuraiIdle" src="./characters/samurai/idle/idle_0.png">
+<img  class="sprite samuraiIdle" src="./characters/samurai/idle/idle_1.png">
+<img  class="sprite samuraiIdle" src="./characters/samurai/idle/idle_2.png">
 
-<img  class="samuraiAttack"src="./characters/samurai/attack/attack_0.png">
-<img  class="samuraiAttack"src="./characters/samurai/attack/attack_1.png">
-<img  class="samuraiAttack"src="./characters/samurai/attack/attack_2.png">
-<img  class="samuraiAttack"src="./characters/samurai/attack/attack_3.png">
+<img  class="sprite samuraiAttack"src="./characters/samurai/attack/attack_0.png">
+<img  class="sprite samuraiAttack"src="./characters/samurai/attack/attack_1.png">
+<img  class="sprite samuraiAttack"src="./characters/samurai/attack/attack_2.png">
+<img  class="sprite samuraiAttack"src="./characters/samurai/attack/attack_3.png">
 
-<img  class="samuraiRun" src="./characters/samurai/run/run_0.png">
-<img  class="samuraiRun" src="./characters/samurai/run/run_1.png">
-<img  class="samuraiRun" src="./characters/samurai/run/run_2.png">
-<img  class="samuraiRun" src="./characters/samurai/run/run_3.png">
-<img  class="samuraiRun" src="./characters/samurai/run/run_4.png">
-<img  class="samuraiRun" src="./characters/samurai/run/run_5.png">
-<img  class="samuraiRun" src="./characters/samurai/run/run_6.png">
-<img  class="samuraiRun" src="./characters/samurai/run/run_7.png">
+<img  class="sprite samuraiRun" src="./characters/samurai/run/run_0.png">
+<img  class="sprite samuraiRun" src="./characters/samurai/run/run_1.png">
+<img  class="sprite samuraiRun" src="./characters/samurai/run/run_2.png">
+<img  class="sprite samuraiRun" src="./characters/samurai/run/run_3.png">
+<img  class="sprite samuraiRun" src="./characters/samurai/run/run_4.png">
+<img  class="sprite samuraiRun" src="./characters/samurai/run/run_5.png">
+<img  class="sprite samuraiRun" src="./characters/samurai/run/run_6.png">
+<img  class="sprite samuraiRun" src="./characters/samurai/run/run_7.png">
 
-<img  class="samuraiFall" src="./characters/samurai/fall/fall_0.png">
+<img  class="sprite samuraiFall" src="./characters/samurai/fall/fall_0.png">
 
-<img  class="samuraiBlock" src="./characters/samurai/block/block_0.png">
+<img  class="sprite samuraiBlock" src="./characters/samurai/block/block_0.png">
 
-<img  class="samuraiTakeHit" src="./characters/samurai/takeHit/takeHit_0.png">
-<img  class="samuraiTakeHit" src="./characters/samurai/takeHit/takeHit_1.png">
-<img  class="samuraiTakeHit" src="./characters/samurai/takeHit/takeHit_2.png">
+<img  class="sprite samuraiTakeHit" src="./characters/samurai/takeHit/takeHit_0.png">
+<img  class="sprite samuraiTakeHit" src="./characters/samurai/takeHit/takeHit_1.png">
+<img  class="sprite samuraiTakeHit" src="./characters/samurai/takeHit/takeHit_2.png">
 
-<img  class="samuraiDeath" src="./characters/samurai/death/death_0.png">
-<img  class="samuraiDeath" src="./characters/samurai/death/death_1.png">
-<img  class="samuraiDeath" src="./characters/samurai/death/death_2.png">
-<img  class="samuraiDeath" src="./characters/samurai/death/death_3.png">
-<img  class="samuraiDeath" src="./characters/samurai/death/death_4.png">
-<img  class="samuraiDeath" src="./characters/samurai/death/death_5.png">
+<img  class="sprite samuraiDeath" src="./characters/samurai/death/death_0.png">
+<img  class="sprite samuraiDeath" src="./characters/samurai/death/death_1.png">
+<img  class="sprite samuraiDeath" src="./characters/samurai/death/death_2.png">
+<img  class="sprite samuraiDeath" src="./characters/samurai/death/death_3.png">
+<img  class="sprite samuraiDeath" src="./characters/samurai/death/death_4.png">
+<img  class="sprite samuraiDeath" src="./characters/samurai/death/death_5.png">
 
 <!-- //Knight -->
-<img  class="knightIdle" src="./characters/knight/idle/idle_0.png">
+<img  class="sprite knightIdle" src="./characters/knight/idle/idle_0.png">
+<img  class="sprite knightIdle" src="./characters/knight/idle/idle_1.png">
+<img  class="sprite knightIdle" src="./characters/knight/idle/idle_2.png">
 
-<img  class="knightAttack"src="./characters/knight/attack/attack_0.png">
-<img  class="knightAttack"src="./characters/knight/attack/attack_1.png">
-<img  class="knightAttack"src="./characters/knight/attack/attack_2.png">
-<img  class="knightAttack"src="./characters/knight/attack/attack_3.png">
+<img  class="sprite knightAttack"src="./characters/knight/attack/attack_0.png">
+<img  class="sprite knightAttack"src="./characters/knight/attack/attack_1.png">
+<img  class="sprite knightAttack"src="./characters/knight/attack/attack_2.png">
+<img  class="sprite knightAttack"src="./characters/knight/attack/attack_3.png">
 
-<img  class="knightRun" src="./characters/knight/run/run_0.png">
-<img  class="knightRun" src="./characters/knight/run/run_1.png">
-<img  class="knightRun" src="./characters/knight/run/run_2.png">
-<img  class="knightRun" src="./characters/knight/run/run_3.png">
-<img  class="knightRun" src="./characters/knight/run/run_4.png">
-<img  class="knightRun" src="./characters/knight/run/run_5.png">
-<img  class="knightRun" src="./characters/knight/run/run_6.png">
-<img  class="knightRun" src="./characters/knight/run/run_7.png">
+<img  class="sprite knightRun" src="./characters/knight/run/run_0.png">
+<img  class="sprite knightRun" src="./characters/knight/run/run_1.png">
+<img  class="sprite knightRun" src="./characters/knight/run/run_2.png">
+<img  class="sprite knightRun" src="./characters/knight/run/run_3.png">
+<img  class="sprite knightRun" src="./characters/knight/run/run_4.png">
+<img  class="sprite knightRun" src="./characters/knight/run/run_5.png">
+<img  class="sprite knightRun" src="./characters/knight/run/run_6.png">
+<img  class="sprite knightRun" src="./characters/knight/run/run_7.png">
 
-<img  class="knightFall" src="./characters/knight/fall/fall_0.png">
+<img  class="sprite knightFall" src="./characters/knight/fall/fall_0.png">
 
-<img  class="knightBlock" src="./characters/knight/block/block_0.png">
+<img  class="sprite knightBlock" src="./characters/knight/block/block_0.png">
 
-<img  class="knightTakeHit" src="./characters/knight/takeHit/takeHit_0.png">
-<img  class="knightTakeHit" src="./characters/knight/takeHit/takeHit_1.png">
-<img  class="knightTakeHit" src="./characters/knight/takeHit/takeHit_2.png">
+<img  class="sprite knightTakeHit" src="./characters/knight/takeHit/takeHit_0.png">
+<img  class="sprite knightTakeHit" src="./characters/knight/takeHit/takeHit_1.png">
+<img  class="sprite knightTakeHit" src="./characters/knight/takeHit/takeHit_2.png">
 
-<img  class="knightDeath" src="./characters/knight/death/death_0.png">
-<img  class="knightDeath" src="./characters/knight/death/death_1.png">
-<img  class="knightDeath" src="./characters/knight/death/death_2.png">
-<img  class="knightDeath" src="./characters/knight/death/death_3.png">
-<img  class="knightDeath" src="./characters/knight/death/death_4.png">
-<img  class="knightDeath" src="./characters/knight/death/death_5.png">
+<img  class="sprite knightDeath" src="./characters/knight/death/death_0.png">
+<img  class="sprite knightDeath" src="./characters/knight/death/death_1.png">
+<img  class="sprite knightDeath" src="./characters/knight/death/death_2.png">
+<img  class="sprite knightDeath" src="./characters/knight/death/death_3.png">
+<img  class="sprite knightDeath" src="./characters/knight/death/death_4.png">
+<img  class="sprite knightDeath" src="./characters/knight/death/death_5.png">
 
 <!-- //Kenji -->
-<img  class="kenjiIdle" src="./characters/kenji/idle/idle_0.png">
+<img  class="sprite kenjiIdle" src="./characters/kenji/idle/idle_0.png">
+<img  class="sprite kenjiIdle" src="./characters/kenji/idle/idle_1.png">
+<img  class="sprite kenjiIdle" src="./characters/kenji/idle/idle_2.png">
 
-<img  class="kenjiAttack"src="./characters/kenji/attack/attack_0.png">
-<img  class="kenjiAttack"src="./characters/kenji/attack/attack_1.png">
-<img  class="kenjiAttack"src="./characters/kenji/attack/attack_2.png">
-<img  class="kenjiAttack"src="./characters/kenji/attack/attack_3.png">
+<img  class="sprite kenjiAttack"src="./characters/kenji/attack/attack_0.png">
+<img  class="sprite kenjiAttack"src="./characters/kenji/attack/attack_1.png">
+<img  class="sprite kenjiAttack"src="./characters/kenji/attack/attack_2.png">
+<img  class="sprite kenjiAttack"src="./characters/kenji/attack/attack_3.png">
 
-<img  class="kenjiRun" src="./characters/kenji/run/run_0.png">
-<img  class="kenjiRun" src="./characters/kenji/run/run_1.png">
-<img  class="kenjiRun" src="./characters/kenji/run/run_2.png">
-<img  class="kenjiRun" src="./characters/kenji/run/run_3.png">
-<img  class="kenjiRun" src="./characters/kenji/run/run_4.png">
-<img  class="kenjiRun" src="./characters/kenji/run/run_5.png">
-<img  class="kenjiRun" src="./characters/kenji/run/run_6.png">
-<img  class="kenjiRun" src="./characters/kenji/run/run_7.png">
+<img  class="sprite kenjiRun" src="./characters/kenji/run/run_0.png">
+<img  class="sprite kenjiRun" src="./characters/kenji/run/run_1.png">
+<img  class="sprite kenjiRun" src="./characters/kenji/run/run_2.png">
+<img  class="sprite kenjiRun" src="./characters/kenji/run/run_3.png">
+<img  class="sprite kenjiRun" src="./characters/kenji/run/run_4.png">
+<img  class="sprite kenjiRun" src="./characters/kenji/run/run_5.png">
+<img  class="sprite kenjiRun" src="./characters/kenji/run/run_6.png">
+<img  class="sprite kenjiRun" src="./characters/kenji/run/run_7.png">
 
-<img  class="kenjiFall" src="./characters/kenji/fall/fall_0.png">
+<img  class="sprite kenjiFall" src="./characters/kenji/fall/fall_0.png">
 
-<img  class="kenjiBlock" src="./characters/kenji/block/block_0.png">
+<img  class="sprite kenjiBlock" src="./characters/kenji/block/block_0.png">
 
-<img  class="kenjiTakeHit" src="./characters/kenji/takeHit/takeHit_0.png">
-<img  class="kenjiTakeHit" src="./characters/kenji/takeHit/takeHit_1.png">
-<img  class="kenjiTakeHit" src="./characters/kenji/takeHit/takeHit_2.png">
+<img  class="sprite kenjiTakeHit" src="./characters/kenji/takeHit/takeHit_0.png">
+<img  class="sprite kenjiTakeHit" src="./characters/kenji/takeHit/takeHit_1.png">
+<img  class="sprite kenjiTakeHit" src="./characters/kenji/takeHit/takeHit_2.png">
 
-<img  class="kenjiDeath" src="./characters/kenji/death/death_0.png">
-<img  class="kenjiDeath" src="./characters/kenji/death/death_1.png">
-<img  class="kenjiDeath" src="./characters/kenji/death/death_2.png">
-<img  class="kenjiDeath" src="./characters/kenji/death/death_3.png">
-<img  class="kenjiDeath" src="./characters/kenji/death/death_4.png">
-<img  class="kenjiDeath" src="./characters/kenji/death/death_5.png">
+<img  class="sprite kenjiDeath" src="./characters/kenji/death/death_0.png">
+<img  class="sprite kenjiDeath" src="./characters/kenji/death/death_1.png">
+<img  class="sprite kenjiDeath" src="./characters/kenji/death/death_2.png">
+<img  class="sprite kenjiDeath" src="./characters/kenji/death/death_3.png">
+<img  class="sprite kenjiDeath" src="./characters/kenji/death/death_4.png">
+<img  class="sprite kenjiDeath" src="./characters/kenji/death/death_5.png">
 
 <!-- AKAZA -->
-<img  class="akazaIdle" src="./characters/akaza/idle/idle_0.png">
+<img  class="sprite akazaIdle" src="./characters/akaza/idle/idle_0.png">
+<img  class="sprite akazaIdle" src="./characters/akaza/idle/idle_1.png">
+<img  class="sprite akazaIdle" src="./characters/akaza/idle/idle_2.png">
 
-<img  class="akazaAttack"src="./characters/akaza/attack/attack_0.png">
-<img  class="akazaAttack"src="./characters/akaza/attack/attack_1.png">
-<img  class="akazaAttack"src="./characters/akaza/attack/attack_2.png">
-<img  class="akazaAttack"src="./characters/akaza/attack/attack_3.png">
+<img  class="sprite akazaAttack"src="./characters/akaza/attack/attack_0.png">
+<img  class="sprite akazaAttack"src="./characters/akaza/attack/attack_1.png">
+<img  class="sprite akazaAttack"src="./characters/akaza/attack/attack_2.png">
+<img  class="sprite akazaAttack"src="./characters/akaza/attack/attack_3.png">
 
-<img  class="akazaRun" src="./characters/akaza/run/run_0.png">
-<img  class="akazaRun" src="./characters/akaza/run/run_1.png">
-<img  class="akazaRun" src="./characters/akaza/run/run_2.png">
-<img  class="akazaRun" src="./characters/akaza/run/run_3.png">
-<img  class="akazaRun" src="./characters/akaza/run/run_4.png">
-<img  class="akazaRun" src="./characters/akaza/run/run_5.png">
-<img  class="akazaRun" src="./characters/akaza/run/run_6.png">
-<img  class="akazaRun" src="./characters/akaza/run/run_7.png">
+<img  class="sprite akazaRun" src="./characters/akaza/run/run_0.png">
+<img  class="sprite akazaRun" src="./characters/akaza/run/run_1.png">
+<img  class="sprite akazaRun" src="./characters/akaza/run/run_2.png">
+<img  class="sprite akazaRun" src="./characters/akaza/run/run_3.png">
+<img  class="sprite akazaRun" src="./characters/akaza/run/run_4.png">
+<img  class="sprite akazaRun" src="./characters/akaza/run/run_5.png">
+<img  class="sprite akazaRun" src="./characters/akaza/run/run_6.png">
+<img  class="sprite akazaRun" src="./characters/akaza/run/run_7.png">
 
-<img  class="akazaFall" src="./characters/akaza/fall/fall_0.png">
+<img  class="sprite akazaFall" src="./characters/akaza/fall/fall_0.png">
 
-<img  class="akazaBlock" src="./characters/akaza/block/block_0.png">
+<img  class="sprite akazaBlock" src="./characters/akaza/block/block_0.png">
 
-<img  class="akazaTakeHit" src="./characters/akaza/takeHit/takeHit_0.png">
-<img  class="akazaTakeHit" src="./characters/akaza/takeHit/takeHit_1.png">
-<img  class="akazaTakeHit" src="./characters/akaza/takeHit/takeHit_2.png">
+<img  class="sprite akazaTakeHit" src="./characters/akaza/takeHit/takeHit_0.png">
+<img  class="sprite akazaTakeHit" src="./characters/akaza/takeHit/takeHit_1.png">
+<img  class="sprite akazaTakeHit" src="./characters/akaza/takeHit/takeHit_2.png">
 
-<img  class="akazaDeath" src="./characters/akaza/death/death_0.png">
-<img  class="akazaDeath" src="./characters/akaza/death/death_1.png">
-<img  class="akazaDeath" src="./characters/akaza/death/death_2.png">
-<img  class="akazaDeath" src="./characters/akaza/death/death_3.png">
-<img  class="akazaDeath" src="./characters/akaza/death/death_4.png">
-<img  class="akazaDeath" src="./characters/akaza/death/death_5.png">
+<img  class="sprite akazaDeath" src="./characters/akaza/death/death_0.png">
+<img  class="sprite akazaDeath" src="./characters/akaza/death/death_1.png">
+<img  class="sprite akazaDeath" src="./characters/akaza/death/death_2.png">
+<img  class="sprite akazaDeath" src="./characters/akaza/death/death_3.png">
+<img  class="sprite akazaDeath" src="./characters/akaza/death/death_4.png">
+<img  class="sprite akazaDeath" src="./characters/akaza/death/death_5.png">
 
 
 <!-- Anakin -->
-<img  class="anakinIdle" src="./characters/anakin/idle/idle_0.png">
+<img  class="sprite anakinIdle" src="./characters/anakin/idle/idle_0.png">
+<img  class="sprite anakinIdle" src="./characters/anakin/idle/idle_1.png">
+<img  class="sprite anakinIdle" src="./characters/anakin/idle/idle_2.png">
 
-<img  class="anakinAttack"src="./characters/anakin/attack/attack_0.png">
-<img  class="anakinAttack"src="./characters/anakin/attack/attack_1.png">
-<img  class="anakinAttack"src="./characters/anakin/attack/attack_2.png">
-<img  class="anakinAttack"src="./characters/anakin/attack/attack_3.png">
+<img  class="sprite anakinAttack"src="./characters/anakin/attack/attack_0.png">
+<img  class="sprite anakinAttack"src="./characters/anakin/attack/attack_1.png">
+<img  class="sprite anakinAttack"src="./characters/anakin/attack/attack_2.png">
+<img  class="sprite anakinAttack"src="./characters/anakin/attack/attack_3.png">
 
-<img  class="anakinRun" src="./characters/anakin/run/run_0.png">
-<img  class="anakinRun" src="./characters/anakin/run/run_1.png">
-<img  class="anakinRun" src="./characters/anakin/run/run_2.png">
-<img  class="anakinRun" src="./characters/anakin/run/run_3.png">
-<img  class="anakinRun" src="./characters/anakin/run/run_4.png">
-<img  class="anakinRun" src="./characters/anakin/run/run_5.png">
-<img  class="anakinRun" src="./characters/anakin/run/run_6.png">
-<img  class="anakinRun" src="./characters/anakin/run/run_7.png">
+<img  class="sprite anakinRun" src="./characters/anakin/run/run_0.png">
+<img  class="sprite anakinRun" src="./characters/anakin/run/run_1.png">
+<img  class="sprite anakinRun" src="./characters/anakin/run/run_2.png">
+<img  class="sprite anakinRun" src="./characters/anakin/run/run_3.png">
+<img  class="sprite anakinRun" src="./characters/anakin/run/run_4.png">
+<img  class="sprite anakinRun" src="./characters/anakin/run/run_5.png">
+<img  class="sprite anakinRun" src="./characters/anakin/run/run_6.png">
+<img  class="sprite anakinRun" src="./characters/anakin/run/run_7.png">
 
-<img  class="anakinFall" src="./characters/anakin/fall/fall_0.png">
+<img  class="sprite anakinFall" src="./characters/anakin/fall/fall_0.png">
 
-<img  class="anakinBlock" src="./characters/anakin/block/block_0.png">
+<img  class="sprite anakinBlock" src="./characters/anakin/block/block_0.png">
 
-<img  class="anakinTakeHit" src="./characters/anakin/takeHit/takeHit_0.png">
-<img  class="anakinTakeHit" src="./characters/anakin/takeHit/takeHit_1.png">
-<img  class="anakinTakeHit" src="./characters/anakin/takeHit/takeHit_2.png">
+<img  class="sprite anakinTakeHit" src="./characters/anakin/takeHit/takeHit_0.png">
+<img  class="sprite anakinTakeHit" src="./characters/anakin/takeHit/takeHit_1.png">
+<img  class="sprite anakinTakeHit" src="./characters/anakin/takeHit/takeHit_2.png">
 
-<img  class="anakinDeath" src="./characters/anakin/death/death_0.png">
-<img  class="anakinDeath" src="./characters/anakin/death/death_1.png">
-<img  class="anakinDeath" src="./characters/anakin/death/death_2.png">
-<img  class="anakinDeath" src="./characters/anakin/death/death_3.png">
-<img  class="anakinDeath" src="./characters/anakin/death/death_4.png">
-<img  class="anakinDeath" src="./characters/anakin/death/death_5.png">
+<img  class="sprite anakinDeath" src="./characters/anakin/death/death_0.png">
+<img  class="sprite anakinDeath" src="./characters/anakin/death/death_1.png">
+<img  class="sprite anakinDeath" src="./characters/anakin/death/death_2.png">
+<img  class="sprite anakinDeath" src="./characters/anakin/death/death_3.png">
+<img  class="sprite anakinDeath" src="./characters/anakin/death/death_4.png">
+<img  class="sprite anakinDeath" src="./characters/anakin/death/death_5.png">
 
 
 <!-- Rambo -->
-<img  class="ramboIdle" src="./characters/rambo/idle/idle_0.png">
+<img  class="sprite ramboIdle" src="./characters/rambo/idle/idle_0.png">
+<img  class="sprite ramboIdle" src="./characters/rambo/idle/idle_1.png">
+<img  class="sprite ramboIdle" src="./characters/rambo/idle/idle_2.png">
 
-<img  class="ramboAttack"src="./characters/rambo/attack/attack_0.png">
-<img  class="ramboAttack"src="./characters/rambo/attack/attack_1.png">
-<img  class="ramboAttack"src="./characters/rambo/attack/attack_2.png">
-<img  class="ramboAttack"src="./characters/rambo/attack/attack_3.png">
+<img  class="sprite ramboAttack"src="./characters/rambo/attack/attack_0.png">
+<img  class="sprite ramboAttack"src="./characters/rambo/attack/attack_1.png">
+<img  class="sprite ramboAttack"src="./characters/rambo/attack/attack_2.png">
+<img  class="sprite ramboAttack"src="./characters/rambo/attack/attack_3.png">
 
-<img  class="ramboRun" src="./characters/rambo/run/run_0.png">
-<img  class="ramboRun" src="./characters/rambo/run/run_1.png">
-<img  class="ramboRun" src="./characters/rambo/run/run_2.png">
-<img  class="ramboRun" src="./characters/rambo/run/run_3.png">
-<img  class="ramboRun" src="./characters/rambo/run/run_4.png">
-<img  class="ramboRun" src="./characters/rambo/run/run_5.png">
-<img  class="ramboRun" src="./characters/rambo/run/run_6.png">
-<img  class="ramboRun" src="./characters/rambo/run/run_7.png">
+<img  class="sprite ramboRun" src="./characters/rambo/run/run_0.png">
+<img  class="sprite ramboRun" src="./characters/rambo/run/run_1.png">
+<img  class="sprite ramboRun" src="./characters/rambo/run/run_2.png">
+<img  class="sprite ramboRun" src="./characters/rambo/run/run_3.png">
+<img  class="sprite ramboRun" src="./characters/rambo/run/run_4.png">
+<img  class="sprite ramboRun" src="./characters/rambo/run/run_5.png">
+<img  class="sprite ramboRun" src="./characters/rambo/run/run_6.png">
+<img  class="sprite ramboRun" src="./characters/rambo/run/run_7.png">
 
-<img  class="ramboFall" src="./characters/rambo/fall/fall_0.png">
+<img  class="sprite ramboFall" src="./characters/rambo/fall/fall_0.png">
 
-<img  class="ramboBlock" src="./characters/rambo/block/block_0.png">
+<img  class="sprite ramboBlock" src="./characters/rambo/block/block_0.png">
 
-<img  class="ramboTakeHit" src="./characters/rambo/takeHit/takeHit_0.png">
-<img  class="ramboTakeHit" src="./characters/rambo/takeHit/takeHit_1.png">
-<img  class="ramboTakeHit" src="./characters/rambo/takeHit/takeHit_2.png">
+<img  class="sprite ramboTakeHit" src="./characters/rambo/takeHit/takeHit_0.png">
+<img  class="sprite ramboTakeHit" src="./characters/rambo/takeHit/takeHit_1.png">
+<img  class="sprite ramboTakeHit" src="./characters/rambo/takeHit/takeHit_2.png">
 
-<img  class="ramboDeath" src="./characters/rambo/death/death_0.png">
-<img  class="ramboDeath" src="./characters/rambo/death/death_1.png">
-<img  class="ramboDeath" src="./characters/rambo/death/death_2.png">
-<img  class="ramboDeath" src="./characters/rambo/death/death_3.png">
-<img  class="ramboDeath" src="./characters/rambo/death/death_4.png">
-<img  class="ramboDeath" src="./characters/rambo/death/death_5.png">
+<img  class="sprite ramboDeath" src="./characters/rambo/death/death_0.png">
+<img  class="sprite ramboDeath" src="./characters/rambo/death/death_1.png">
+<img  class="sprite ramboDeath" src="./characters/rambo/death/death_2.png">
+<img  class="sprite ramboDeath" src="./characters/rambo/death/death_3.png">
+<img  class="sprite ramboDeath" src="./characters/rambo/death/death_4.png">
+<img  class="sprite ramboDeath" src="./characters/rambo/death/death_5.png">
 
 <!-- Law -->
-<img  class="lawIdle" src="./characters/law/idle/idle_0.png">
+<img  class="sprite lawIdle" src="./characters/law/idle/idle_0.png">
+<img  class="sprite lawIdle" src="./characters/law/idle/idle_1.png">
+<img  class="sprite lawIdle" src="./characters/law/idle/idle_2.png">
 
-<img  class="lawAttack"src="./characters/law/attack/attack_0.png">
-<img  class="lawAttack"src="./characters/law/attack/attack_1.png">
-<img  class="lawAttack"src="./characters/law/attack/attack_2.png">
-<img  class="lawAttack"src="./characters/law/attack/attack_3.png">
+<img  class="sprite lawAttack"src="./characters/law/attack/attack_0.png">
+<img  class="sprite lawAttack"src="./characters/law/attack/attack_1.png">
+<img  class="sprite lawAttack"src="./characters/law/attack/attack_2.png">
+<img  class="sprite lawAttack"src="./characters/law/attack/attack_3.png">
 
-<img  class="lawRun" src="./characters/law/run/run_0.png">
-<img  class="lawRun" src="./characters/law/run/run_1.png">
-<img  class="lawRun" src="./characters/law/run/run_2.png">
-<img  class="lawRun" src="./characters/law/run/run_3.png">
-<img  class="lawRun" src="./characters/law/run/run_4.png">
-<img  class="lawRun" src="./characters/law/run/run_5.png">
-<img  class="lawRun" src="./characters/law/run/run_6.png">
-<img  class="lawRun" src="./characters/law/run/run_7.png">
+<img  class="sprite lawRun" src="./characters/law/run/run_0.png">
+<img  class="sprite lawRun" src="./characters/law/run/run_1.png">
+<img  class="sprite lawRun" src="./characters/law/run/run_2.png">
+<img  class="sprite lawRun" src="./characters/law/run/run_3.png">
+<img  class="sprite lawRun" src="./characters/law/run/run_4.png">
+<img  class="sprite lawRun" src="./characters/law/run/run_5.png">
+<img  class="sprite lawRun" src="./characters/law/run/run_6.png">
+<img  class="sprite lawRun" src="./characters/law/run/run_7.png">
 
-<img  class="lawFall" src="./characters/law/fall/fall_0.png">
+<img  class="sprite lawFall" src="./characters/law/fall/fall_0.png">
 
-<img  class="lawBlock" src="./characters/law/block/block_0.png">
+<img  class="sprite lawBlock" src="./characters/law/block/block_0.png">
 
-<img  class="lawTakeHit" src="./characters/law/takeHit/takeHit_0.png">
-<img  class="lawTakeHit" src="./characters/law/takeHit/takeHit_1.png">
-<img  class="lawTakeHit" src="./characters/law/takeHit/takeHit_2.png">
+<img  class="sprite lawTakeHit" src="./characters/law/takeHit/takeHit_0.png">
+<img  class="sprite lawTakeHit" src="./characters/law/takeHit/takeHit_1.png">
+<img  class="sprite lawTakeHit" src="./characters/law/takeHit/takeHit_2.png">
 
-<img  class="lawDeath" src="./characters/law/death/death_0.png">
-<img  class="lawDeath" src="./characters/law/death/death_1.png">
-<img  class="lawDeath" src="./characters/law/death/death_2.png">
-<img  class="lawDeath" src="./characters/law/death/death_3.png">
-<img  class="lawDeath" src="./characters/law/death/death_4.png">
-<img  class="lawDeath" src="./characters/law/death/death_5.png">
+<img  class="sprite lawDeath" src="./characters/law/death/death_0.png">
+<img  class="sprite lawDeath" src="./characters/law/death/death_1.png">
+<img  class="sprite lawDeath" src="./characters/law/death/death_2.png">
+<img  class="sprite lawDeath" src="./characters/law/death/death_3.png">
+<img  class="sprite lawDeath" src="./characters/law/death/death_4.png">
+<img  class="sprite lawDeath" src="./characters/law/death/death_5.png">
 
 
 <!-- Death -->
-<img  class="deathIdle" src="./characters/death/idle/idle_0.png">
+<img  class="sprite deathIdle" src="./characters/death/idle/idle_0.png">
+<img  class="sprite deathIdle" src="./characters/death/idle/idle_1.png">
+<img  class="sprite deathIdle" src="./characters/death/idle/idle_2.png">
 
-<img  class="deathAttack"src="./characters/death/attack/attack_0.png">
-<img  class="deathAttack"src="./characters/death/attack/attack_1.png">
-<img  class="deathAttack"src="./characters/death/attack/attack_2.png">
-<img  class="deathAttack"src="./characters/death/attack/attack_3.png">
+<img  class="sprite deathAttack"src="./characters/death/attack/attack_0.png">
+<img  class="sprite deathAttack"src="./characters/death/attack/attack_1.png">
+<img  class="sprite deathAttack"src="./characters/death/attack/attack_2.png">
+<img  class="sprite deathAttack"src="./characters/death/attack/attack_3.png">
 
-<img  class="deathRun" src="./characters/death/run/run_0.png">
-<img  class="deathRun" src="./characters/death/run/run_1.png">
-<img  class="deathRun" src="./characters/death/run/run_2.png">
-<img  class="deathRun" src="./characters/death/run/run_3.png">
-<img  class="deathRun" src="./characters/death/run/run_4.png">
-<img  class="deathRun" src="./characters/death/run/run_5.png">
-<img  class="deathRun" src="./characters/death/run/run_6.png">
-<img  class="deathRun" src="./characters/death/run/run_7.png">
+<img  class="sprite deathRun" src="./characters/death/run/run_0.png">
+<img  class="sprite deathRun" src="./characters/death/run/run_1.png">
+<img  class="sprite deathRun" src="./characters/death/run/run_2.png">
+<img  class="sprite deathRun" src="./characters/death/run/run_3.png">
+<img  class="sprite deathRun" src="./characters/death/run/run_4.png">
+<img  class="sprite deathRun" src="./characters/death/run/run_5.png">
+<img  class="sprite deathRun" src="./characters/death/run/run_6.png">
+<img  class="sprite deathRun" src="./characters/death/run/run_7.png">
 
-<img  class="deathFall" src="./characters/death/fall/fall_0.png">
+<img  class="sprite deathFall" src="./characters/death/fall/fall_0.png">
 
-<img  class="deathBlock" src="./characters/death/block/block_0.png">
+<img  class="sprite deathBlock" src="./characters/death/block/block_0.png">
 
-<img  class="deathTakeHit" src="./characters/death/takeHit/takeHit_0.png">
-<img  class="deathTakeHit" src="./characters/death/takeHit/takeHit_1.png">
-<img  class="deathTakeHit" src="./characters/death/takeHit/takeHit_2.png">
+<img  class="sprite deathTakeHit" src="./characters/death/takeHit/takeHit_0.png">
+<img  class="sprite deathTakeHit" src="./characters/death/takeHit/takeHit_1.png">
+<img  class="sprite deathTakeHit" src="./characters/death/takeHit/takeHit_2.png">
 
-<img  class="deathDeath" src="./characters/death/death/death_0.png">
-<img  class="deathDeath" src="./characters/death/death/death_1.png">
-<img  class="deathDeath" src="./characters/death/death/death_2.png">
-<img  class="deathDeath" src="./characters/death/death/death_3.png">
-<img  class="deathDeath" src="./characters/death/death/death_4.png">
-<img  class="deathDeath" src="./characters/death/death/death_5.png">
+<img  class="sprite deathDeath" src="./characters/death/death/death_0.png">
+<img  class="sprite deathDeath" src="./characters/death/death/death_1.png">
+<img  class="sprite deathDeath" src="./characters/death/death/death_2.png">
+<img  class="sprite deathDeath" src="./characters/death/death/death_3.png">
+<img  class="sprite deathDeath" src="./characters/death/death/death_4.png">
+<img  class="sprite deathDeath" src="./characters/death/death/death_5.png">
 
 
 
@@ -1222,7 +1222,7 @@ img,
 
         if(debug === true){
             debugPlayerAttackBoxAndHitBox();
-            // debugEnemyAttackBoxAndHitBox();
+            debugEnemyAttackBoxAndHitBox();
             for (let i = 0; i < 8; i++) { // Loop from 0 to 7
                 hitBoxCords[i].style.display = "block";
             }
@@ -1465,10 +1465,10 @@ img,
         // player.width = Math.abs(player.hitBoxXR - player.hitBoxXL);
 
         //WHen flip
-        player.attackRange = Math.abs(player.attackRangeE - player.attackRangeS);
+        // player.attackRange = Math.abs(player.attackRangeE - player.attackRangeS);
 
-        player.attackRangeS = player.hitBoxXL - player.attackRange;
-        player.attackRangeE = player.attackRangeS + (width/3);
+        // player.attackRangeS = player.hitBoxXL - player.attackRange;
+        // player.attackRangeE = player.attackRangeS + (width/3);
 
     }
     function debugPlayerAttackBoxAndHitBox(){
@@ -1487,36 +1487,36 @@ img,
 
         //Left X
             context.strokeRect(player.hitBoxXL,player.y+(height/1.3), 1,1);
-            hitBoxCords[2].style.top = player.y+(height/1.3)+"px";
-            hitBoxCords[2].style.left = player.hitBoxXL+"px";
-            hitBoxCords[2].innerText = player.hitBoxXL;
+            hitBoxCords[7].style.top = player.y+(height/1.3)+"px";
+            hitBoxCords[7].style.left = player.hitBoxXL+"px";
+            hitBoxCords[7].innerText = player.hitBoxXL;
         
         // //Right X
             context.strokeRect(player.hitBoxXR,player.y+(height/1.3), 1,1);
-            hitBoxCords[3].style.top = player.y+(height/1.3)+"px";
-            hitBoxCords[3].style.left = player.hitBoxXR+"px";
-            hitBoxCords[3].innerText = player.hitBoxXR;
+            hitBoxCords[6].style.top = player.y+(height/1.3)+"px";
+            hitBoxCords[6].style.left = player.hitBoxXR+"px";
+            hitBoxCords[6].innerText = player.hitBoxXR;
             
         // //Top Y
             context.strokeRect(player.x+(width/2),player.hitBoxYT, 1,1);
-            hitBoxCords[0].style.top = player.hitBoxYT+"px";
-            hitBoxCords[0].style.left = player.x+(width/2)+"px";
-            hitBoxCords[0].innerText = player.hitBoxYT;
+            hitBoxCords[4].style.top = player.hitBoxYT+"px";
+            hitBoxCords[4].style.left = player.x+(width/2)+"px";
+            hitBoxCords[4].innerText = player.hitBoxYT;
 
         // //Bottom Y
             context.strokeRect((player.x+(width/2)),player.hitBoxYB, 1,1);
-            hitBoxCords[1].style.top = player.hitBoxYB+"px";
-            hitBoxCords[1].style.left = player.x+(width/2)+"px";
-            hitBoxCords[1].innerText = player.hitBoxYB;
+            hitBoxCords[5].style.top = player.hitBoxYB+"px";
+            hitBoxCords[5].style.left = player.x+(width/2)+"px";
+            hitBoxCords[5].innerText = player.hitBoxYB;
             
 
         playerHitBoxBox.innerText = "Left X:"+player.hitBoxXL+"\n"+"Right X:"+player.hitBoxXR+"\n"+"Top Y:"+player.hitBoxYT+"\n"+"Bottom Y:"+player.hitBoxYB+"\n" + "Attack Range:" +  (player.attackRangeS - player.attackRangeE);
     
     
     
-        context.lineWidth = "5";
-        context.strokeStyle = "blue";
-        context.strokeRect(player.x,player.y,width,height);
+        // context.lineWidth = "5";
+        // context.strokeStyle = "blue";
+        // context.strokeRect(player.x,player.y,width,height);
 
     
     
@@ -1537,6 +1537,12 @@ img,
         enemy.attackRangeT = enemy.hitBoxYT;
         enemy.attackRangeB = enemy.hitBoxYB;
 
+        //WHen flip
+        // enemy.attackRange = Math.abs(enemy.attackRangeE - enemy.attackRangeS);
+        // // console.log('attackRange: ', enemy.attackRange);
+
+        // enemy.attackRangeS = enemy.hitBoxXR + enemy.attackRange;
+        // enemy.attackRangeE = enemy.attackRangeS - (width/3);
 
     }
     function debugEnemyAttackBoxAndHitBox(){
@@ -1550,7 +1556,7 @@ img,
         context.strokeRect(enemy.attackRangeS,enemy.attackRangeT,enemy.attackRangeE-enemy.attackRangeS,1);
         context.strokeRect(enemy.attackRangeS,enemy.attackRangeB,enemy.attackRangeE-enemy.attackRangeS,1);
 
-        eAttackRange.innerText = "Attack Range:"+"\n"+"X : "+enemy.attackRangeS +"-"+enemy.attackRangeE +" ("+(enemy.attackRangeS-enemy.attackRangeE)+")"+"\n"+"Y : "+enemy.attackRangeT+"-"+enemy.attackRangeB ;
+        // eAttackRange.innerText = "Attack Range:"+"\n"+"X : "+enemy.attackRangeS +"-"+enemy.attackRangeE +" ("+(enemy.attackRangeS-enemy.attackRangeE)+")"+"\n"+"Y : "+enemy.attackRangeT+"-"+enemy.attackRangeB ;
 
         //Enemy HitBox    
             context.lineWidth = "6";
@@ -1578,12 +1584,12 @@ img,
             hitBoxCords[1].style.left = enemy.x+(width/2)+"px";
             hitBoxCords[1].innerText = enemy.hitBoxYB;
             
-        pEnemyHitBoxBox.innerText = "Left X:"+enemy.hitBoxXL+"\n"+"Right X:"+enemy.hitBoxXR+"\n"+"Top Y:"+enemy.hitBoxYT+"\n"+"Bottom Y:"+enemy.hitBoxYB;    
+        pEnemyHitBoxBox.innerText = "Left X:"+enemy.hitBoxXL+"\n"+"Right X:"+enemy.hitBoxXR+"\n"+"Top Y:"+enemy.hitBoxYT+"\n"+"Bottom Y:"+enemy.hitBoxYB+"\n "+"Attack Range:" +  (enemy.attackRangeS - enemy.attackRangeE);    
 
 
-        context.lineWidth = "5";
-        context.strokeStyle = "blue";
-        context.strokeRect(enemy.x,enemy.y,width,height);
+        // context.lineWidth = "5";
+        // context.strokeStyle = "blue";
+        // context.strokeRect(enemy.x,enemy.y,width,height);
     }
 
     function startCountdown(){
