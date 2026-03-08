@@ -330,17 +330,30 @@ body{
 </div>
 
 <p id="playerHitBoxBox">boxbox</p>
-<p class="hitBoxCords" id="XL">XL</p>
-<p class="hitBoxCords" id="XR">XR</p>
-<p class="hitBoxCords" id="YT">YT</p>
-<p class="hitBoxCords" id="YB">YB</p>
-<p class="hitBoxCords" id="PC">PC</p>
+<p class="hitBoxCords" id="XL"></p>
+<p class="hitBoxCords" id="XR"></p>
+<p class="hitBoxCords" id="YT"></p>
+<p class="hitBoxCords" id="YB"></p>
+<p class="hitBoxCords" id="PC"></p>
+<p class="hitBoxCords" id="PHE"></p>
 <p id="enemyHitBoxBox">Test</p>
-<p class="hitBoxCords" id="XL">XL</p>
-<p class="hitBoxCords" id="XR">XR</p>
-<p class="hitBoxCords" id="YT">YT</p>
-<p class="hitBoxCords" id="YB">YB</p>
-<p class="hitBoxCords" id="EC">EC</p>
+<p class="hitBoxCords" id="XL"></p>
+<p class="hitBoxCords" id="XR"></p>
+<p class="hitBoxCords" id="YT"></p>
+<p class="hitBoxCords" id="YB"></p>
+<p class="hitBoxCords" id="EC"></p>
+<p class="hitBoxCords" id="EHE"></p>
+
+<!-- //EFFECTS -->
+<img  class="sprite hitOrange" src="./assets/effects/hitOrange/hitOrange_0.png">
+<img  class="sprite hitOrange" src="./assets/effects/hitOrange/hitOrange_1.png">
+<img  class="sprite hitOrange" src="./assets/effects/hitOrange/hitOrange_2.png">
+<img  class="sprite hitOrange" src="./assets/effects/hitOrange/hitOrange_3.png">
+
+<img  class="sprite hitYellow" src="./assets/effects/hitYellow/hitYellow_0.png">
+<img  class="sprite hitYellow" src="./assets/effects/hitYellow/hitYellow_1.png">
+<img  class="sprite hitYellow" src="./assets/effects/hitYellow/hitYellow_2.png">
+<img  class="sprite hitYellow" src="./assets/effects/hitYellow/hitYellow_3.png">
 
 <!-- //Samurai -->
 <img  class="sprite samuraiIdle" src="./characters/samurai/idle/idle_0.png">
@@ -643,13 +656,13 @@ body{
     let borderRight = window.innerWidth;
     // <------------------ CHARACTER SELECT ------------------->
     // let chosenCharacter = "samurai";
-    // let chosenCharacter = "kenji";
+    // let chosenCharacter = "kenji"; 
     // let chosenCharacter = "knight";
-    // let chosenCharacter = "akaza";
-    // let chosenCharacter = "anakin";
+    let chosenCharacter = "akaza";
+    // let chosenCharacter = "anakin"; 
     // let chosenCharacter = "rambo";
     // let chosenCharacter = "law";
-    let chosenCharacter = "death";
+    // let chosenCharacter = "death";
     // <------------------ ENEMY SELECT ------------------->
     // let chosenEnemy = "samurai";
     // let chosenEnemy = "kenji";
@@ -712,6 +725,10 @@ body{
     let pAttackFCounter = 0;  // Keeps track of the current frame
     let eAttackFCounter = 0;  // Keeps track of the current frame
 
+    //Effect counter for when hit while blocked
+    let pEffectOrangeFCounter = 2;
+    let eEffectOrangeFCounter = 0;
+
     let pDeathFCounter = 0;
     let eDeathFCounter = 0;
     
@@ -753,6 +770,8 @@ body{
         let hitBoxYB;
 
         let hitBoxCenter;
+        let effectBoxX;
+        let effectBoxY;
 
         
         this.attack = function(){
@@ -760,6 +779,7 @@ body{
                 this.isAttacking = true;
                 this.cooldown = true;
             }
+
             setTimeout(() => {
                 this.isAttacking = false;
                 if (this === player) {     
@@ -832,11 +852,18 @@ body{
             }else{
                 console.log(this.name+" Blocked the Attack!");
                 this.blockCounter--;
-                console.log('blockCounter--: ', this.blockCounter);
+                console.log("Calling Effect!");
+                effectDraw(this.name);
+                console.log('this.name: ', this.name);
+                // console.log('blockCounter--: ', this.blockCounter);
+                //  drawEffect(effectOrangeF[2], player.hitBoxCenter+20, player.hitBoxYT+20, "player");
+                //  console.log('effectOrangeF: ', effectOrangeF[2]);
+
+
                 this.block();//to check status and unblock if blockCounter is 0
             }
         }
-
+        //To check block limit
         this.block = function(){
             
             if(this.blockCounter > 0 && !this.isMoving){
@@ -969,6 +996,10 @@ body{
         glareClassP.style.display = "none"; // Removes from layout
         glareClassE = document.querySelector('.glareE');
         glareClassE.style.display = "none"; // Removes from layout
+
+        //Load Effect Frames
+        effectOrangeF = document.querySelectorAll(".hitOrange");
+        effectYellowF = document.querySelectorAll(".hitYellow");
 
         //LOAD FRAMES CHARACTER
         if(chosenCharacter === "samurai"){
@@ -1120,7 +1151,7 @@ body{
 
         // Track keydown and keyup events
         window.addEventListener('keydown', (event) => {
-            console.log("Key Pressed: ", event.key);
+            // console.log("Key Pressed: ", event.key);
             //lOWER CASE SO THAT IT WORKS FOR BOTH UPPER AND LOWER CASE KEYS
             if(event.key === "A" || event.key === "D" || event.key === "W" || event.key === "S"){
                 keysPressed.add(event.key.toLowerCase());
@@ -1155,6 +1186,30 @@ body{
             }
             
         }, 50);
+        //Blocking Effect Frame Interval
+        setInterval(() => {
+            if(enemy.isAttacking || !enemy.isAttacking){
+
+                if(pEffectOrangeFCounter < 4){
+                    // pEffectOrangeFCounter++;
+                }
+                
+            }else{
+                pEffectOrangeFCounter = 2;
+
+            }
+            if(player.isAttacking){
+
+                if(eEffectOrangeFCounter < 4){
+                    eEffectOrangeFCounter++;
+                }
+                
+            }else{
+                eEffectOrangeFCounter = 0;
+
+            }
+            
+        }, 100);
         //Taking Hit Frame Interval
         setInterval(() => {
             if(player.isTakingHit){
@@ -1216,11 +1271,13 @@ body{
         playerDraw();
         enemyDraw();
 
+        // drawEffect(effectOrangeF[1], player.hitBoxCenter+20, player.hitBoxYT+20, "player");
+        // drawEffect(effectOrangeF[1], enemy.hitBoxCenter-20, enemy.hitBoxYT-20, "enemy");
+
 
         if(!winnerDeclared){
-            
             checkHealth();   
-            
+            getFlipped();
             getPlayerAttackBoxAndHitBox();
             getEnemyAttackBoxAndHitBox();
         }
@@ -1228,7 +1285,7 @@ body{
         if(debug === true){
             debugPlayerAttackBoxAndHitBox();
             debugEnemyAttackBoxAndHitBox();
-            for (let i = 0; i < 10; i++) { // Loop from 0 to 9
+            for (let i = 0; i < 12; i++) { // Loop from 0 to 11
                 hitBoxCords[i].style.display = "block";
             }
             playerHitBoxBox.style.display = "block";
@@ -1238,25 +1295,41 @@ body{
         
         window.requestAnimationFrame(gameLoop); // Keep requesting new frames
     }
+
+    function effectDraw(character){
+
+        console.log('Effectdraw function  called by character: ', character);
+
+        if(character === "player"){
+            console.log("Drawing Player Effect");
+            console.log('pEffectOrangeFCounter: ', pEffectOrangeFCounter);
+            console.log(effectOrangeF[pEffectOrangeFCounter]);
+            drawEffect(effectOrangeF[pEffectOrangeFCounter], player.hitBoxCenter+20, player.hitBoxYT+20, "player");
+        }else if(character === "enemy"){
+            console.log("Drawing Enemy Effect");
+            drawEffect(effectOrangeF[eEffectOrangeFCounter], enemy.hitBoxCenter-20, enemy.hitBoxYT-20, "enemy");
+        }
+    }
+
     function playerDraw(){
         if (player.isDead){
-            drawDeath(pDeathF[pDeathFCounter],player.x,player.y);
+            drawDeath(pDeathF[pDeathFCounter],player.x,player.y,"player");
             return;
         }
         if (player.isAttacking){
-            drawAttack(pAttackF[pAttackFCounter],player.x,player.y); 
+            drawAttack(pAttackF[pAttackFCounter],player.x,player.y,"player"); 
         }
         if (player.isBlocking){
-            drawBlock(pBlockF,player.x,player.y); 
+            drawBlock(pBlockF,player.x,player.y,"player"); 
         }
         if (player.isTakingHit && !player.isAttacking){
-            drawTakeHit(pTakeHitF[pTakeHitFCounter],player.x,player.y); 
+            drawTakeHit(pTakeHitF[pTakeHitFCounter],player.x,player.y,"player"); 
         }
         else if (player.isMoving && !player.isAttacking) {
-            drawMove(pMoveF[pMoveFCounter],player.x,player.y);
+            drawMove(pMoveF[pMoveFCounter],player.x,player.y,"player");
         } 
         else if (player.isFalling) {
-            drawFall(pFallF,player.x,player.y);
+            drawFall(pFallF,player.x,player.y,"player");
         } 
         else if(!player.isAttacking && !player.isFalling && !player.isMoving && !player.isDashing && !player.isDead && !player.isBlocking) { 
             drawIdle(pIdle,player.x,player.y,"player"); 
@@ -1359,6 +1432,26 @@ body{
         }
     }
 
+    //Draw effect
+    function drawEffect(effectImg, x, y, name){
+        console.log("Drawing Effect ");
+        console.log(effectImg);
+        console.log(x);
+        console.log(y);
+        console.log(name);
+        if(name === "enemy" && !enemy.isFlipped || name === "player" && player.isFlipped){
+            context.save();
+            context.translate(x + width, y);
+            context.scale(-1, 1);
+            context.drawImage(effectImg, 0, 0);
+            context.restore();
+        }else{
+            context.drawImage(effectImg, x, y);
+            
+        }
+
+    }
+
     //FLip when enemy calls this function
     function drawIdle(charImg, x, y, name) {
         if(name === "enemy" && !enemy.isFlipped || name === "player" && player.isFlipped){
@@ -1386,6 +1479,7 @@ body{
             
         }
     }
+
     function drawBlock(charBlock,x, y, name) {
         if(name === "enemy" && !enemy.isFlipped || name === "player" && player.isFlipped){
             context.save();
@@ -1450,7 +1544,17 @@ body{
             
         }
     }
-    
+
+    function getFlipped(){
+        if(player.hitBoxCenter > enemy.hitBoxCenter){
+            player.isFlipped = true;
+            enemy.isFlipped = true;
+        }else{
+            player.isFlipped = false;
+            enemy.isFlipped = false;
+        }
+    }
+
     function getPlayerAttackBoxAndHitBox(){
         
         //Left X
@@ -1463,8 +1567,11 @@ body{
         player.hitBoxYB = Math.floor(player.y+height);
  
         //Center
-        player.hitBoxCenter = (player.hitBoxXL + player.hitBoxXR) / 2;
-        
+        player.hitBoxCenter = (player.hitBoxXL + player.hitBoxXR) / 2;        
+
+        player.effectBoxX = player.hitBoxXR;
+        player.effectBoxY = (player.hitBoxYB + player.hitBoxYT) / 2.25;
+
         player.attackRangeS = player.hitBoxXR ;
         player.attackRangeE = player.attackRangeS + (width/3);
         player.attackRangeT = player.hitBoxYT;
@@ -1472,13 +1579,6 @@ body{
 
         player.attackRange = Math.abs(player.attackRangeE - player.attackRangeS);
         
-        if(player.hitBoxCenter > enemy.hitBoxCenter){
-            player.isFlipped = true;
-            enemy.isFlipped = true;
-        }else{
-            player.isFlipped = false;
-            enemy.isFlipped = false;
-        }
         //WHen flip
         if(player.isFlipped){
             player.attackRangeS = player.hitBoxXL - player.attackRange;
@@ -1500,6 +1600,9 @@ body{
         
         //Center
         enemy.hitBoxCenter = (enemy.hitBoxXL + enemy.hitBoxXR) / 2;
+
+        enemy.effectBoxX = enemy.hitBoxXL;
+        enemy.effectBoxY = (enemy.hitBoxYB + enemy.hitBoxYT) / 2.25;
  
         enemy.attackRangeS = enemy.hitBoxXL;
         enemy.attackRangeE = enemy.attackRangeS - (width/3);
@@ -1561,6 +1664,13 @@ body{
             hitBoxCords[8].style.left = player.hitBoxCenter+"px";
             hitBoxCords[8].innerText = player.hitBoxCenter;
             
+        // //Effectbox
+            context.lineWidth = "10";
+            context.strokeStyle = "blue";
+            context.strokeRect(player.effectBoxX, player.effectBoxY, 1 ,1);
+            hitBoxCords[10].style.top = player.effectBoxY+"px";
+            hitBoxCords[10].style.left = player.effectBoxX+"px";
+            
 
         playerHitBoxBox.innerText = "Left X:"+player.hitBoxXL+"\n"+"Right X:"+player.hitBoxXR+"\n"+"Top Y:"+player.hitBoxYT+"\n"+"Bottom Y:"+player.hitBoxYB+"\n"+"Center:"+player.hitBoxCenter+"\n" + "Attack Range:" +  (player.attackRangeS - player.attackRangeE);
     
@@ -1621,6 +1731,14 @@ body{
             hitBoxCords[9].style.left = enemy.hitBoxCenter+"px";
             hitBoxCords[9].innerText = enemy.hitBoxCenter;
 
+        // //Effectbox
+            context.lineWidth = "10";
+            context.strokeStyle = "blue";
+            context.strokeRect(enemy.effectBoxX, enemy.effectBoxY, 1 ,1);
+            hitBoxCords[11].style.top = enemy.effectBoxY+"px";
+            hitBoxCords[11].style.left = enemy.effectBoxX+"px";
+            
+
             
         pEnemyHitBoxBox.innerText = "Left X:"+enemy.hitBoxXL+"\n"+"Right X:"+enemy.hitBoxXR+"\n"+"Top Y:"+enemy.hitBoxYT+"\n"+"Bottom Y:"+enemy.hitBoxYB+"\n"+"Center:"+enemy.hitBoxCenter+"\n" + "Attack Range:" +  (enemy.attackRangeS - enemy.attackRangeE);    
 
@@ -1629,7 +1747,8 @@ body{
         // context.strokeStyle = "blue";
         // context.strokeRect(enemy.x,enemy.y,width,height);
     }
-
+    
+    
     function startCountdown(){
         const interval = setInterval(() => {
             countdownDuration--;
