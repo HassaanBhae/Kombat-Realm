@@ -6,41 +6,135 @@
     <title>Kombat Realm</title>
     <link rel="preload" as="image" href="./images/background2-compresed.jpg"> <!-- Preload the image -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="menu.css">
     <link rel="stylesheet" href="leaves.css">
 </head>
 <body>
+    <!-- AUDIO -->
     <audio muted id="background-audio">
-        <source src="./audio/chill.mp3" type="audio/mp3">
-        <!-- <source src="horse.mp3" type="audio/mpeg"> -->
         Your browser does not support the audio element.
     </audio>
     <audio id="slideDoor-audio">
         <source src="./audio/heavy-slide-door-3s.mp3" type="audio/mp3">
-        <!-- <source src="horse.mp3" type="audio/mpeg"> -->
         Your browser does not support the audio element.
     </audio>
+<!-- DOORS ANIMATION -->
+
+
     <div class="slideshow" id="slideshow"></div>
-    <div id="menu">
-        <h1 id="heading">Choose Your Weapon</h1>
+
+<!-- MENU MAIN -->
+    <div id="blur-overlay"></div>
+
+  <div class="menu-box">
+    <div class="menu-item">
+        <img src="./assets/menu/arcade.png" alt="Arcade Mode">
     </div>
-    <h2 id="choice">Katana</h2>
-    <div id="weapon-holder">
-        <div id="katana" class="weapon">
-            <h2 id="katana-head" class="head">Katana</h2>
-            <div class="ring"></div>
-            <div><img src="./images/katana.png" id="kimg"></div>
-        </div>
-        <div id="spear" class="weapon">
-            <h2 id="spear-head" class="head">Spear</h2>
-            <div class="ring"></div>
-            <div><img src="./images/spear.png" id="simg"></div>
-        </div>
-        <div id="shield" class="weapon">
-            <h2 id="shield-head" class="head">Shield</h2>
-            <div class="ring"></div>
-            <div><img src="./images/shield.png" id="ssimg"></div>
-        </div>
+    <div class="menu-item">
+        <img src="./assets/menu/2-player.png" alt="2 Player">
     </div>
+    <div class="menu-item">
+        <img src="./assets/menu/settings.png" alt="Settings">
+    </div>
+    <div class="menu-item">
+        <img src="./assets/menu/credits.png" alt="Credits">
+    </div>
+</div>
+<!-- WINDOWS -->
+<div class="menu-window" id="arcade-window">Arcade Mode Content</div>
+<div class="menu-window" id="2player-window">2 Player Content</div>
+<div class="menu-window" id="settings-window">
+    <div class="settings-inner">
+
+      <!-- Close button -->
+      <button id="close-btn" aria-label="Close settings">✕</button>
+
+      <p class="settings-title">SETTINGS</p>
+      <p class="settings-subtitle">Key Bindings</p>
+
+      <!-- Movement -->
+      <p class="section-label">Movement</p>
+      <div class="grid-move">
+        <div class="kb-empty"></div>
+        <div class="kb-key" data-action="up">
+          <span class="kb-label">Up</span>
+          <div class="kb-box" id="key-up">W</div>
+        </div>
+        <div class="kb-empty"></div>
+
+        <div class="kb-key" data-action="left">
+          <span class="kb-label">Left</span>
+          <div class="kb-box" id="key-left">A</div>
+        </div>
+        <div class="kb-key" data-action="down">
+          <span class="kb-label">BLOCK</span>
+          <div class="kb-box" id="key-block">S</div>
+        </div>
+        <div class="kb-key" data-action="right">
+          <span class="kb-label">Right</span>
+          <div class="kb-box" id="key-right">D</div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Actions -->
+      <div class="grid-actions">
+        <div class="kb-key" data-action="attack">
+          <span class="kb-label">Attack</span>
+          <div class="kb-box" id="key-attack">J</div>
+        </div>
+        <div class="kb-key" data-action="special">
+          <span class="kb-label">Special</span>
+          <div class="kb-box" id="key-special">L</div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Audio -->
+      <p class="section-label">Audio</p>
+      <div class="audio-toggles">
+
+        <div class="audio-row">
+          <div class="audio-info">
+            <span class="audio-icon">♪</span>
+            <span class="audio-name">Music</span>
+          </div>
+          <button class="toggle-btn on" id="toggle-music" aria-pressed="true">
+            <span class="toggle-track">
+              <span class="toggle-thumb"></span>
+            </span>
+            <span class="toggle-state-label">ON</span>
+          </button>
+        </div>
+
+        <div class="audio-row">
+          <div class="audio-info">
+            <span class="audio-icon">★</span>
+            <span class="audio-name">Sound FX</span>
+          </div>
+          <button class="toggle-btn on" id="toggle-sfx" aria-pressed="true">
+            <span class="toggle-track">
+              <span class="toggle-thumb"></span>
+            </span>
+            <span class="toggle-state-label">ON</span>
+          </button>
+        </div>
+
+      </div>
+
+      <hr class="divider">
+
+      <p class="hint">Click a box, then press any key to rebind</p>
+      <button id="reset-btn">Reset to defaults</button>
+
+    </div>
+  </div>
+<div class="menu-window" id="credits-window">Credits Content</div>
+
+
+<!-- LEAVES -->
     <div id="leaves">
         <i class="leaf"></i>
         <i class="leaf"></i>

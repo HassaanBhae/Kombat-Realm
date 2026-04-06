@@ -1,91 +1,4 @@
-// console.log("Code Started");
-// function getComputerChoice(){
-//     computerChoice=Math.floor(Math.random()*3);
-//     return;
-// }
-// function getHumanChoice(){
-//     humanChoice=parseInt(prompt("Enter:\n[0] for Rock\n[1] for Paper \n[2] for Scissor"));
-//     return;
-// }
-// function checkChoice(choice){
-//     if(choice==0){
-//         console.log("rock");
-//     }
-//     else if(choice==1){
-//         console.log("paper");
-//     }
-//     else if(choice==2){
-//         console.log("scissor");
-//     }
-//     else{
-//         console.log("Invalid Number!");
-//     }
-// }
-// function checkWin(){
-//     if(humanChoice==computerChoice){
-//         console.log("Draw!")
-//     }
-//     else if(humanChoice==0 && computerChoice==2){
-//         console.log("Human Wins!")
-//         humanWin();
-//     }
-//     else if(humanChoice==1 && computerChoice==0){
-//         console.log("Human Wins!")
-//         humanWin();
-//     }
-//     else if(humanChoice==2 && computerChoice==1){
-//         console.log("Human Wins!")
-//         humanWin();
-//     }
-//     else {
-//         console.log("Computer Wins!")
-//         computerWin();
-//     }
-// }
-// function computerWin(){
-//     computerScore++;
-// }
-// function humanWin(){
-//     humanScore++;
-// }
-// function totalScore(){
-//     console.log("Human Score:"+humanScore);
-//     console.log("Computer Score:"+computerScore);
-//     if(humanScore==computerScore){
-//         console.log("Match Draw!")
-//     }
-//     else if(humanScore>computerScore){
-//         console.log("Human Wins the Match!")
-//     }
-//     else if(humanScore<computerScore){
-//         console.log("Computer Wins the Match!")
-//     }
-// }
-// function plaground(){
-//     for(i=1;i<=5;i++){
-//         console.log("Round"+i+"!");
-//         getComputerChoice();
-//         getHumanChoice();
-//         console.log("Computer chose:");
-//         checkChoice(computerChoice);
-//         console.log("Human chose:")
-//         checkChoice(humanChoice);
-//         checkWin();
-//     }
-//     totalScore();
-// }
-// let computerChoice=0;
-// let humanChoice=0;
-// let computerScore=0;
-// let humanScore=0;
-// plaground();
-
-////////////////////////////////////////////////////////////***********/////////////////////////////////////////////////////////////////////////////////
 //Ui Elemnts
-const weapons = document.querySelectorAll(".weapon");
-const rings = document.querySelectorAll(".ring");
-const choice = document.getElementById("choice");
-const menu = document.getElementById("menu");
 const leaves = document.querySelectorAll(".leaf");
 const leavesAll = document.getElementById("leaves");
 const slideshow = document.getElementById("slideshow");
@@ -93,11 +6,11 @@ const loader = document.getElementById("loader");
 const loadingBar = document.getElementById("loadingBar");
 const innerBar = document.getElementById("innerBar");
 const playButton = document.getElementById("playButton");
-const weaponHolder = document.getElementById("weapon-holder");
 const bg = document.querySelector("body");
-const heading = document.getElementById("heading");
 const audioBg = document.getElementById('background-audio');
 const slideDoorAudio = document.getElementById('slideDoor-audio');
+const items = document.querySelectorAll('.menu-item');
+const overlay = document.getElementById('blur-overlay');
 
 //Load The Images Before Hand
 let imagesLoaded = 0;
@@ -165,6 +78,10 @@ function functionPlayButton(){
     playAudio();
     startMenu();
 }
+functionPlayButton();
+playButton.style.display = "none";
+
+
 function playAudio() {
     console.log("Playing BGAudio!");
     audioBg.muted = false;
@@ -186,10 +103,8 @@ function finnerBar(){
 }
 function startMenu(){
     leavesAll.style.display = "block";  
-    heading.style.opacity = "1";
     bg.style.backdropFilter = "none";
     bg.style.filter = "none";
-    weaponHolder.style.opacity = "1";
     loadingBar.style.opacity = "0";
     loadingBar.style.display = "none";
 };
@@ -219,35 +134,170 @@ function splashScreen(){
     playSlideDoorAudio();
     const intervalId = setInterval(() => showNextImage(intervalId), 30); 
 }
+//OVERLAY BLUE
+items.forEach((item, index) => {
+    item.addEventListener('click', () => {
+        document.querySelectorAll('.menu-window')
+            .forEach(w => w.classList.remove('active'));
 
-//Add Listener For Each Weapon
-weapons.forEach(weapon => {
-    weapon.addEventListener("click", () => {
-        //Ring
-        const circle = weapon.children[1]; // Get the second child
-        const head = weapon.children[0];
-        circle.style.transform = "scale(0)"; // Shrinks to center
-        circle.style.opacity = "0"; // Optional for fade effect
-        head.style.transform= "scale(0)";
-        head.style.opacity = "0"; // Optional for fade effect
-        choice.textContent = weapon.children[0].textContent;
-        // choice.textContent = choice.textContent.toUpperCase();
-        setTimeout(() => {
-            circle.style.transform = "scale(30)"; // Shrinks to center
-            circle.style.opacity = "0.6"; // Optional for fade effect
-            menu.style.transition = "1s";
-            menu.style.opacity = 0;
-            weaponHolder.style.transition = "1s";
-            weaponHolder.style.opacity = 0;
-            choice.style.transform = "scale(15)"; // Grows
-            choice.style.opacity = "0.8"; // Optional for fade effect
-            choice.style.transition = "transform 0.5s ease-in-out";
-            audioBg.pause();
-        }, 500); // Match this duration with the CSS transition time
-        setTimeout(() => {
-            console.log("Calling Splash Screen!");
-            splashScreen(); // Call your desired function here
-            console.log("Ui Elemonts Done! Starting Game!")
-        }, 1500); // Function will execute after 1500 ms
+        windows[index].classList.add('active');
+
+        overlay.classList.add('active'); // enable blur
     });
+});
+// document.querySelectorAll('.menu-window').forEach(win => {
+//     win.addEventListener('click', () => {
+//         win.classList.remove('active');
+//         overlay.classList.remove('active');
+//     });
+// });
+//---------------------------------------
+const windows = {
+    0: document.getElementById('arcade-window'),
+    1: document.getElementById('2player-window'),
+    2: document.getElementById('settings-window'),
+    3: document.getElementById('credits-window')
+};
+// document.querySelectorAll('.menu-window').forEach(win => {
+//     win.addEventListener('click', () => {
+//         win.classList.remove('active');
+//     });
+// });
+items.forEach((item, index) => {
+    item.addEventListener('click', () => {
+        // close all
+        document.querySelectorAll('.menu-window')
+            .forEach(w => w.classList.remove('active'));
+
+        // open selected
+        windows[index].classList.add('active');
+    });
+});
+const DEFAULTS = {
+  up:      'W',
+  left:    'A',
+  right:   'D',
+  attack:  'J',
+  block:   'S',
+  special: 'L',
+};
+
+const keys = { ...DEFAULTS };
+let listeningBox = null;
+
+function getAllBoxes() {
+  return document.querySelectorAll('.kb-box[id^="key-"]');
+}
+
+function actionFromBox(box) {
+  return box.id.replace('key-', '');
+}
+
+function render() {
+  getAllBoxes().forEach(box => {
+    const action = actionFromBox(box);
+    box.textContent = keys[action];
+  });
+}
+
+function startListening(box) {
+  if (listeningBox) stopListening(false);
+  listeningBox = box;
+  box.classList.add('listening');
+  box.textContent = '...';
+}
+
+function stopListening(rerender = true) {
+  if (!listeningBox) return;
+  listeningBox.classList.remove('listening');
+  listeningBox = null;
+  if (rerender) render();
+}
+
+// Click on a key box → start rebind
+document.addEventListener('click', (e) => {
+  const box = e.target.closest('.kb-box');
+  if (box) {
+    startListening(box);
+  } else {
+    stopListening();
+  }
+});
+
+// Keydown → assign or cancel
+document.addEventListener('keydown', (e) => {
+  if (!listeningBox) return;
+  e.preventDefault();
+
+  if (e.key === 'Escape') {
+    stopListening();
+    return;
+  }
+
+  let label = e.key.toUpperCase();
+  if (label === ' ')              label = 'SPC';
+  if (label.startsWith('ARROW')) label = label.replace('ARROW', '')[0];
+  if (label.length > 4)          label = label.slice(0, 4);
+
+  const action = actionFromBox(listeningBox);
+
+  // Clear any conflicting binding
+  Object.keys(keys).forEach(k => {
+    if (keys[k] === label && k !== action) keys[k] = '—';
+  });
+
+  keys[action] = label;
+  stopListening();
+});
+
+// Visual press effect
+document.addEventListener('mousedown', (e) => {
+  const box = e.target.closest('.kb-box');
+  if (box) box.classList.add('pressed');
+});
+document.addEventListener('mouseup', () => {
+  document.querySelectorAll('.kb-box.pressed').forEach(b => b.classList.remove('pressed'));
+});
+
+// Reset button
+document.getElementById('reset-btn').addEventListener('click', () => {
+  Object.assign(keys, DEFAULTS);
+  stopListening();
+  render();
+});
+
+// Init
+render();
+
+/* ─── Audio Toggles ─── */
+const audioState = {
+  music: true,
+  sfx:   true,
+};
+
+function applyToggleUI(btn, isOn) {
+  btn.classList.toggle('on',  isOn);
+  btn.classList.toggle('off', !isOn);
+  btn.setAttribute('aria-pressed', isOn);
+  btn.querySelector('.toggle-state-label').textContent = isOn ? 'ON' : 'OFF';
+}
+
+function setupToggle(btnId, stateKey) {
+  const btn = document.getElementById(btnId);
+  applyToggleUI(btn, audioState[stateKey]);
+
+  btn.addEventListener('click', () => {
+    audioState[stateKey] = !audioState[stateKey];
+    applyToggleUI(btn, audioState[stateKey]);
+  });
+}
+
+setupToggle('toggle-music', 'music');
+setupToggle('toggle-sfx',   'sfx');
+
+// Close button
+document.getElementById('close-btn').addEventListener('click', () => {
+  document.getElementById('settings-window').classList.remove('active');
+  overlay.classList.remove('active');
+
 });

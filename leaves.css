@@ -83,9 +83,9 @@
 #leaves i:nth-of-type(14n) { -webkit-animation-delay: 4.7s;}
 #leaves i:nth-of-type(15n) { -webkit-animation-delay: 3s;  }
 
-#leaves i:nth-of-type(n)    { background: linear-gradient(to bottom right, #fe7c02, #efbd0a); }
-#leaves i:nth-of-type(2n+2)  { background: linear-gradient(to bottom right, #f3a034, #f88d01); }
-#leaves i:nth-of-type(4n+1)  { background: linear-gradient(to bottom right, rgb(153, 133, 0), #6d5001); }
+#leaves i:nth-of-type(n)    { background: linear-gradient(to bottom right, #19a400, #047b3c); }
+#leaves i:nth-of-type(2n+2)  { background: linear-gradient(to bottom right, #109004, #039d48); }
+#leaves i:nth-of-type(4n+1)  { background: linear-gradient(to bottom right, rgb(8, 66, 24), #104430); }
 
 #leaves i:nth-of-type(n)    { opacity: 1;}
 #leaves i:nth-of-type(3n+1)  { opacity: 1;}
