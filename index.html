@@ -6,8 +6,10 @@
     <title>Kombat Realm</title>
     <link rel="preload" as="image" href="./images/background2-compresed.jpg"> <!-- Preload the image -->
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="menu.css">
-    <link rel="stylesheet" href="leaves.css">
+    <link rel="stylesheet" href="./menus/menu.css">
+    <link rel="stylesheet" href="./menus/settings.css">
+    <link rel="stylesheet" href="./menus/2player.css">
+    <link rel="stylesheet" href=".leaves.css">
 </head>
 <body>
     <!-- AUDIO -->
@@ -42,12 +44,140 @@
 </div>
 <!-- WINDOWS -->
 <div class="menu-window" id="arcade-window">Arcade Mode Content</div>
-<div class="menu-window" id="2player-window">2 Player Content</div>
+<!-- <div class="menu-window" id="2player-window">2 Player Content</div> -->
+<div class="menu-window  player-window" id="2player-window">
+ 
+    <button class="close-btn" aria-label="Close">&#x2715;</button>
+ 
+    <div class="cs-inner">
+ 
+      <p class="cs-title">SELECT YOUR FIGHTER</p>
+ 
+      <div class="cs-grid">
+ 
+        <div class="cs-card" data-index="0"
+          data-name="Kenji"
+          data-type="Warrior"
+          data-hp="95" data-atk="80" data-def="70" data-spd="55" data-sp="60">
+          <div class="cs-portrait">
+            <img src="./assets/characterSelection/kenji.png" alt="Kael" draggable="false">
+          </div>
+          <div class="cs-footer">
+            <p class="cs-name">kenji</p>
+            <p class="cs-type">Warrior</p>
+          </div>
+        </div>
+ 
+        <div class="cs-card" data-index="1"
+          data-name="Samurai"
+          data-type="Mage"
+          data-hp="60" data-atk="95" data-def="40" data-spd="70" data-sp="90">
+          <div class="cs-portrait">
+            <img src="./assets/characterSelection/samurai.png" alt="Samurai" draggable="false">
+          </div>
+          <div class="cs-footer">
+            <p class="cs-name">samurai</p>
+            <p class="cs-type">Mage</p>
+          </div>
+        </div>
+ 
+        <div class="cs-card" data-index="2"
+          data-name="Knight"
+          data-type="Assassin"
+          data-hp="65" data-atk="90" data-def="35" data-spd="95" data-sp="75">
+          <div class="cs-portrait">
+            <img src="./assets/characterSelection/knight.png" alt="Knight" draggable="false">
+          </div>
+          <div class="cs-footer">
+            <p class="cs-name">knight</p>
+            <p class="cs-type">Assassin</p>
+          </div>
+        </div>
+ 
+        <div class="cs-card" data-index="3"
+          data-name="Anakin"
+          data-type="Tank"
+          data-hp="100" data-atk="60" data-def="95" data-spd="40" data-sp="50">
+          <div class="cs-portrait">
+            <img src="./assets/characterSelection/anakin.png" alt="Anakin" draggable="false">
+          </div>
+          <div class="cs-footer">
+            <p class="cs-name">Anakin</p>
+            <p class="cs-type">Tank</p>
+          </div>
+        </div>
+ 
+        <div class="cs-card" data-index="4"
+          data-name="Rambo"
+          data-type="Ranger"
+          data-hp="70" data-atk="75" data-def="55" data-spd="85" data-sp="70">
+          <div class="cs-portrait">
+            <img src="./assets/characterSelection/rambo.png" alt="Rambo" draggable="false">
+          </div>
+          <div class="cs-footer">
+            <p class="cs-name">Rambo</p>
+            <p class="cs-type">Ranger</p>
+          </div>
+        </div>
+ 
+        <div class="cs-card" data-index="5"
+          data-name="Law"
+          data-type="Berserker"
+          data-hp="85" data-atk="100" data-def="45" data-spd="65" data-sp="55">
+          <div class="cs-portrait">
+            <img src="./assets/characterselection/law.png" alt="Law" draggable="false">
+          </div>
+          <div class="cs-footer">
+            <p class="cs-name">Law</p>
+            <p class="cs-type">Berserker</p>
+          </div>
+        </div>
+ 
+        <div class="cs-card" data-index="6"
+          data-name="Death"
+          data-type="Healer"
+          data-hp="75" data-atk="50" data-def="65" data-spd="75" data-sp="100">
+          <div class="cs-portrait">
+            <img src="./assets/characterselection/death.png" alt="Death" draggable="false">
+          </div>
+          <div class="cs-footer">
+            <p class="cs-name">Death</p>
+            <p class="cs-type">Healer</p>
+          </div>
+        </div>
+ 
+        <div class="cs-card" data-index="7"
+          data-name="Akaza"
+          data-type="Demon"
+          data-hp="70" data-atk="85" data-def="50" data-spd="90" data-sp="80">
+          <div class="cs-portrait">
+            <img src="./assets/characterSelection/akaza.png" alt="Akaza" draggable="false">
+          </div>
+          <div class="cs-footer">
+            <p class="cs-name">Akaza</p>
+            <p class="cs-type">Demon</p>
+          </div>
+        </div>
+ 
+      </div>
+ 
+      <p class="cs-hint">Click a character to select &bull; Hover to preview stats</p>
+ 
+    </div>
+ 
+    <!-- Stat popup (repositioned by JS) -->
+    <div class="stat-popup" id="stat-popup">
+      <p class="sp-name" id="sp-name">Kael</p>
+      <p class="sp-type" id="sp-type">Warrior</p>
+      <div class="sp-bars" id="sp-bars"></div>
+    </div>
+ 
+  </div>
 <div class="menu-window" id="settings-window">
     <div class="settings-inner">
 
       <!-- Close button -->
-      <button id="close-btn" aria-label="Close settings">✕</button>
+      <button class="close-btn" aria-label="Close settings">✕</button>
 
       <p class="settings-title">SETTINGS</p>
       <p class="settings-subtitle">Key Bindings</p>

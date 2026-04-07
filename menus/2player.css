@@ -1,0 +1,213 @@
+/* ─── Inner layout ─── */
+.cs-inner {
+  width: 100%;
+  height: 100%;
+  padding: 0 !important;
+  /* padding: 1.8rem 2rem 1.4rem; */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow-y: auto;
+  
+  font-family: sans-serif;
+  
+}
+ 
+.cs-title {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #fff8ef;
+  text-transform: uppercase;
+  font-family: ninja;
+}
+ 
+ 
+/* ─── Character grid ─── */
+.cs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  flex: 1;
+}
+ 
+/* ─── Character card ─── */
+.cs-card {
+  background: rgba(0,0,0,0.30);
+  border: 2px solid rgba(255,255,255,0.2);
+  border-bottom: 5px solid rgba(0,0,0,0.4);
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: border-color 0.15s, background 0.15s, transform 0.12s;
+}
+ 
+.cs-card:hover {
+  border-color: rgba(255,255,255,0.5);
+  background: rgba(0,0,0,0.42);
+  transform: translateY(-3px);
+}
+ 
+.cs-card.selected {
+  border-color: #ffd97a;
+  border-bottom-color: #b8862e;
+  background: rgba(255,200,80,0.13);
+  transform: translateY(-3px);
+}
+ 
+.cs-card.selected .cs-name {
+  color: #ffd97a;
+}
+ 
+/* ─── Portrait ─── */
+.cs-portrait {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+ 
+.cs-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform 0.2s;
+}
+ 
+.cs-card:hover .cs-portrait img {
+  transform: scale(1.05);
+}
+ 
+/* ─── Card footer ─── */
+.cs-footer {
+  padding: 8px 8px 10px;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  background: rgba(0,0,0,0.15);
+}
+ 
+.cs-name {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff8ef;
+  transition: color 0.15s;
+}
+ 
+.cs-type {
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #f5d4b0;
+  opacity: 0.8;
+  margin-top: 2px;
+}
+ 
+/* ─── Hint ─── */
+.cs-hint {
+  text-align: center;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  color: #f5d4b0;
+  opacity: 0.7;
+}
+ 
+/* ─── Stat popup ─── */
+.stat-popup {
+  position: absolute;
+  width: 180px;
+  background: rgb(100, 50, 15);
+  border: 2px solid #ffd97a;
+  border-radius: 10px;
+  padding: 12px 14px 14px;
+  font-family: sans-serif;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.15s, transform 0.15s;
+  z-index: 200;
+}
+ 
+.stat-popup.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+ 
+.sp-name {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffd97a;
+  margin-bottom: 2px;
+}
+ 
+.sp-type {
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f5d4b0;
+  margin-bottom: 10px;
+  opacity: 0.85;
+}
+ 
+/* ─── Stat bars ─── */
+.sp-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+ 
+.sp-row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+ 
+.sp-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+ 
+.sp-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f5d4b0;
+}
+ 
+.sp-val {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #fff8ef;
+}
+ 
+.sp-track {
+  width: 100%;
+  height: 5px;
+  background: rgba(0,0,0,0.35);
+  border-radius: 3px;
+  overflow: hidden;
+}
+ 
+.sp-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: #ffd97a;
+  transition: width 0.3s ease;
+}
+ 
+.sp-fill.high  { background: #7edb8a; }
+.sp-fill.mid   { background: #ffd97a; }
+.sp-fill.low   { background: #e07a5a; }

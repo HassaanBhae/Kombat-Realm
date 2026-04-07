@@ -89,9 +89,9 @@ body {
     display: none; /* Hide all images by default */
     position: relative;
 }
-.active {
-    display: block !important; /* Show the active image */
-}
+/* .active { */
+    /* display: block !important; Show the active image */
+/* } */
 
 #loader {
     position: absolute;
