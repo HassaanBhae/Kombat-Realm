@@ -33,12 +33,7 @@
   backdrop-filter: blur(200px);
   animation: popup 0.35s ease;
 }
-.player-window {
-  width: 60%;
-  padding-top: 0px;
-  padding-left: 20px;
-  padding-right: 20px;
-}
+
 @keyframes popup {
   from {
     opacity: 0;
@@ -55,6 +50,7 @@
   position: absolute;
   top: 14px;
   right: 14px;
+  z-index: 101;
   width: 4rem;
   height: 4rem;
   background: rgba(0, 0, 0, 0.25);

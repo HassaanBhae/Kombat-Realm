@@ -1,3 +1,10 @@
+.player-window {
+  width: 50%;
+  padding-top: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+  min-width: 600px;
+}
 /* ─── Inner layout ─── */
 .cs-inner {
   width: 100%;

@@ -34,18 +34,18 @@
 }
 
 .side-img img {
-  width: 30em;
+  width: 6em;
   /* height: auto; */
 }
 
 /* left side */
 .side-img.left {
-  left: -30%;
+  left: 7%;
 }
 
 /* right side */
 .side-img.right {
-  right: -30%;
+  right: 7%;
   /* flip side */
   transform: translateY(-50%) scaleX(-1);
 }
