@@ -633,6 +633,8 @@ function gameLoop(timeStamp) {
         getPlayerAttackBoxAndHitBox();
         getEnemyAttackBoxAndHitBox();
     }
+        drawEffect(effectOrangeF[effectOrangeFCounter], player.effectBoxX, enemy.effectBoxY-40, "player");
+        drawEffect(effectOrangeF[effectOrangeFCounter], enemy.effectBoxX, enemy.effectBoxY-40, "enemy");
 
     if(debug === true){
         debugPlayerAttackBoxAndHitBox();
@@ -653,17 +655,6 @@ function gameLoop(timeStamp) {
     
     window.requestAnimationFrame(gameLoop); // Keep requesting new frames
 }
-
-// function effectDraw(character){
-
-//     if(character === "player"){
-//         drawEffect(effectOrangeF[effectOrangeFCounter], player.effectBoxX, enemy.effectBoxY-40, "player");
-
-//     }else if(character === "enemy"){
-//         drawEffect(effectOrangeF[effectOrangeFCounter], enemy.effectBoxX, enemy.effectBoxY-40, "enemy");
-
-//     }
-// }
 
 function playerDraw(){
     if (player.isDead){
@@ -790,18 +781,32 @@ function checkHealth(){
 function drawEffect(effectImg, x, y, name){
     console.log("Drawing Effect ");
     console.log(name);
-    if(name === "enemy" && !enemy.isFlipped || name === "player" && player.isFlipped){
+
+
+    if(name === "enemy" && !enemy.isFlipped){
         context.save();
-        // move origin to where image should be drawn
         context.translate(x-effectOffset, 0);
         // flip horizontally
         context.scale(-1, 1);
-        // draw image using negative width offset
         context.drawImage(effectImg, -effectImg.width, y);
         context.restore();
-    }else{
-        context.drawImage(effectImg, x, y);
+    }else if(name === "enemy" && enemy.isFlipped ){
+        context.drawImage(effectImg, enemy.hitBoxXR-effectOffset, y);
     }
+
+
+    if(name === "player" && player.isFlipped){
+        context.save();
+        context.translate(x, 0);
+        // flip horizontally
+        context.scale(-1, 1);
+        context.drawImage(effectImg, -effectImg.width+(effectOffset*3.7 ), y);
+        context.restore();
+    }else if(name === "player" && !player.isFlipped ){
+        context.drawImage(effectImg, player.effectBoxX-effectOffset, y);
+    }
+
+
 }
 
 //FLip when enemy calls this function
