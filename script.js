@@ -177,6 +177,7 @@ document.querySelectorAll('.close-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.menu-window')
       .forEach(w => w.classList.remove('active'));
+      restartCredits();
 
     overlay?.classList.remove('active');
   });
@@ -392,6 +393,33 @@ cards.forEach(card => {
   card.addEventListener('click', () => {
     cards.forEach(c => c.classList.remove('selected'));
     card.classList.add('selected');
+
   });
 });
 
+// -----------------------------
+// credits
+const creditsWindow = document.getElementById('credits-window');
+const creditsInner = creditsWindow.querySelector('.credits-inner');
+
+function restartCredits() {
+  console.log("Restarting Credits!");
+
+  // reset parent animation
+  creditsInner.style.animation = 'none';
+  creditsInner.offsetHeight;
+
+  // reset children animations
+  creditsWindow.querySelectorAll('.credits-section, .credits-title')
+    .forEach(el => {
+      el.style.opacity = '1';
+      el.style.animation = 'none';
+      el.offsetHeight;
+      el.style.animation = '';
+    });
+
+  // restart scroll
+  setTimeout(() => {
+    creditsInner.style.animation = 'scrollCredits 20s linear forwards';
+  }, 10);
+}
