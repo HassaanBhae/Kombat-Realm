@@ -1,0 +1,294 @@
+body{
+    /* background-color:#271408;  */
+    background-color:#61411b;
+    margin: 0;
+    /* background-size: auto; */
+    user-select: none; /* Disables text selection */
+    
+    overflow: hidden;
+}
+
+
+#background {
+    /* background-image: url(./assets/Dojo-long2x.jpg); */
+    background-image: url(./assets/Dojo-long-under.jpg);
+    background-repeat: no-repeat;
+    /* background-size: 1550px 800px; */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% ;
+    height: 100%;
+    /* max-width: 1301px; */
+    /* max-height: 700px; */
+    /* background-size:cover; */
+    background-size:contain ;
+    /* background-size:1400px; */
+    /* background-size:; */
+    z-index: -1; /* Keeps it behind other content */
+}
+
+@font-face {
+    font-family: "ninja";
+    src: url("./fonts/ninja-font2.ttf");
+}
+#indicator{
+    position: absolute;
+    scale: 3;
+    margin-left: 300px;
+    margin-top: 900px;
+    color: blueviolet;
+    display: none;
+}
+.hitBoxCords{
+    position: absolute;
+    scale: 1.5;
+    /* margin-left: 50px; */
+    /* margin-top: 460px; */
+    color: yellow;
+    font-weight: 900;
+    /* background-color: white; */
+    /* ss2 */
+    display: none;
+}
+#playerHitBoxBox{
+    position: absolute;
+    scale: 1.5;
+    margin-left: 50px;
+    margin-top: 600px;
+    color: yellow;
+    font-weight: 900;
+    display: none;
+}
+#enemyHitBoxBox{
+    position: absolute;
+    scale: 1.5;
+    margin-right: 50px;
+    margin-top: 600px;
+    color: yellow;
+    right: 0;
+    font-weight: 900;
+    display: none;
+}
+.sprite{
+    position: absolute;
+    display:none;
+    scale: 3;
+}
+/* .statusMenu{
+    scale: 0.5;
+} */
+.icon{
+    position: absolute;
+    height: 120px;
+    z-index: 1000;
+}
+.healthBar1 >.icon{
+    left: -105px;
+    top: -50px;
+}
+.healthBar2 > .icon{
+    right: -105px;
+    top: -50px;
+}
+.healthBar1{
+    width: 25%;
+    height: 30px;
+    outline: black solid 3px;
+    position: absolute;
+    margin: 40px;
+    margin-left: 60px;
+}
+.healthBar2{
+    width: 25%;
+    height: 30px;
+    outline: black solid 3px;
+    position: absolute;
+    margin: 40px;
+    right: 0;
+    margin-right: 60px;
+}
+#healthBarPlayer{
+    position: absolute;
+    height: inherit;
+    width: 100%;
+    background-color: red;
+    left: 0;
+}
+#healthBarEnemy{
+    position: absolute;
+    height: inherit;
+    width: 100%;
+    background-color: red;
+    right: 0;
+}
+.specialPower{
+    position: absolute;
+    height: 25px;
+    z-index: 1000;
+}
+.healthBar1 > .specialPower{
+    left: -40px;
+    top: 30px;
+}
+.healthBar2 > .specialPower{
+    right: -40px;
+    transform: scaleX(-1);
+    top: 30px;
+}
+.progress-container1 {
+    width: 20%;
+    background-color: transparent;
+    /* border-radius: 25px; */
+    /* overflow: hidden; */
+    height: 15px;
+    outline: black solid 3px;
+    margin: 20px;
+    position: absolute;
+    margin-left: 40px;
+    margin-left: 60px;
+    margin-top: 74px;
+    overflow: hidden;
+
+}
+.progress-bar1 {
+    height: 100%;
+    width: 0px;
+    /* width: 100%; */
+    background-color: #4caf50;
+    transition: width 10s linear;
+    overflow: hidden;
+    position: absolute;
+}
+.glareP{
+    height: 3000%;
+    width: 0px;
+    width: 150%;
+    /* background-color: blue; */
+    position: absolute;
+    z-index: 20;
+    rotate: 10deg;
+    bottom: -20px;
+    /* left: -200px; */
+    /* top: 200px; */
+}
+.glareE{
+    height: 3000%;
+    width: 0px;
+    width: 150%;
+    /* background-color: blue; */
+    position: absolute;
+    z-index: 20;
+    rotate: -10deg;
+    bottom: -20px;
+    left: -40px;
+    /* top: 200px; */
+    scale: -1;
+}
+.glareP::after{
+    content: "";
+    width: 10px;
+    height: 100%;
+    background-color: #fff;
+    opacity: 1;
+    position: absolute;
+    animation: glare 1s linear;
+    animation-direction: forwards;
+    animation-iteration-count: infinite;
+} 
+.glareE::after{
+    content: "";
+    width: 10px;
+    height: 100%;
+    background-color: #fff;
+    opacity: 1;
+    position: absolute;
+    animation: glare 1s linear;
+    animation-direction: forwards;
+    animation-iteration-count: infinite;
+} 
+
+
+.progress-container2 {
+    width: 20%;
+    background-color: transparent;
+    /* border-radius: 25px; */
+    /* overflow: hidden; */
+    height: 15px;
+    outline: black solid 3px;
+    margin: 20px;
+    position: absolute;
+    margin-right: 40px;
+    margin-right: 60px;
+    margin-top: 74px;
+    right: 0;
+    overflow: hidden;
+}
+
+.progress-bar2 {
+    position: absolute;
+    height: 100%;
+    width: 0;
+    background-color:#333892;
+    right: 0;
+    transition: width 0.1s linear;
+}
+#time{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 900;
+    font-size:40px;
+    margin-top: 26px;
+    font-family:ninja ;
+    /* font-family: "Arial", sans-serif; Use a monospaced or tabular-enabled font for best results */
+    font-weight: 100;
+    /* color: whitesmoke; */
+    letter-spacing: 0.2em; /* Adjust the value as needed */
+
+    /* font-variant-numeric: tabular-nums; */
+
+}
+#resultIndicator{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size:100px;
+    margin: 0;
+    text-wrap: nowrap;
+    /* background-color: green; */
+    transform: translate(-50%,-50%);
+    display: none;
+}
+.flip {
+  transform: scaleX(-1);
+}
+
+@keyframes flash {
+  0%   {background-color: #4caf50;}
+  25%  {background-color: green;}
+  50%  {background-color: #4caf50;}
+  75%  {background-color: green;}
+  100% {background-color: #4caf50;}
+}
+@keyframes shine {
+  0% {
+    background-position: 0;
+  }
+  60% {
+    background-position: 600px;
+  }
+  100% {
+    background-position: 600px;
+  }
+}
+@keyframes glare {
+  from {
+    left: -5%;
+    opacity: 0.7;
+  }
+  to {
+    left: 100%;
+    opacity: 0.7;
+  }
+}
