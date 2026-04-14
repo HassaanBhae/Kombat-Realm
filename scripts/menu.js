@@ -7,6 +7,7 @@ const windows = {
     1: document.getElementById('2player-window'),
     2: document.getElementById('settings-window'),
     3: document.getElementById('credits-window'),
+    4: document.getElementById('character-select-window'),
 };
 
 // ─── Open Window on Menu Item Click ─────────────────────────────
@@ -15,7 +16,12 @@ items.forEach((item, index) => {
         document.querySelectorAll('.menu-window')
             .forEach(w => w.classList.remove('active'));
 
-        windows[index].classList.add('active');
+            if(index == 0 || index == 1){
+            windows[4].classList.add('active');
+            }else{
+            windows[index].classList.add('active');
+
+            }
         overlay.classList.add('active');
     });
 });
